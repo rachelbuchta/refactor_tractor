@@ -1,8 +1,3 @@
-// OKAY SO THERE IS AN ENTRY FILE FOR THE WEBPACK BUT I DONT THINK ITS USED YET. ALSO WHATS UP WITH THE LAST LINE.
-
-// in the html, im not sure if images are being accessed right. from what I saw with webpack you have to import the images somewhere (maybe the js entrypoint?)
-
-
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 

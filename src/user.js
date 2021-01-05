@@ -1,5 +1,3 @@
-// MD THIS LOOKS GOOD TO ME
-
 class User {
   constructor(user) {
     this.id = user.id;
