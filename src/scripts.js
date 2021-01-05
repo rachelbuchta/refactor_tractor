@@ -1,3 +1,8 @@
+// MD I DONT THINK THIS IS WEBPACK SYNTAX. 
+
+// MD IM UNSURE IF WEBPACK IS CURRENTLY DOING ANYTHING. ITS INCLUDED IN THE PACKAGE.JSON BUT NO BUILD DESIGNATING A PATH IS THERE.
+
+
 import users from './data/users-data';
 import recipeData from  './data/recipe-data';
 import ingredientData from './data/ingredient-data';

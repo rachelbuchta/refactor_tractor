@@ -1,3 +1,5 @@
+// MD WHY IS THE METHOD COMMENTED OUT? THIS USES MODULE.EXPORTS SYNTAX, PROBS EVERYTHING ELSE TOO
+
 class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
