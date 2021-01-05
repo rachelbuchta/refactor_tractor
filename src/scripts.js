@@ -1,3 +1,4 @@
+//wrong syntax
 import users from './data/users-data';
 import recipeData from  './data/recipe-data';
 import ingredientData from './data/ingredient-data';
@@ -38,6 +39,7 @@ showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
 
 // GENERATE A USER ON LOAD
+//possibly move to sep domFile
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   let firstName = user.name.split(" ")[0];
@@ -60,9 +62,10 @@ function createCards() {
       shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
     }
     addToDom(recipeInfo, shortRecipeName)
+    //change that shit^
   });
 }
-
+//possibly move to sep domFile
 function addToDom(recipeInfo, shortRecipeName) {
   let cardHtml = `
     <div class="recipe-card" id=${recipeInfo.id}>
@@ -80,6 +83,7 @@ function addToDom(recipeInfo, shortRecipeName) {
 }
 
 // FILTER BY RECIPE TAGS
+//this seems repetitive and should be in the data model
 function findTags() {
   let tags = [];
   recipeData.forEach(recipe => {
@@ -92,7 +96,7 @@ function findTags() {
   tags.sort();
   listTags(tags);
 }
-
+// domFIle
 function listTags(allTags) {
   allTags.forEach(tag => {
     let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
@@ -100,13 +104,13 @@ function listTags(allTags) {
     tagList.insertAdjacentHTML("beforeend", tagHtml);
   });
 }
-
+// this is a no for me
 function capitalize(words) {
   return words.split(" ").map(word => {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }).join(" ");
 }
-
+// These next few functions can be combined/moved to proper data model and domFile
 function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
   let checkboxInfo = Array.from(tagCheckboxes)
@@ -149,9 +153,14 @@ function hideUnselectedRecipes(foundRecipes) {
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
+
+// Need to sort through these to properly place in domFile or data model
+
 function addToMyRecipes() {
+  // this needs to be split up into multiple functions so notSRP
   if (event.target.className === "card-apple-icon") {
     let cardId = parseInt(event.target.closest(".recipe-card").id)
+    // this codeblock straight up sucks, makes no sense
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
       user.saveRecipe(cardId);
@@ -165,7 +174,7 @@ function addToMyRecipes() {
     openRecipeInfo(event);
   }
 }
-
+// not a clue what is happening here
 function isDescendant(parent, child) {
   let node = child;
   while (node !== null) {
