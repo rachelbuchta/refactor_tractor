@@ -256,11 +256,21 @@ function pressEnterSearch(event) {
 
 function searchRecipes() {
   showAllRecipes();
-  let searchedRecipes = recipeData.filter(recipe => {
-    if (recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
-      return recipe;
+  let searchedRecipes = [];
+
+  recipeData.forEach(recipe => {
+    if (recipe => recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+      searchedRecipes.push(recipe);
     }
-  });
+
+    recipe.ingredients.forEach(ingredient => {
+      if (ingredient.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+        searchedRecipes.push(recipe);
+      }
+    })
+  })
+  console.log(searchedRecipes);
+
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
 
