@@ -257,7 +257,9 @@ function pressEnterSearch(event) {
 function searchRecipes() {
   showAllRecipes();
   let searchedRecipes = recipeData.filter(recipe => {
-    return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
+    if (recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+      return recipe;
+    }
   });
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
