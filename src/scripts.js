@@ -258,17 +258,34 @@ function searchRecipes() {
   showAllRecipes();
   let searchedRecipes = [];
 
-  recipeData.forEach(recipe => {
-    if (recipe => recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
-      searchedRecipes.push(recipe);
-    }
 
+
+  recipeData.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
-      if (ingredient.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+      if (!searchedRecipes.includes(ingredient.name) && ingredient.name === searchInput.value.toLowerCase()) {
+        searchedRecipes.push(recipe);
+      }
+
+      if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
         searchedRecipes.push(recipe);
       }
     })
-  })
+  });
+
+
+
+
+  // recipeData.forEach(recipe => {
+  //   if (recipe => recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+  //     searchedRecipes.push(recipe);
+  //   }
+
+  //   recipe.ingredients.forEach(ingredient => {
+  //     if (ingredient.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+  //       searchedRecipes.push(recipe);
+  //     }
+  //   })
+  // })
   console.log(searchedRecipes);
 
   filterNonSearched(createRecipeObject(searchedRecipes));
