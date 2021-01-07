@@ -241,10 +241,13 @@ main {
 .title-container {
   grid-area: title;
   text-align: center;
+  align-items: center;
 }
 
 .recipe-card {
   display: grid;
+  grid-gap: 1%;
+  justify-content: space-evenly;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas: 
@@ -297,14 +300,8 @@ main {
 }
 
 .card-apple-icon {
- 
-  // justify-items: center;
-  
-
   cursor: pointer;
-  // float: right;
   height: 50px;
-  // padding-bottom: 10px;
   width: 45px;
 }
 
