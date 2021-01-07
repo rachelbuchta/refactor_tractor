@@ -70,27 +70,42 @@ function createCards() {
     addToDom(recipeInfo, shortRecipeName)
     //change that shit^
   });
+ 
 }
-//possibly move to sep domFile
-function addToDom(recipeInfo, shortRecipeName) {
+
+function getTags(tags) {
+  let result = ''
+  tags.forEach(tag => {
+   let newTag = `<h4>${tag}</h4>` 
+   result += newTag
+  })
+return result
+}
+
+function addToDom(recipe, shortRecipeName) {
   let cardHtml = `
-    <div class="recipe-card" id=${recipeInfo.id}>
+    <div class="recipe-card" id=${recipe.id}>
       <h3 maxlength="40">${shortRecipeName}</h3>
       <div class="card-photo-container">
-        <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
+        <img src=${recipe.image} class="card-photo-preview" alt="${recipe.name} recipe" title="${recipe.name} recipe">
         <div class="text">
           <div>Click for Instructions</div>
         </div>
       </div>
-      <h4>${recipeInfo.tags[0]}</h4>
+      <div class="tags">
+        ${getTags(recipe.tags)}
+      </div>
       <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
     </div>`
   main.insertAdjacentHTML("beforeend", cardHtml);
+ 
 }
 
 // FILTER BY RECIPE TAGS
 //this seems repetitive and should be in the data model
+
 function findTags() {
+  // debugger
   let tags = [];
   recipeData.forEach(recipe => {
     recipe.tags.forEach(tag => {
@@ -99,6 +114,7 @@ function findTags() {
       }
     });
   });
+  // console.log(tags)
   tags.sort();
   listTags(tags);
 }
@@ -108,6 +124,7 @@ function listTags(allTags) {
     let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
       <label for="${tag}">${capitalize(tag)}</label></li>`;
     tagList.insertAdjacentHTML("beforeend", tagHtml);
+    // console.log(tagHtml)
   });
 }
 // this is a no for me
