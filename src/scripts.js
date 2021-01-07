@@ -199,6 +199,7 @@ function openRecipeInfo(event) {
   generateRecipeTitle(recipe, generateIngredients(recipe));
   addRecipeImage(recipe);
   generateInstructions(recipe);
+  generateEstimateCost(recipe);
   fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
 }
 
@@ -231,6 +232,12 @@ function generateInstructions(recipe) {
   });
   fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
   fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
+}
+
+function generateEstimateCost(recipe) {
+  let currentRecipe = new Recipe (recipe);
+  fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Estimated Cost</h4>")
+  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${currentRecipe.calculateIngredientsCost()}</h4>`)
 }
 
 function exitRecipe() {
