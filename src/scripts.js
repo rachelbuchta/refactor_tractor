@@ -155,6 +155,9 @@ function addToMyRecipes() {
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
       user.saveRecipe(cardId);
+    } else if (!user.favoriteRecipes.includes(cardId)) {
+
+    dd
     } else {
       event.target.src = "../images/apple-logo-outline.png";
       user.removeRecipe(cardId);
@@ -258,8 +261,6 @@ function searchRecipes() {
   showAllRecipes();
   let searchedRecipes = [];
 
-
-
   recipeData.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
       if (!searchedRecipes.includes(ingredient.name) && ingredient.name === searchInput.value.toLowerCase()) {
@@ -271,22 +272,6 @@ function searchRecipes() {
       }
     })
   });
-
-
-
-
-  // recipeData.forEach(recipe => {
-  //   if (recipe => recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
-  //     searchedRecipes.push(recipe);
-  //   }
-
-  //   recipe.ingredients.forEach(ingredient => {
-  //     if (ingredient.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
-  //       searchedRecipes.push(recipe);
-  //     }
-  //   })
-  // })
-  console.log(searchedRecipes);
 
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
