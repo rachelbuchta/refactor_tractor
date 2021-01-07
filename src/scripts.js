@@ -256,9 +256,38 @@ function pressEnterSearch(event) {
 
 function searchRecipes() {
   showAllRecipes();
-  let searchedRecipes = recipeData.filter(recipe => {
-    return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
+  let searchedRecipes = [];
+
+
+
+  recipeData.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      if (!searchedRecipes.includes(ingredient.name) && ingredient.name === searchInput.value.toLowerCase()) {
+        searchedRecipes.push(recipe);
+      }
+
+      if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+        searchedRecipes.push(recipe);
+      }
+    })
   });
+
+
+
+
+  // recipeData.forEach(recipe => {
+  //   if (recipe => recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+  //     searchedRecipes.push(recipe);
+  //   }
+
+  //   recipe.ingredients.forEach(ingredient => {
+  //     if (ingredient.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+  //       searchedRecipes.push(recipe);
+  //     }
+  //   })
+  // })
+  console.log(searchedRecipes);
+
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
 

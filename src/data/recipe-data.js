@@ -5917,4 +5917,4 @@ let recipeData = [
   }
 ]
 
-export default recipeData;
+module.exports = recipeData;
