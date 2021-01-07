@@ -74,15 +74,15 @@ function createCards() {
 }
 
 function getTags(tags) {
-  let result = ''
+  let result = '';
   tags.forEach(tag => {
-   let newTag = `<h4>${tag}</h4>` 
-   result += newTag
-  })
-return result
-}
+    let newTag = `<h4>${tag}</h4>` 
+    result += newTag
+  });
+  return result
+};
 
-function addToDom(recipe, shortRecipeName) {
+function addToDom(recipe) {
   let cardHtml = `
     <div class="recipe-card" id=${recipe.id}>
       <div class="title-container"
