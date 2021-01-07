@@ -85,7 +85,9 @@ return result
 function addToDom(recipe, shortRecipeName) {
   let cardHtml = `
     <div class="recipe-card" id=${recipe.id}>
-      <h3 maxlength="40">${shortRecipeName}</h3>
+      <div class="title-container"
+        <h3 class="title" maxlength="40">${recipe.name}</h3>
+      </div>  
       <div class="card-photo-container">
         <img src=${recipe.image} class="card-photo-preview" alt="${recipe.name} recipe" title="${recipe.name} recipe">
         <div class="text">
@@ -95,7 +97,9 @@ function addToDom(recipe, shortRecipeName) {
       <div class="tags">
         ${getTags(recipe.tags)}
       </div>
-      <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+      <div class="apple-container">
+        <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+      </div>  
     </div>`
   main.insertAdjacentHTML("beforeend", cardHtml);
  
