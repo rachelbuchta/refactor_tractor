@@ -7,9 +7,10 @@ describe('User', function() {
   let user;
   let userInfo;
   let recipe;
+  console.log(data.users)
 
   beforeEach(function() {
-    userInfo = data.users[0];
+    userInfo = data[0];
     user = new User(userInfo)
 
     recipe = {name: 'Chicken Parm', type: ['italian', 'dinner']};
