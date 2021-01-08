@@ -1,6 +1,6 @@
 import getData from '../APICalls';
 
-const apiCall = 'recipes';
+const apiCall = 'ingredients';
 
 let ingredientsData;
 
