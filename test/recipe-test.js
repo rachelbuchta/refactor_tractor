@@ -45,6 +45,6 @@ describe('Recipe', function() {
   });
 
   it('should calculate the total cost of all of the ingredients', function() {
-    expect(recipe.calculateIngredientsCost()).to.eq();
+    expect(recipe.calculateIngredientsCost()).to.eq('$9.76');
   });
 });
