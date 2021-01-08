@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 import ingredientsData from '../src/data/ingredient-data';
 
 class Recipe {
@@ -19,7 +21,14 @@ class Recipe {
       return totalCost;
     }, 0);
 
-    return `$${costInCents.toString().slice(0, 1)}.${costInCents.toString().slice(1, 3)}`
+    // return `$${costInCents.toString().slice(0, 1)}.${costInCents.toString().slice(1, 3)}`
+    const currency = {
+      style: "currency",
+      currency: "USD"
+    }
+
+    let cost = costInCents * .01;
+    return cost.toLocaleString("en-US", currency)
   }
 }
 
