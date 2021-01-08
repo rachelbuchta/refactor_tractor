@@ -34,12 +34,14 @@ h3 {
   height: 17%;
   margin: 5px 5px 10px 0px;
   transition: .8s ease;
+  
 }
 
 h4 {
   color: #359567;
   background-color: #C4EB67;
   border-radius: 3px;
+  font-size: smaller;
   margin: 10px 0px 0px 0px;
   padding: 1px 4px 1px 4px;
   width: max-content;
@@ -236,7 +238,22 @@ main {
   flex-wrap: wrap;
 }
 
+.title-container {
+  grid-area: title;
+  text-align: center;
+  align-items: center;
+}
+
 .recipe-card {
+  display: grid;
+  grid-gap: 1%;
+  justify-content: space-evenly;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: 
+  "title title"
+  "food food"
+  "tags apple";
   background-color: white;
   border: 2px solid #C4EB67;
   border-radius: 7px;
@@ -264,11 +281,27 @@ main {
   transition: .8s ease;
 }
 
+.tags {
+  display: grid;
+  grid-area: tags;
+  align-items: center;
+  justify-content: space-between;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+}
+
+.apple-container{
+  align-items: center;
+   justify-items: center;
+  display: inline-grid;
+  grid-area: apple;
+ 
+}
+
 .card-apple-icon {
   cursor: pointer;
-  float: right;
   height: 50px;
-  padding-bottom: 10px;
   width: 45px;
 }
 
@@ -284,6 +317,7 @@ main {
 }
 
 .card-photo-container {
+  grid-area: food;
   align-items: center;
   display: flex;
   height: 130px;
