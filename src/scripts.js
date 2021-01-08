@@ -77,10 +77,10 @@ function getTags(tags) {
   let result = '';
   tags.forEach(tag => {
     let newTag = `<h4>${tag}</h4>` 
-    result += newTag
+    result += newTag;
   });
-  return result
-};
+  return result;
+}
 
 function addToDom(recipe) {
   let cardHtml = `
