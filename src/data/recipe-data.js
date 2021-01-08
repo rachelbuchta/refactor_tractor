@@ -1,4 +1,16 @@
-let recipeData = [
+import getData from '../APICalls';
+
+const apiCall = 'recipes';
+
+let recipeData;
+
+recipeData = getData(apiCall);
+
+export default recipeData;
+
+
+
+let recipeTest = [
   {
     "name": "Loaded Chocolate Chip Pudding Cookie Cups",
     "id": 595736,
@@ -5852,5 +5864,3 @@ let recipeData = [
     ]
   }
 ]
-
-module.exports = recipeData;

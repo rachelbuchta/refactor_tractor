@@ -1,4 +1,16 @@
-let users = [
+import getData from '../APICalls';
+
+const apiCall = 'users';
+let users;
+
+users = getData(apiCall);
+
+export default users;
+
+
+
+
+let usersTest = [
   {
     "id": 1,
     "name": "Saige O'Kon",
@@ -53254,5 +53266,3 @@ let users = [
     ]
   }
 ]
-
-export default users;
