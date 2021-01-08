@@ -1,7 +1,3 @@
-
-
-
-
 let usersTest = [
   {
     "id": 1,
@@ -53258,3 +53254,5 @@ let usersTest = [
     ]
   }
 ]
+
+export default usersTest;

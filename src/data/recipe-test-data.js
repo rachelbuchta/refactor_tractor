@@ -1,8 +1,4 @@
-
-
-
-
-let recipeTest = [
+let recipesTest = [
   {
     "name": "Loaded Chocolate Chip Pudding Cookie Cups",
     "id": 595736,
@@ -5856,3 +5852,5 @@ let recipeTest = [
     ]
   }
 ]
+
+export default recipesTest;

@@ -1,9 +1,4 @@
-
-
-
-
-
-let ingredientsData = [
+let ingredientsTest = [
   {
     "id": 20081,
     "name": "wheat flour",
@@ -1239,4 +1234,4 @@ let ingredientsData = [
   }
 ]
 
-export default ingredientsData;
+export default ingredientsTest;

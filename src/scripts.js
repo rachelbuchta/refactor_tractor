@@ -47,7 +47,6 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // GENERATE A USER ON LOAD
 //possibly move to sep domFile
 function generateUser() {
-  console.log(users)
   user = new User(users[Math.floor(Math.random() * users.length)]);
   let firstName = user.name.split(" ")[0];
   let welcomeMsg = `
@@ -353,12 +352,14 @@ function showAllRecipes() { // domFile and datamodel thing - helper function to 
 
 // CREATE AND USE PANTRY 
 function findPantryInfo() { 
-  coonsole.log(user)
+  console.log(user.pantry)
   user.pantry.forEach(item => { // create pantry class
     let itemInfo = ingredientData.find(ingredient => {
       return ingredient.id === item.ingredient; // string and number cant be compared, will be undefined. Also this needs to go into the data model
                                                 // basically we want to have a method that is counting the ingreients and giving it a name to eventually be displayed on the dom
+      
     });
+
     let originalIngredient = pantryInfo.find(ingredient => {
       if (itemInfo) {
         return ingredient.name === itemInfo.name;
@@ -370,6 +371,7 @@ function findPantryInfo() {
       pantryInfo.push({name: itemInfo.name, count: item.amount});
     }
   });
+  console.log(pantryInfo)
   displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name))); // this goes in the dom
 }
 
