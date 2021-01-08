@@ -1,4 +1,5 @@
-let recipesTest = [
+
+let recipeTest = [
   {
     "name": "Loaded Chocolate Chip Pudding Cookie Cups",
     "id": 595736,
@@ -5853,4 +5854,8 @@ let recipesTest = [
   }
 ]
 
+<<<<<<< HEAD
 export default recipesTest;
+=======
+export default recipeTest;
+>>>>>>> feature-reconnect-ingredient-data

@@ -2,8 +2,9 @@ import getData from '../APICalls';
 
 const apiCall = 'ingredients';
 
-let ingredientData;
 
-ingredientData = getData(apiCall);
+let ingredientsData;
 
-export default ingredientData;
+ingredientsData = getData(apiCall);
+
+export default ingredientsData;

@@ -32,6 +32,8 @@ let tagList = document.querySelector(".tag-list");
 let user;
 
 
+
+
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
 window.addEventListener("load", generateUser);
@@ -48,6 +50,7 @@ searchForm.addEventListener("submit", pressEnterSearch);
 //possibly move to sep domFile
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
+
   let firstName = user.name.split(" ")[0];
   let welcomeMsg = `
     <div class="welcome-msg">
@@ -57,6 +60,8 @@ function generateUser() {
     welcomeMsg);
   findPantryInfo();
 }
+
+
 
 // CREATE RECIPE CARDS
 function createCards() {
@@ -109,7 +114,6 @@ function addToDom(recipe) {
 //this seems repetitive and should be in the data model
 
 function findTags() {
-  // debugger
   let tags = [];
   recipeData.forEach(recipe => {
     recipe.tags.forEach(tag => {
@@ -216,6 +220,8 @@ function isDescendant(parent, child) {
   return false;
 }
 
+
+
 function showSavedRecipes() {
   let unsavedRecipes = recipes.filter(recipe => {
     return !user.favoriteRecipes.includes(recipe.id);// this needs to change because we arent comparing correct data types
@@ -252,9 +258,16 @@ function addRecipeImage(recipe) {
   document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
 }
 
+function findRecipeIngredient(recipeIngredient) {
+  return ingredientData.find(ingredient => recipeIngredient.id === ingredient.id
+  );
+}
+
 function generateIngredients(recipe) {
+  
   return recipe && recipe.ingredients.map(i => {
-    return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
+    const foundIngredient = findRecipeIngredient(i);
+    return `${capitalize(foundIngredient.name)} (${i.quantity.amount} ${i.quantity.unit})`
   }).join(", "); //the output is not what we want. Its giving us an array and we want a string (is this being displayed properly?)
 }
 
