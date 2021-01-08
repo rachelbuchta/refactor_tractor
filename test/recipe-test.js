@@ -8,7 +8,7 @@ describe('Recipe', function() {
   let recipeInfo;
 
   beforeEach(function() {
-    recipeInfo = data.recipeData[0];
+    recipeInfo = data[0];
     recipe = new Recipe(recipeInfo);
   })
 
@@ -45,6 +45,6 @@ describe('Recipe', function() {
   });
 
   it('should calculate the total cost of all of the ingredients', function() {
-    expect(recipe.calculateIngredientsCost()).to.eq();
+    expect(recipe.calculateIngredientsCost()).to.eq('$9.76');
   });
 });

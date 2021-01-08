@@ -191,6 +191,9 @@ function addToMyRecipes() {
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
       user.saveRecipe(cardId);
+    } else if (!user.favoriteRecipes.includes(cardId)) {
+
+    dd
     } else {
       event.target.src = "../images/apple-logo-outline.png";
       user.removeRecipe(cardId);
@@ -232,6 +235,7 @@ function openRecipeInfo(event) { // let needs to be const
   generateRecipeTitle(recipe, generateIngredients(recipe)); // all of this to be moved in a domFile
   addRecipeImage(recipe);
   generateInstructions(recipe);
+  generateEstimateCost(recipe);
   fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
 }
 
@@ -266,6 +270,12 @@ function generateInstructions(recipe) {
   fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
 }
 
+function generateEstimateCost(recipe) {
+  let currentRecipe = new Recipe (recipe);
+  fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Estimated Cost</h4>")
+  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${currentRecipe.calculateIngredientsCost()}</h4>`)
+}
+
 function exitRecipe() {
   while (fullRecipeInfo.firstChild &&
     fullRecipeInfo.removeChild(fullRecipeInfo.firstChild)); //this can be achieved probably using event.target.closest or id.
@@ -292,9 +302,20 @@ function pressEnterSearch(event) { //rename
 
 function searchRecipes() { //create a method that filters through recipes in data model that can be called to display searched recipe on the dom
   showAllRecipes();
-  let searchedRecipes = recipeData.filter(recipe => {
-    return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
+  let searchedRecipes = [];
+
+  recipeData.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      if (!searchedRecipes.includes(ingredient.name) && ingredient.name === searchInput.value.toLowerCase()) {
+        searchedRecipes.push(recipe);
+      }
+
+      if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+        searchedRecipes.push(recipe);
+      }
+    })
   });
+
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
 

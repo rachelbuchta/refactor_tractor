@@ -27,70 +27,6 @@ let recipeData = [
           "amount": 1,
           "unit": "large"
         }
-      },
-      {
-        "name": "granulated sugar",
-        "id": 19335,
-        "quantity": {
-          "amount": 0.5,
-          "unit": "c"
-        }
-      },
-      {
-        "name": "instant vanilla pudding mix",
-        "id": 19206,
-        "quantity": {
-          "amount": 3,
-          "unit": "Tbsp"
-        }
-      },
-      {
-        "name": "light brown sugar",
-        "id": 19334,
-        "quantity": {
-          "amount": 0.5,
-          "unit": "c"
-        }
-      },
-      {
-        "name": "salt",
-        "id": 2047,
-        "quantity": {
-          "amount": 0.5,
-          "unit": "tsp"
-        }
-      },
-      {
-        "name": "sea salt",
-        "id": 1012047,
-        "quantity": {
-          "amount": 24,
-          "unit": "servings"
-        }
-      },
-      {
-        "name": "semisweet chocolate chips",
-        "id": 10019903,
-        "quantity": {
-          "amount": 2,
-          "unit": "c"
-        }
-      },
-      {
-        "name": "unsalted butter",
-        "id": 1145,
-        "quantity": {
-          "amount": 0.5,
-          "unit": "c"
-        }
-      },
-      {
-        "name": "vanilla extract",
-        "id": 2050,
-        "quantity": {
-          "amount": 0.5,
-          "unit": "tsp"
-        }
       }
     ],
     "instructions": [
@@ -5917,4 +5853,4 @@ let recipeData = [
   }
 ]
 
-export default recipeData;
+module.exports = recipeData;
