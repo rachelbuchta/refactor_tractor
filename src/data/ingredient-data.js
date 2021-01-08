@@ -2,7 +2,7 @@ import getData from '../APICalls';
 
 const apiCall = 'recipes';
 
-let ngredientsData;
+let ingredientsData;
 
 ingredientsData = getData(apiCall);
 
