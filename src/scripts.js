@@ -1,15 +1,15 @@
 //wrong syntax
-import users from './data/users-data';
+import users from './data/users-data.js';
 import recipeData from  './data/recipe-data';
 import ingredientData from './data/ingredient-data';
 
 import './css/base.scss';
 import './css/styles.scss';
-import './images/apple-logo.png'
-import './images/search.png'
-import './images/cookbook.png'
-import './images/seasoning.png'
-import './images/apple-logo-outline.png'
+import './images/apple-logo.png';
+import './images/search.png';
+import './images/cookbook.png';
+import './images/seasoning.png';
+import './images/apple-logo-outline.png';
 
 
 import User from './user';
@@ -47,6 +47,7 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // GENERATE A USER ON LOAD
 //possibly move to sep domFile
 function generateUser() {
+  console.log(users)
   user = new User(users[Math.floor(Math.random() * users.length)]);
   let firstName = user.name.split(" ")[0];
   let welcomeMsg = `
@@ -67,7 +68,7 @@ function createCards() {
     if (recipeInfo.name.length > 40) {
       shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
     }
-    addToDom(recipeInfo, shortRecipeName)
+    addToDom(recipeInfo, shortRecipeName);
     //change that shit^
   });
  
@@ -76,7 +77,7 @@ function createCards() {
 function getTags(tags) {
   let result = '';
   tags.forEach(tag => {
-    let newTag = `<h4>${tag}</h4>` 
+    let newTag = `<h4>${tag}</h4>`;
     result += newTag;
   });
   return result;
