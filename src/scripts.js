@@ -353,8 +353,9 @@ function showAllRecipes() { // domFile and datamodel thing - helper function to 
 
 // CREATE AND USE PANTRY 
 function findPantryInfo() { 
+  coonsole.log(user)
   user.pantry.forEach(item => { // create pantry class
-    let itemInfo = ingredientsData.find(ingredient => {
+    let itemInfo = ingredientData.find(ingredient => {
       return ingredient.id === item.ingredient; // string and number cant be compared, will be undefined. Also this needs to go into the data model
                                                 // basically we want to have a method that is counting the ingreients and giving it a name to eventually be displayed on the dom
     });
