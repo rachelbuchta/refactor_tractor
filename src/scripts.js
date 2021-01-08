@@ -32,6 +32,8 @@ let tagList = document.querySelector(".tag-list");
 let user;
 
 
+
+
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
 window.addEventListener("load", generateUser);
@@ -47,8 +49,9 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // GENERATE A USER ON LOAD
 //possibly move to sep domFile
 function generateUser() {
-  console.log(users)
-  user = new User(users[Math.floor(Math.random() * users.length)]);
+  const test = new User(users[Math.floor(Math.random() * users.length)]);
+  user = test;
+
   let firstName = user.name.split(" ")[0];
   let welcomeMsg = `
     <div class="welcome-msg">
@@ -58,6 +61,8 @@ function generateUser() {
     welcomeMsg);
   findPantryInfo();
 }
+
+
 
 // CREATE RECIPE CARDS
 function createCards() {
@@ -110,7 +115,6 @@ function addToDom(recipe) {
 //this seems repetitive and should be in the data model
 
 function findTags() {
-  // debugger
   let tags = [];
   recipeData.forEach(recipe => {
     recipe.tags.forEach(tag => {
@@ -217,6 +221,8 @@ function isDescendant(parent, child) {
   return false;
 }
 
+
+
 function showSavedRecipes() {
   let unsavedRecipes = recipes.filter(recipe => {
     return !user.favoriteRecipes.includes(recipe.id);// this needs to change because we arent comparing correct data types
@@ -253,9 +259,16 @@ function addRecipeImage(recipe) {
   document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
 }
 
+function findRecipeIngredient(recipeIngredient) {
+  return ingredientData.find(ingredient => recipeIngredient.id === ingredient.id
+  );
+}
+
 function generateIngredients(recipe) {
+  
   return recipe && recipe.ingredients.map(i => {
-    return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
+    const foundIngredient = findRecipeIngredient(i);
+    return `${capitalize(foundIngredient.name)} (${i.quantity.amount} ${i.quantity.unit})`
   }).join(", "); //the output is not what we want. Its giving us an array and we want a string (is this being displayed properly?)
 }
 
@@ -354,7 +367,7 @@ function showAllRecipes() { // domFile and datamodel thing - helper function to 
 // CREATE AND USE PANTRY 
 function findPantryInfo() { 
   user.pantry.forEach(item => { // create pantry class
-    let itemInfo = ingredientsData.find(ingredient => {
+    let itemInfo = ingredientData.find(ingredient => {
       return ingredient.id === item.ingredient; // string and number cant be compared, will be undefined. Also this needs to go into the data model
                                                 // basically we want to have a method that is counting the ingreients and giving it a name to eventually be displayed on the dom
     });
