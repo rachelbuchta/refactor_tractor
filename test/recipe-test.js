@@ -4,7 +4,7 @@ import Recipe from '../src/recipe';
 import data from '../src/data/recipe-test-data';
 import ingredientData from '../src/data/ingredient-test-data';
 
-describe.only('Recipe', function() {
+describe('Recipe', function() {
   let recipe;
   let recipeInfo;
 
@@ -46,7 +46,7 @@ describe.only('Recipe', function() {
   });
 
   it('should calculate the total cost of all of the ingredients', function() {
-    
+
     expect(recipe.calculateIngredientsCost(ingredientData)).to.eq('$9.76');
   });
 

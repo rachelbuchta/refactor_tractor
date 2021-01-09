@@ -7,7 +7,7 @@ class Recipe {
     this.tags = recipe.tags;
     this.ingredients = recipe.ingredients;
     this.instructions = recipe.instructions;
-  }
+  };
 
   calculateIngredientsCost(ingredientData) {
     const costInCents = this.ingredients.reduce((totalCost, recipeIngredient) => {
@@ -19,20 +19,14 @@ class Recipe {
       })
       return totalCost;
     }, 0);
-    const currency = {
-      style: "currency",
-      currency: "USD"
-    }
     let cost = costInCents * .01;
-    return cost.toLocaleString("en-US", currency);
+    return cost.toLocaleString("en-US", "currency");
   }
 
   returnInstructions() {
     return this.instructions;
-  }
-
-}
-
+  };
+};
 
 
 export default Recipe;
