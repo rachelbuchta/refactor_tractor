@@ -1,3 +1,5 @@
+import usersTest from '../src/data/users-test-data';
+
 class User {
   constructor(user) {
     this.id = user.id;
@@ -33,7 +35,8 @@ class User {
 //Class Pantry
 // create method that removes the ingredients used to make a recipe from pantry
 
-module.exports = User;
+// module.exports = User;
+export default User;
 
 //need to change all of our module.exports
 

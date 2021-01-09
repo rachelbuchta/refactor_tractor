@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
 import User from '../src/user';
-import data from '../src/data/users-data';
-
+// import data from '../src/data/users-data';
+import data from '../src/data/users-test-data';
 
 describe('Pantry', function() {
   let user;

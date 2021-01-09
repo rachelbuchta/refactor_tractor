@@ -113,7 +113,7 @@ function addToDom(recipe) {
 
 // FILTER BY RECIPE TAGS
 //this seems repetitive and should be in the data model
-
+//Should this go in a recipe repo file?
 function findTags() {
   let tags = [];
   recipeData.forEach(recipe => {
@@ -169,7 +169,7 @@ function findTaggedRecipes(selected) {
     filterRecipes(filteredResults);
   }
 }
-
+//allRecipes
 function filterRecipes(filtered) {
   let foundRecipes = recipes.filter(recipe => {
     return !filtered.includes(recipe);
@@ -236,7 +236,7 @@ function showSavedRecipes() {
 
 // CREATE RECIPE INSTRUCTIONS
 function openRecipeInfo(event) { // let needs to be const
-  fullRecipeInfo.style.display = "inline"; //< I hate this
+  fullRecipeInfo.style.display = "inline"; 
   let recipeId = event.path.find(e => e.id).id; // most of this can probably go in the data model to find a recipe
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
   generateRecipeTitle(recipe, generateIngredients(recipe)); // all of this to be moved in a domFile
@@ -260,6 +260,8 @@ function addRecipeImage(recipe) {
 }
 
 function findRecipeIngredient(recipeIngredient) {
+  console.log(recipeIngredient)
+  // console.log(ingredient)
   return ingredientData.find(ingredient => recipeIngredient.id === ingredient.id
   );
 }
@@ -273,21 +275,21 @@ function generateIngredients(recipe) {
 }
 
 function generateInstructions(recipe) {
+  const currentRecipe = new Recipe(recipe);
+  const instructions = currentRecipe.returnInstructions().map(step => step.instruction);
+
+  //this will eventually go in a domFile
   let instructionsList = "";
-  let instructions = recipe.instructions.map(i => { //refactor possibly, mostly makes sense but we will need to separate functionality from dom manipulation
-    return i.instruction
-  });
-  instructions.forEach(i => {
-    instructionsList += `<li>${i}</li>`
-  });
+  instructions.forEach(step => instructionsList += `<li>${step}</li>`);
   fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
   fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
 }
 
+
 function generateEstimateCost(recipe) {
   let currentRecipe = new Recipe (recipe);
   fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Estimated Cost</h4>")
-  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${currentRecipe.calculateIngredientsCost()}</h4>`)
+  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${currentRecipe.calculateIngredientsCost(ingredientData)}</h4>`)
 }
 
 function exitRecipe() {
