@@ -14,6 +14,7 @@ import './images/apple-logo-outline.png';
 
 import User from './user';
 import Recipe from './recipe';
+import RecipeRepo from './recipe-repo'
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -23,6 +24,7 @@ let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let pantryInfo = [];
 let recipes = [];
+let recipes2 = new RecipeRepo(recipeData);
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
@@ -115,16 +117,7 @@ function addToDom(recipe) {
 //this seems repetitive and should be in the data model
 //Should this go in a recipe repo file?
 function findTags() {
-  let tags = [];
-  recipeData.forEach(recipe => {
-    recipe.tags.forEach(tag => {
-      if (!tags.includes(tag)) {
-        tags.push(tag);
-      }
-    });
-  });
-  // console.log(tags)
-  tags.sort();
+let tags = recipes2.returnAllTags()
   listTags(tags);
 }
 // domFIle
