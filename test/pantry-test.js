@@ -11,7 +11,8 @@ import data from '../src/data/users-test-data';
 describe('Pantry', function() {
   let user;
   let userInfo;
-  let recipe;
+  let recipe1;
+  let recipe2;
   let pantry;
 
 
