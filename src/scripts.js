@@ -14,6 +14,7 @@ import './images/apple-logo-outline.png';
 
 import User from './user';
 import Recipe from './recipe';
+import RecipeRepo from './recipe-repo'
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -22,7 +23,8 @@ let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let pantryInfo = [];
-let recipes = [];
+let recipes = []
+let recipes2 = new RecipeRepo(recipeData);
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
@@ -112,19 +114,9 @@ function addToDom(recipe) {
 
 // FILTER BY RECIPE TAGS
 //this seems repetitive and should be in the data model
-
 function findTags() {
-  let tags = [];
-  recipeData.forEach(recipe => {
-    recipe.tags.forEach(tag => {
-      if (!tags.includes(tag)) {
-        tags.push(tag);
-      }
-    });
-  });
-  // console.log(tags)
-  tags.sort();
-  listTags(tags);
+let tags = recipes2.returnAllTags()
+listTags(tags);
 }
 // domFIle
 function listTags(allTags) {
@@ -132,7 +124,6 @@ function listTags(allTags) {
     let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
       <label for="${tag}">${capitalize(tag)}</label></li>`;
     tagList.insertAdjacentHTML("beforeend", tagHtml);
-    // console.log(tagHtml)
   });
 }
 // this is a no for me
@@ -168,7 +159,7 @@ function findTaggedRecipes(selected) {
     filterRecipes(filteredResults);
   }
 }
-
+//allRecipes
 function filterRecipes(filtered) {
   let foundRecipes = recipes.filter(recipe => {
     return !filtered.includes(recipe);
@@ -235,7 +226,7 @@ function showSavedRecipes() {
 
 // CREATE RECIPE INSTRUCTIONS
 function openRecipeInfo(event) { // let needs to be const
-  fullRecipeInfo.style.display = "inline"; //< I hate this
+  fullRecipeInfo.style.display = "inline"; 
   let recipeId = event.path.find(e => e.id).id; // most of this can probably go in the data model to find a recipe
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
   generateRecipeTitle(recipe, generateIngredients(recipe)); // all of this to be moved in a domFile
@@ -259,6 +250,8 @@ function addRecipeImage(recipe) {
 }
 
 function findRecipeIngredient(recipeIngredient) {
+  console.log(recipeIngredient)
+  // console.log(ingredient)
   return ingredientData.find(ingredient => recipeIngredient.id === ingredient.id
   );
 }
@@ -272,21 +265,21 @@ function generateIngredients(recipe) {
 }
 
 function generateInstructions(recipe) {
+  const currentRecipe = new Recipe(recipe);
+  const instructions = currentRecipe.returnInstructions().map(step => step.instruction);
+
+  //this will eventually go in a domFile
   let instructionsList = "";
-  let instructions = recipe.instructions.map(i => { //refactor possibly, mostly makes sense but we will need to separate functionality from dom manipulation
-    return i.instruction
-  });
-  instructions.forEach(i => {
-    instructionsList += `<li>${i}</li>`
-  });
+  instructions.forEach(step => instructionsList += `<li>${step}</li>`);
   fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
   fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
 }
 
+
 function generateEstimateCost(recipe) {
   let currentRecipe = new Recipe (recipe);
   fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Estimated Cost</h4>")
-  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${currentRecipe.calculateIngredientsCost()}</h4>`)
+  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${currentRecipe.calculateIngredientsCost(ingredientData)}</h4>`)
 }
 
 function exitRecipe() {

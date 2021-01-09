@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 
 import User from '../src/user';
-import data from '../src/data/users-data';
+import data from '../src/data/users-test-data';
 
 describe('User', function() {
   let user;
   let userInfo;
   let recipe;
-  console.log(data.users)
+  // console.log(data.users)
 
   beforeEach(function() {
     userInfo = data[0];
