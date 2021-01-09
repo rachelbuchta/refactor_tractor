@@ -59,8 +59,8 @@ describe('Pantry', function() {
           "name": "lizards",
           "id": 18372001001,
           "quantity": {
-          "amount": 0.5,
-          "unit": "tsp"
+            "amount": 0.5,
+            "unit": "tsp"
           }
         }
       ]
