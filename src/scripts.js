@@ -23,7 +23,7 @@ let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let pantryInfo = [];
-let recipes = [];
+let recipes = []
 let recipes2 = new RecipeRepo(recipeData);
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
@@ -115,10 +115,9 @@ function addToDom(recipe) {
 
 // FILTER BY RECIPE TAGS
 //this seems repetitive and should be in the data model
-//Should this go in a recipe repo file?
 function findTags() {
 let tags = recipes2.returnAllTags()
-  listTags(tags);
+listTags(tags);
 }
 // domFIle
 function listTags(allTags) {
@@ -126,7 +125,6 @@ function listTags(allTags) {
     let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
       <label for="${tag}">${capitalize(tag)}</label></li>`;
     tagList.insertAdjacentHTML("beforeend", tagHtml);
-    // console.log(tagHtml)
   });
 }
 // this is a no for me
