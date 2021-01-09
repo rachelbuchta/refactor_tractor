@@ -62,7 +62,7 @@ describe('Pantry', function() {
   });
 
   it('should store a user pantry', function() {
-    expect(pantry.contents).to.eq(user.pantry);
+    expect(pantry.contents).to.deep.equal(user.pantry);
   });
 
   it('should determine if it is stocked for a meal', function() {
