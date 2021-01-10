@@ -55,6 +55,11 @@ describe.only('User', function() {
     expect(secondUser.favoriteRecipes).to.be.an('Array');    
   });
 
+  it('should be able to return the user\'s first name', function() {
+    expect(firstUser.returnFirstName()).to.equal('Saige');
+    expect(secondUser.returnFirstName()).to.equal('Ephraim');
+  });
+
   it('should be able to save a recipe to favoriteRecipes', function() {
     user.saveRecipe(recipe);
     expect(user.favoriteRecipes[0].name).to.equal('Chicken Parm');
