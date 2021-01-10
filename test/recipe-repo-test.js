@@ -20,6 +20,20 @@ describe("RecipeRepo", () => {
   let secondUserInfo;
   let recipe1;
   let recipe2;
+  let favorites;
+  let toCook;
+  let domName1;
+  let domName2;
+  let domName3;
+  let domName4;
+  // let domIngredient1;
+  // let domIngredient2;
+  // let domIngredient3;
+  // let domIngredient4;
+  // let id1;
+  // let id2;
+  // let id3;
+  // let id4;
 
   beforeEach(() => {
     allRecipes = new RecipeRepo(data);
@@ -62,49 +76,51 @@ describe("RecipeRepo", () => {
     
   });
 
-  it('should be able to filter recipes by type', () => {
+  beforeEach(() => {
     firstUser.saveRecipe(recipe1);    
     secondUser.decideToCook(recipe2);
-    const favorites = firstUser.favoriteRecipes;
-    const toCook = secondUser.recipesToCook;
-    const domInput1 = 'starter';
-    const domInput2 = 'brunch';
-    const domInput3 = 'main course';
-    const domInput4 = 'breakfast';
-    const domInput5 = 'side dish';
+    favorites = firstUser.favoriteRecipes;
+    toCook = secondUser.recipesToCook;
+    domName1 = 'Loaded Chocolate Chip Pudding Cookie Cups';
+    domName2 = 'Elvis Pancakes';
+    domName3 = 'Maple Dijon Apple Cider Grilled Pork Chops';
+    domName4 = 'Dirty Steve\'s Original Wing Sauce';    
+  });
 
-    // const id1 = ingredients.getRecipeIdByName(domInput1);
-    // const id2 = ingredients.getRecipeIdByName(domInput2);
-    // const id3 = ingredients.getRecipeIdByName(domInput3);
-    // const id4 = ingredients.getRecipeIdByName(domInput4);   
-
-    expect(allRecipes.filterListByTag(favorites, domInput1)).to.deep.equal([recipe1]);
-    expect(allRecipes.filterListByTag(favorites, domInput2)).to.deep.equal([]);
-    expect(allRecipes.filterListByTag(toCook, domInput3)).to.deep.equal([recipe2]);
-    expect(allRecipes.filterListByTag(toCook, domInput4)).to.deep.equal([]);
-    expect(allRecipes.filterListbyTag(testRecipes, domInput5)[0].name).to.equal('Elvis Pancakes');
-    expect(allRecipes.filterListbyTag(testRecipes, domInput5)[0].id).to.equal(741603);
+  it('should be able to filter recipes by type', () => {
+    expect(allRecipes.filterListByTag(favorites, 'starter')).to.deep.equal([recipe1]);
+    expect(allRecipes.filterListByTag(favorites, 'brunch')).to.deep.equal([]);
+    expect(allRecipes.filterListByTag(toCook, 'main course')).to.deep.equal([recipe2]);
+    expect(allRecipes.filterListByTag(toCook, 'breakfast')).to.deep.equal([]);
+    expect(allRecipes.filterListbyTag(testRecipes, 'side dish')[0].name).to.equal('Elvis Pancakes');
+    expect(allRecipes.filterListbyTag(testRecipes, 'side dish')[0].id).to.equal(741603);
   });
 
   // filterListByName
-  // filterListByIngredient
+  // filterListByIngredient 
 
-  // it('should be able to filter recipes by ingredient', () => {
-  //   firstUser.saveRecipe(recipe1);    
-  //   secondUser.decideToCook(recipe2);
+  it('should be able to filter recipes by ingredient', () => {
+    const domIngredient1 = 'egg';
+    const domIngredient2 = 'apples';
+    const domIngredient3 = 'dijon mustard';
+    const domIngredient4 = 'black pepper';
 
-  //   const favorites = firstUser.favoriteRecipes;
-  //   const toCook = secondUser.recipesToCook;
+    const id1 = ingredients.getRecipeIdByName(domIngredient1);
+    const id2 = ingredients.getRecipeIdByName(domIngredient2);
+    const id3 = ingredients.getRecipeIdByName(domIngredient3);
+    const id4 = ingredients.getRecipeIdByName(domIngredient4);
 
-  //   expect(firstUser.filterListByIngredient(favorites, 'starter')).to.deep.equal([recipe1]);
-  //   expect(firstUser.filterListByIngredient(favorites, 'brunch')).to.deep.equal([]);
-  //   expect(second.filterListByIngredient(toCook, 'main course')).to.deep.equal([recipe2]);
-  //   expect(firstUser.filterListByIngredient(toCook, 'breakfast')).to.deep.equal([]);
-  // });
+    expect(allRecipes.filterListByIngredient(favorites, id1)).to.deep.equal([recipe1]);
+    expect(allRecipes.filterListByIngredient(favorites, id2)).to.deep.equal([]);
+    expect(allRecipes.filterListByIngredient(toCook, id3)).to.deep.equal([recipe2]);
+    expect(allRecipes.filterListByIngredient(toCook, id4)).to.deep.equal([]);
+  });
 
   // it('should be able to search recipes by name', () => {
   //   user.saveRecipe(recipe);
   //   expect(user.searchForRecipe('Chicken Parm')).to.deep.equal([recipe]);
   // });
+
+  
 
 });
