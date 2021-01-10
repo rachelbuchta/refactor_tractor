@@ -71,22 +71,11 @@ function createCards() {
 }
 
 // FILTER BY RECIPE TAGS
-
 function displayTagList() {
 let tags = recipes2.returnAllTags()
 domUpdates.createListTags(tags);
 }
-// domFIle
-// function listTags(allTags) {
-//   allTags.forEach(tag => {
-//     let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
-//       <label for="${tag}">${capitalize(tag)}</label></li>`;
-//     tagList.insertAdjacentHTML("beforeend", tagHtml);
-//   });
-// }
-// this is a no for me
-// function 
-// These next few functions can be combined/moved to proper data model and domFile
+
 function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
   let checkboxInfo = Array.from(tagCheckboxes)
@@ -119,14 +108,7 @@ function filterRecipes(filtered) {
   let foundRecipes = recipes.filter(recipe => {
     return !filtered.includes(recipe);
   });
-  hideUnselectedRecipes(foundRecipes)
-}
-
-function hideUnselectedRecipes(foundRecipes) { // most likely wont need this one
-  foundRecipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "none";
-  });
+  domUpdates.hideUnselectedRecipes(foundRecipes)
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
@@ -142,8 +124,6 @@ function addToMyRecipes() {
       event.target.src = "../images/apple-logo.png";
       user.saveRecipe(cardId);
     } else if (!user.favoriteRecipes.includes(cardId)) {
-
-    dd
     } else {
       event.target.src = "../images/apple-logo-outline.png";
       user.removeRecipe(cardId);
@@ -166,16 +146,11 @@ function isDescendant(parent, child) {
   return false;
 }
 
-
-
 function showSavedRecipes() {
   let unsavedRecipes = recipes.filter(recipe => {
-    return !user.favoriteRecipes.includes(recipe.id);// this needs to change because we arent comparing correct data types
+  return !user.favoriteRecipes.includes(recipe.id);
   });
-  unsavedRecipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`); // also needs to be split up between proper data model and the dom portion in the domFile by calling the function from the data model (will probably go in user)
-    domRecipe.style.display = "none";
-  });
+  domUpdates.displaySavedRecipes(unsavedRecipes)
   showMyRecipesBanner();
 }
 

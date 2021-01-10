@@ -9,7 +9,7 @@ let domUpdates = {
   document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
     welcomeMsg);
   },
-
+// Create Cards and Tag List onload // 
   createCardTags(tags) {
   let result = '';
   tags.forEach(tag => {
@@ -55,7 +55,23 @@ capitalize(words) {
   return words.split(" ").map(word => {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }).join(" ");
+},
+
+hideUnselectedRecipes(foundRecipes) {
+  foundRecipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "none";
+  });
+},
+
+displaySavedRecipes(recipes) {
+  recipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`); 
+    domRecipe.style.display = "none";
+  });
 }
+
+
 
 }
 export default domUpdates;
