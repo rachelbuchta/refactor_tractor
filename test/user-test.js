@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 
 import User from '../src/user';
+import Pantry from '../src/pantry';
 import userData from '../src/data/users-test-data';
 import testRecipe from '../src/data/recipe-test-data.js';
 
@@ -9,13 +10,17 @@ describe.only('User', function() {
   let firstUserInfo;
   let secondUser;
   let secondUserInfo;
+  let firstPantry;
+  let firstPantryInfo;
+  let secondPantry;
+  let secondPantryInfo;
   let recipe;  
 
   beforeEach(function() {
     firstUserInfo = userData[0];
     firstUser = new User(firstUserInfo);
     secondUserInfo = userData[1];
-    secondUser = new User(secondUserInfo);
+    secondUser = new User(secondUserInfo);   
 
     recipe = testRecipe[0];
   });
@@ -35,8 +40,9 @@ describe.only('User', function() {
     expect(secondUser.name).to.eq('Ephraim Goyette');
   });
 
-  it('should initialize with a pantry', function() {
-    expect(user.pantry[0].ingredient).to.eq(11477);
+  it('should initialize with a pantry', function() {    
+    expect(firstUser.pantry).to.be.an.instanceof(Pantry);
+    expect(secondUser.pantry).to.be.an.instanceof(Pantry);
   });
 
   it('should initialize with an empty favoriteRecipes array', function() {
