@@ -4,14 +4,15 @@ import Pantry from '../src/pantry';
 import User from '../src/user';
 
 import data from '../src/data/users-test-data';
-import ingredientData from '../src/data/ingredient-test-data';
+// import ingredientData from '../src/data/ingredient-test-data';
 
 
 
 describe('Pantry', function() {
   let user;
   let userInfo;
-  let recipe;
+  let recipe1;
+  let recipe2;
   let pantry;
 
 
@@ -20,41 +21,50 @@ describe('Pantry', function() {
     user = new User(userInfo);
     pantry = new Pantry(user);
 
-    recipe1 = {name: 'Flour Soda', type: ['italian', 'dinner'], ingredients: [{
-      "name": "all purpose flour",
-      "id": 20081,
-      "quantity": {
-        "amount": 1.5,
-        "unit": "c"
-      }
-    },
-    {
-      "name": "baking soda",
-      "id": 18372,
-      "quantity": {
-        "amount": 0.5,
-        "unit": "tsp"
-      }
-    }]};
+    recipe1 = {
+      name: 'Flour Soda', 
+      type: ['italian', 'dinner'], 
+      ingredients: [
+        {
+          "name": "all purpose flour",
+          "id": 20081,
+          "quantity": {
+            "amount": 1.5,
+            "unit": "c"
+          }
+        },
+        {
+          "name": "baking soda",
+          "id": 18372,
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp"
+          }
+        }
+      ]};
 
-    recipe2 = {name: 'Cannot make this', type: ['italian', 'dinner'], ingredients: [{
-      "name": "sharks",
-      "id": 8585858585,
-      "quantity": {
-        "amount": 1.5,
-        "unit": "c"
-      }
-    },
-    {
-      "name": "lizards",
-      "id": 18372001001,
-      "quantity": {
-        "amount": 0.5,
-        "unit": "tsp"
-      }
-    }]};
-
-
+    recipe2 = {
+      name: 'Cannot make this', 
+      type: ['italian', 'dinner'], 
+      ingredients: [
+        {
+          "name": "sharks",
+          "id": 8585858585,
+          "quantity": {
+            "amount": 1.5,
+            "unit": "c"
+          }
+        },
+        {
+          "name": "lizards",
+          "id": 18372001001,
+          "quantity": {
+            "amount": 0.5,
+            "unit": "tsp"
+          }
+        }
+      ]
+    };
   });
 
   it('should be a function', function() {
@@ -62,7 +72,7 @@ describe('Pantry', function() {
   });
 
   it('should store a user pantry', function() {
-    expect(pantry.contents).to.eq(user.pantry);
+    expect(pantry.contents).to.deep.equal(user.pantry);
   });
 
   it('should determine if it is stocked for a meal', function() {
@@ -82,7 +92,7 @@ describe('Pantry', function() {
     expect(pantry.contents).to.deep.eq([
       {
         "ingredient": 20081,
-        "amount": 10;
+        "amount": 10
       },
       {
         "ingredient": 18372,
