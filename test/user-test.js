@@ -63,20 +63,39 @@ describe.only('User', function() {
   it('should be able to save a recipe to favoriteRecipes', function() {
     firstUser.saveRecipe(recipe1);
     secondUser.saveRecipe(recipe2);
-
+    
+    expect(firstUser.recipesToCook[0]).to.be.an.instanceof(Recipe);
     expect(firstUser.favoriteRecipes[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
+    expect(secondUser.recipesToCook[0]).to.be.an.instanceof(Recipe);
     expect(secondUser.favoriteRecipes[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops');
   });
 
   it('should be able to decide to cook a recipe', function() {
-    user.decideToCook(recipe);
-    expect(user.recipesToCook[0].name).to.equal('Chicken Parm');
+    firstUser.decideToCook(recipe1);
+    secondUser.decideToCook(recipe2);
+
+    expect(firstUser.recipesToCook[0]).to.be.an.instanceof(Recipe);
+    expect(firstUser.recipesToCook[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
+    expect(secondUser.recipesToCook[0]).to.be.an.instanceof(Recipe);
+    expect(secondUser.recipesToCook[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops');
   });
 
   it('should be able to filter recipes by type', function() {
-    user.saveRecipe(recipe);
-    expect(user.filterRecipes('italian')).to.deep.equal([recipe]);
+    firstUser.saveRecipe(recipe1);    
+    secondUser.decideToCook(recipe2);
+
+    const favorites = firstUser.favoriteRecipes;
+    const toCook = secondUser.recipesToCook;
+
+    expect(firstUser.filterListByTag(favorites, 'starter')).to.deep.equal([recipe1]);
+    expect(firstUser.filterListByTag(favorites, 'brunch')).to.deep.equal([]);
+    expect(second.filterListByTag(toCook, 'main course')).to.deep.equal([recipe2]);
+    expect(firstUser.filterListByTag(toCook, 'breakfast')).to.deep.equal([]);
+
   });
+
+  // filterListByName
+  // filterListByIngredient
 
   it('should be able to search recipes by name', function() {
     user.saveRecipe(recipe);
