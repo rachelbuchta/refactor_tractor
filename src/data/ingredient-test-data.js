@@ -1,4 +1,4 @@
-let ingredientsTest = [
+export default ingredientsTest = [
   {
     "name": "sharks",
     "id": 8585858585,
@@ -139,6 +139,4 @@ let ingredientsTest = [
     "name": "seasoned salt",
     "estimatedCostInCents": 334
   }
-]
-
-export default ingredientsTest;
+];
