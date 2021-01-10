@@ -7,8 +7,7 @@ import testRecipe from '../src/data/recipe-test-data.js';
 describe('User', function() {
   let user;
   let userInfo;
-  let recipe;
-  // console.log(data.users)
+  let recipe;  
 
   beforeEach(function() {
     userInfo = userData[0];
@@ -22,7 +21,11 @@ describe('User', function() {
   });
 
   it('should initialize with an id', function() {
+    const user2Info = userData[1];
+    const user2 = new User(user2Info);
+
     expect(user.id).to.eq(1);
+    expect(user2.id).to.equal(2);
   });
 
   it('should initialize with a name', function() {
