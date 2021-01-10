@@ -22,10 +22,10 @@ describe("RecipeRepo", () => {
   let recipe2;
   let favorites;
   let toCook;
-  let domName1;
-  let domName2;
-  let domName3;
-  let domName4;
+  // let domName1;
+  // let domName2;
+  // let domName3;
+  // let domName4;
   // let domIngredient1;
   // let domIngredient2;
   // let domIngredient3;
@@ -51,40 +51,28 @@ describe("RecipeRepo", () => {
   });
 
   it("should hold all instances of Recipes", () => {
-
     expect(allRecipes.recipes).to.deep.eq(data);
   });
 
   it("should return an array of all recipe tags with no duplicates in alphabetical order", () => {
-
-
     expect(allRecipes.returnAllTags()).to.deep.eq(["antipasti", "antipasto", "appetizer", "dinner", "hor d'oeuvre", "lunch", "main course", "main dish", "sauce", "side dish", "snack", "starter"]);
   });
 
   it("should return ingredients id that matches entered name", () => {
-
-
     expect(ingredients.getRecipeIdByName("butter")).to.eq(1001);
   });
 
   it("should return recipes id that matches entered name", () => {
-
     const ingredientId = ingredients.getRecipeIdByName("butter");
 
-
-    expect(allRecipes.searchRecipes(ingredientId)).to.deep.eq(["Dirty Steve's Original Wing Sauce", "Elvis Pancakes"]);
-    
+    expect(allRecipes.searchRecipes(ingredientId)).to.deep.eq(["Dirty Steve's Original Wing Sauce", "Elvis Pancakes"]);    
   });
 
   beforeEach(() => {
     firstUser.saveRecipe(recipe1);    
     secondUser.decideToCook(recipe2);
     favorites = firstUser.favoriteRecipes;
-    toCook = secondUser.recipesToCook;
-    domName1 = 'Loaded Chocolate Chip Pudding Cookie Cups';
-    domName2 = 'Elvis Pancakes';
-    domName3 = 'Maple Dijon Apple Cider Grilled Pork Chops';
-    domName4 = 'Dirty Steve\'s Original Wing Sauce';    
+    toCook = secondUser.recipesToCook;    
   });
 
   it('should be able to filter recipes by type', () => {
@@ -96,13 +84,10 @@ describe("RecipeRepo", () => {
     expect(allRecipes.filterListbyTag(testRecipes, 'side dish')[0].id).to.equal(741603);
   });
 
-  // filterListByName
-  // filterListByIngredient 
-
   it('should be able to filter recipes by ingredient', () => {
     const domIngredient1 = 'egg';
     const domIngredient2 = 'apples';
-    const domIngredient3 = 'dijon mustard';
+    const domIngredient3 = 'dijon'; // this is short for dijon mustard, and should still work
     const domIngredient4 = 'black pepper';
 
     const id1 = ingredients.getRecipeIdByName(domIngredient1);
@@ -116,11 +101,17 @@ describe("RecipeRepo", () => {
     expect(allRecipes.filterListByIngredient(toCook, id4)).to.deep.equal([]);
   });
 
-  // it('should be able to search recipes by name', () => {
-  //   user.saveRecipe(recipe);
-  //   expect(user.searchForRecipe('Chicken Parm')).to.deep.equal([recipe]);
-  // });
-
-  
-
+  it('should be able to search recipes by name', () => {
+    const domName1 = 'Loaded Chocolate Chip Pudding Cookie Cups';
+    const domName2 = 'Elvis Pancakes';
+    const domName3 = 'Maple Dijon Apple Cider Grilled Pork Chops';
+    const domName4 = 'Dirty Steve\'s Original Wing Sauce';
+    const domName5 = 'a';    
+    
+    expect(allRecipes.filterRecipesByName(favorites, domName1)).to.deep.equal([recipe1]);
+    expect(allRecipes.filterRecipesByName(favorites, domName2)).to.deep.equal([]);
+    expect(allRecipes.filterRecipesByName(toCook, domName3)).to.deep.equal([recipe2]);
+    expect(allRecipes.filterRecipesByName(toCook, domName4)).to.deep.equal([]);
+    expect(allRecipes.filterRecipesByName(testRecipes, domName5)).to.deep.equal(testRecipes);
+  });
 });
