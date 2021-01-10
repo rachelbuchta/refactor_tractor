@@ -2,19 +2,18 @@ import { expect } from 'chai';
 
 import User from '../src/user';
 import Pantry from '../src/pantry';
+import Recipe from '../src/recipe';
 import userData from '../src/data/users-test-data';
 import testRecipe from '../src/data/recipe-test-data.js';
+
 
 describe.only('User', function() {
   let firstUser;
   let firstUserInfo;
   let secondUser;
-  let secondUserInfo;
-  let firstPantry;
-  let firstPantryInfo;
-  let secondPantry;
-  let secondPantryInfo;
-  let recipe;  
+  let secondUserInfo;  
+  let recipe1;
+  let recipe2;
 
   beforeEach(function() {
     firstUserInfo = userData[0];
@@ -22,7 +21,8 @@ describe.only('User', function() {
     secondUserInfo = userData[1];
     secondUser = new User(secondUserInfo);   
 
-    recipe = testRecipe[0];
+    recipe1 = new Recipe(testRecipe[0]);
+    recipe2 = new Recipe(testRecipe[1]);
   });
 
   it('should be an instance of User', function() {
@@ -61,8 +61,11 @@ describe.only('User', function() {
   });
 
   it('should be able to save a recipe to favoriteRecipes', function() {
-    user.saveRecipe(recipe);
-    expect(user.favoriteRecipes[0].name).to.equal('Chicken Parm');
+    firstUser.saveRecipe(recipe1);
+    secondUser.saveRecipe(recipe2);
+
+    expect(firstUser.favoriteRecipes[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
+    expect(secondUser.favoriteRecipes[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops');
   });
 
   it('should be able to decide to cook a recipe', function() {
