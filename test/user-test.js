@@ -42,16 +42,20 @@ describe.only('User', function() {
 
   it('should initialize with a pantry', function() {    
     expect(firstUser.pantry).to.be.an.instanceof(Pantry);
+    expect(firstUser.pantry).to.be.an('Array');
+    expect(firstUser.pantry[0]).to.be.an('Object');
     expect(secondUser.pantry).to.be.an.instanceof(Pantry);
-  });
+    expect(secondUser.pantry).to.be.an('Array');
+    expect(secondUser.pantry[0]).to.be.an('Object');
+  });  
 
-  it('should initialize with an empty favoriteRecipes array', function() {
+  it('should initialize with an empty favoriteRecipes array', function() {    
     expect(user.favoriteRecipes).to.deep.equal([]);
   });
 
   it('should initialize with an empty recipesToCook array', function() {
     expect(user.recipesToCook).to.deep.equal([]);
-  });
+  });  
 
   it('should be able to save a recipe to favoriteRecipes', function() {
     user.saveRecipe(recipe);
