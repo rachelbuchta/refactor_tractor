@@ -20,7 +20,7 @@ export default class Recipe {
       return totalCost;
     }, 0);
     let cost = costInCents * .01;
-    return cost.toLocaleString("en-US",{style:"currency", currency: "USD"});
+    return cost.toLocaleString("en-US", {style: "currency", currency: "USD"});
   }
 
   returnInstructions() {

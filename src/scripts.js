@@ -66,13 +66,12 @@ function createCards() {
     }
     domUpdates.createCard(recipeInfo);
   });
- 
 }
 
 // FILTER BY RECIPE TAGS
 function displayTagList() {
-let tags = recipes2.returnAllTags()
-domUpdates.createListTags(tags);
+  let tags = recipes2.returnAllTags()
+  domUpdates.createListTags(tags);
 }
 
 function findCheckedBoxes() {
@@ -95,11 +94,11 @@ function findTaggedRecipes(selected) {
         filteredResults.push(recipe);
       }
     })
-  showAllRecipes();
-  if (filteredResults.length > 0) {
-    filterRecipes(filteredResults);
-  }
-})
+    showAllRecipes();
+    if (filteredResults.length > 0) {
+      filterRecipes(filteredResults);
+    }
+  })
 }
 
 //allRecipes
@@ -147,7 +146,7 @@ function isDescendant(parent, child) {
 
 function showSavedRecipes() {
   let unsavedRecipes = recipes.filter(recipe => {
-  return !user.favoriteRecipes.includes(recipe.id);
+    return !user.favoriteRecipes.includes(recipe.id);
   });
   domUpdates.displaySavedRecipes(unsavedRecipes)
   showMyRecipesBanner();
@@ -158,7 +157,7 @@ function openRecipeInfo(event) {
   fullRecipeInfo.style.display = "inline"; 
   let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
-  domUpdates.createInstructionsTitle(recipe, generateIngredients(recipe)); // all of this to be moved in a domFile
+  domUpdates.createInstructionsTitle(recipe, generateIngredients(recipe));
   domUpdates.createInstructionsImage(recipe);
   generateInstructions(recipe);
   generateEstimateCost(recipe);
@@ -188,11 +187,8 @@ function generateEstimateCost(recipe) {
   domUpdates.createEstimatedPrice(currentRecipe, ingredientsData)
 }
 
-// function exitRecipe() {
-  
-// }
-
-// TOGGLE DISPLAYS // these need to be changed using classList.toggle("hidden") also combine them using parameters
+// TOGGLE DISPLAYS // 
+//combine these//
 function showMyRecipesBanner() {
   document.querySelector(".welcome-msg").style.display = "none";
   document.querySelector(".my-recipes-banner").style.display = "block";
@@ -225,7 +221,7 @@ function searchRecipes() {
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
 
-function filterNonSearched(filtered) { //Kinda thinking this is unneccesary and redundant if we have the above functionality..
+function filterNonSearched(filtered) { 
   let found = recipes.filter(recipe => {
     let ids = filtered.map(f => f.id);
     return !ids.includes(recipe.id)
@@ -286,19 +282,18 @@ function findCheckedPantryBoxes() {
 }
 
 function findRecipesWithCheckedIngredients(selected) {
-  let recipeChecker = (arr, target) => target.every(v => arr.includes(v)); //no datatype as parameters (we think its checking if every current element(target) is in the array(arr), recipes and checked boxes)
+  let recipeChecker = (arr, target) => target.every(v => arr.includes(v)); 
   let ingredientNames = selected.map(item => {
-    return item.id; //(array of ids of each ingredient whos checked box is checked)
+    return item.id;
   })
-  recipes.forEach(recipe => { //iterating through array of recipe instances
+  recipes.forEach(recipe => { 
     let allRecipeIngredients = [];
     recipe.ingredients.forEach(ingredient => {
-      allRecipeIngredients.push(ingredient.name); //creates an array of ingredient names
+      allRecipeIngredients.push(ingredient.name);
     });
     if (!recipeChecker(allRecipeIngredients, ingredientNames)) {
       let domRecipe = document.getElementById(`${recipe.id}`);
-      domRecipe.style.display = "none"; //this is all super complicated and an inverted way to achieve simply displaying recipes who include the checked ingredients
-      // eric IS dead
+      domRecipe.style.display = "none";
     }
   })
 }
