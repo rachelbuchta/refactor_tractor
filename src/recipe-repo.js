@@ -31,17 +31,18 @@ export default class RecipeRepo {
 
   filterRecipesByTag(selected) {
     const filteredRecipes = [];
-    this.recipes.forEach(recipe => {
-      recipe.tags.forEach(tag => {
-        selected.forEach(item => {
-          if (item === tag) {
-            filteredRecipes.push(recipe.name)
-          }
-        });
-      });
+    selected.forEach(tag => {
+    const allRecipes = this.recipes
+    .filter(recipe => recipe.tags.includes(tag))
+    .forEach(recipe => {
+      if (!filteredRecipes.includes(recipe)) {
+        filteredRecipes.push(recipe)
+      };
     });
-    return filteredRecipes;
+    }) 
+    return filteredRecipes
+    }
   } 
-}
+
 
 

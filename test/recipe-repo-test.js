@@ -44,7 +44,7 @@ describe("RecipeRepo", () => {
   it("should filter recipes by tags", () => {
 
     const selected = ["starter", "sauce"]
-
-    expect(allRecipes.filterRecipesByTag(selected)).to.deep.eq(["Loaded Chocolate Chip Pudding Cookie Cups", "Dirty Steve's Original Wing Sauce"]);
+  
+    expect(allRecipes.filterRecipesByTag(selected)).to.deep.eq([data[0], data[2]]);
   });
 });

@@ -140,32 +140,44 @@ function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
   let checkboxInfo = Array.from(tagCheckboxes)
   let selectedTags = checkboxInfo.filter(box => {
+    
     return box.checked;
+    
   })
+  // console.log(selectedTags)
   findTaggedRecipes(selectedTags);
 }
 
 function findTaggedRecipes(selected) {
   let filteredResults = [];
+  // event.preventDefault()
+  // const test = recipes2.filterRecipesByTag(selected)
+  // const test2 = filteredResults.push(test)
+
+  // const test = filteredResults.push(recipesByTag)
+  // console.log(test)
   selected.forEach(tag => {
-      
+    console.log(selected)
+      console.log(recipes)
     let allRecipes = recipes.filter(recipe => {
-        console.log(tag.id)
-        console.log(recipe.tags.includes(tag))
+     
       return recipe.tags.includes(tag.id);
       
     });
+   
     allRecipes.forEach(recipe => {
       if (!filteredResults.includes(recipe)) {
         filteredResults.push(recipe);
       }
     })
-  });
+  
   showAllRecipes();
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
   }
+})
 }
+
 //allRecipes
 function filterRecipes(filtered) {
   let foundRecipes = recipes.filter(recipe => {
