@@ -128,7 +128,7 @@ function addToMyRecipes() {
       user.removeRecipe(cardId);
     }
   } else if (event.target.id === "exit-recipe-btn") {
-    exitRecipe();
+    domUpdates.exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
   }
@@ -171,7 +171,6 @@ function findRecipeIngredient(recipeIngredient) {
 }
 
 function generateIngredients(recipe) {
-  
   return recipe && recipe.ingredients.map(i => {
     const foundIngredient = findRecipeIngredient(i);
     return `${domUpdates.capitalize(foundIngredient.name)} (${i.quantity.amount} ${i.quantity.unit})`
@@ -184,18 +183,14 @@ function generateInstructions(recipe) {
   domUpdates.createInstructionsList(instructions)
 }
 
-
 function generateEstimateCost(recipe) {
   let currentRecipe = new Recipe (recipe);
   domUpdates.createEstimatedPrice(currentRecipe, ingredientsData)
 }
 
-function exitRecipe() {
-  while (fullRecipeInfo.firstChild &&
-    fullRecipeInfo.removeChild(fullRecipeInfo.firstChild)); //this can be achieved probably using event.target.closest or id.
-  fullRecipeInfo.style.display = "none";
-  document.getElementById("overlay").remove();
-}
+// function exitRecipe() {
+  
+// }
 
 // TOGGLE DISPLAYS // these need to be changed using classList.toggle("hidden") also combine them using parameters
 function showMyRecipesBanner() {
@@ -209,12 +204,12 @@ function showWelcomeBanner() {
 }
 
 // SEARCH RECIPES
-function pressEnterSearch(event) { //rename
+function pressEnterSearch(event) { 
   event.preventDefault();
   searchRecipes();
 }
 
-function searchRecipes() { //create a method that filters through recipes in data model that can be called to display searched recipe on the dom
+function searchRecipes() { 
   showAllRecipes();
   let searchedRecipes = [];
   recipeData.forEach(recipe => {
@@ -227,7 +222,6 @@ function searchRecipes() { //create a method that filters through recipes in dat
       }
     })
   });
-
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
 
@@ -236,15 +230,15 @@ function filterNonSearched(filtered) { //Kinda thinking this is unneccesary and 
     let ids = filtered.map(f => f.id);
     return !ids.includes(recipe.id)
   })
-  hideUnselectedRecipes(found);
+  domUpdates.hideUnselectedRecipes(found);
 }
 
-function createRecipeObject(recipes) { //you dont belong here....go back to where you belong....in the data model....
+function createRecipeObject(recipes) { 
   recipes = recipes.map(recipe => new Recipe(recipe));
   return recipes
 }
 
-function toggleMenu() { // this can proabably be done using classList.toggle
+function toggleMenu() { // Might have to go to domUpdates?
   var menuDropdown = document.querySelector(".drop-menu");
   menuOpen = !menuOpen;
   if (menuOpen) {
@@ -254,24 +248,17 @@ function toggleMenu() { // this can proabably be done using classList.toggle
   }
 }
 
-function showAllRecipes() { // domFile and datamodel thing - helper function to hold initial dom display(scripts). showWelcomeBanner has a timeOut()
-  recipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "block";
-  });
+function showAllRecipes(recipes) { 
+  domUpdates.createAllRecipes(recipes)
   showWelcomeBanner();
 }
 
 // CREATE AND USE PANTRY 
 function findPantryInfo() { 
- 
   user.pantry.forEach(item => { // create pantry class
     let itemInfo = ingredientsData.find(ingredient => {
-      return ingredient.id === item.ingredient; // string and number cant be compared, will be undefined. Also this needs to go into the data model
-    // basically we want to have a method that is counting the ingreients and giving it a name to eventually be displayed on the dom
-
+      return ingredient.id === item.ingredient; 
     });
-
     let originalIngredient = pantryInfo.find(ingredient => {
       if (itemInfo) {
         return ingredient.name === itemInfo.name;
@@ -283,26 +270,16 @@ function findPantryInfo() {
       pantryInfo.push({name: itemInfo.name, count: item.amount});
     }
   });
-
-  displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name))); // this goes in the dom
+  domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name))); 
 }
 
-function displayPantryInfo(pantry) { // displays each ingredient on the dom
-  pantry.forEach(ingredient => {
-    let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-      <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
-    document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
-      ingredientHtml); // the ingredients need to be able to checked off so that a user can filter through recipes depending on what ingredients they want to use
-  });
-}
-
-function findCheckedPantryBoxes() { //
+function findCheckedPantryBoxes() {
   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
   let pantryCheckboxInfo = Array.from(pantryCheckboxes)
   let selectedIngredients = pantryCheckboxInfo.filter(box => {
     return box.checked;
   })
-  showAllRecipes(); //we dont need this
+  showAllRecipes();
   if (selectedIngredients.length > 0) {
     findRecipesWithCheckedIngredients(selectedIngredients);
   }

@@ -70,7 +70,8 @@ displaySavedRecipes(recipes) {
     domRecipe.style.display = "none";
   });
 },
-//Recipe Instructions
+
+//Recipe Instructions//
 createInstructionsTitle(recipe, ingredients) {
   let fullRecipeInfo = document.querySelector(".recipe-instructions");
   let recipeTitle = `
@@ -97,7 +98,35 @@ createEstimatedPrice(recipe, ingredients) {
   let fullRecipeInfo = document.querySelector(".recipe-instructions");
     fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Estimated Cost</h4>")
   fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${recipe.calculateIngredientsCost(ingredients)}</h4>`)
+},
+
+exitRecipe() {
+  let fullRecipeInfo = document.querySelector(".recipe-instructions");
+  while (fullRecipeInfo.firstChild &&
+    fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
+  fullRecipeInfo.style.display = "none";
+  document.getElementById("overlay").remove();
+},
+
+createAllRecipes(recipes) {
+    recipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "block";
+  });
+},
+
+//Pantry//
+
+displayPantryInfo(pantry) {
+    pantry.forEach(ingredient => {
+    let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
+      <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
+    document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
+      ingredientHtml);
+  });
 }
+
+
 
 }
 
