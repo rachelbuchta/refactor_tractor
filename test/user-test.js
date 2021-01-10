@@ -20,8 +20,9 @@ describe.only('User', function() {
     recipe = testRecipe[0];
   });
 
-  it('should be a function', function() {
-    expect(User).to.be.a('function');
+  it('should be an instance of User', function() {
+    expect(firstUser).to.be.an.instanceof(User);
+    expect(secondUser).to.be.an.instanceof(User);
   });
 
   it('should initialize with an id', function() {
