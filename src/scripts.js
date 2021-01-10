@@ -49,7 +49,6 @@ showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
 
 // GENERATE A USER ON LOAD
-//possibly move to sep domFile
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   domUpdates.welcomeUser(user)
@@ -155,28 +154,15 @@ function showSavedRecipes() {
 }
 
 // CREATE RECIPE INSTRUCTIONS
-function openRecipeInfo(event) { // let needs to be const
+function openRecipeInfo(event) { 
   fullRecipeInfo.style.display = "inline"; 
-  let recipeId = event.path.find(e => e.id).id; // most of this can probably go in the data model to find a recipe
+  let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
-  generateRecipeTitle(recipe, generateIngredients(recipe)); // all of this to be moved in a domFile
-  addRecipeImage(recipe);
+  domUpdates.createInstructionsTitle(recipe, generateIngredients(recipe)); // all of this to be moved in a domFile
+  domUpdates.createInstructionsImage(recipe);
   generateInstructions(recipe);
   generateEstimateCost(recipe);
   fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
-}
-
-function generateRecipeTitle(recipe, ingredients) {
-  let recipeTitle = `
-    <button id="exit-recipe-btn">X</button>
-    <h3 id="recipe-title">${recipe.name}</h3>
-    <h4>Ingredients</h4>
-    <p>${ingredients}</p>`
-  fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);  /// all of these things will most likely be combined into creating one big html element displaying a recipe
-}
-
-function addRecipeImage(recipe) {
-  document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
 }
 
 function findRecipeIngredient(recipeIngredient) {
@@ -189,25 +175,19 @@ function generateIngredients(recipe) {
   return recipe && recipe.ingredients.map(i => {
     const foundIngredient = findRecipeIngredient(i);
     return `${domUpdates.capitalize(foundIngredient.name)} (${i.quantity.amount} ${i.quantity.unit})`
-  }).join(", "); //the output is not what we want. Its giving us an array and we want a string (is this being displayed properly?)
+  }).join(", "); 
 }
 
 function generateInstructions(recipe) {
   const currentRecipe = new Recipe(recipe);
   const instructions = currentRecipe.returnInstructions().map(step => step.instruction);
-
-  //this will eventually go in a domFile
-  let instructionsList = "";
-  instructions.forEach(step => instructionsList += `<li>${step}</li>`);
-  fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
-  fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
+  domUpdates.createInstructionsList(instructions)
 }
 
 
 function generateEstimateCost(recipe) {
   let currentRecipe = new Recipe (recipe);
-  fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Estimated Cost</h4>")
-  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${currentRecipe.calculateIngredientsCost(ingredientsData)}</h4>`)
+  domUpdates.createEstimatedPrice(currentRecipe, ingredientsData)
 }
 
 function exitRecipe() {

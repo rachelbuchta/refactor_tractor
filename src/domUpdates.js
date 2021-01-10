@@ -69,9 +69,40 @@ displaySavedRecipes(recipes) {
     let domRecipe = document.getElementById(`${recipe.id}`); 
     domRecipe.style.display = "none";
   });
+},
+//Recipe Instructions
+createInstructionsTitle(recipe, ingredients) {
+  let fullRecipeInfo = document.querySelector(".recipe-instructions");
+  let recipeTitle = `
+    <button id="exit-recipe-btn">X</button>
+    <h3 id="recipe-title">${recipe.name}</h3>
+    <h4>Ingredients</h4>
+    <p>${ingredients}</p>`
+  fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
+},
+
+createInstructionsImage(recipe) {
+    document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
+},
+
+createInstructionsList(instructions) {
+  let fullRecipeInfo = document.querySelector(".recipe-instructions");
+  let instructionsList = "";
+  instructions.forEach(step => instructionsList += `<li>${step}</li>`);
+  fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
+  fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
+},
+
+createEstimatedPrice(recipe, ingredients) {
+  let fullRecipeInfo = document.querySelector(".recipe-instructions");
+    fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Estimated Cost</h4>")
+  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${recipe.calculateIngredientsCost(ingredients)}</h4>`)
+}
+
 }
 
 
 
-}
+
+
 export default domUpdates;
