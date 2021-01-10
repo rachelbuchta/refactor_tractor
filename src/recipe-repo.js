@@ -2,7 +2,6 @@
 export default class RecipeRepo {
   constructor(recipes) {
     this.recipes = recipes;
-    this.filteredRecipes = [];
   }
 
   returnAllTags() {
@@ -28,21 +27,21 @@ export default class RecipeRepo {
     });
     return filteredRecipes;
   }
-
-  filterRecipesByTag(selected) {
-    const filteredRecipes = [];
-    selected.forEach(tag => {
-    const allRecipes = this.recipes
-    .filter(recipe => recipe.tags.includes(tag))
-    .forEach(recipe => {
-      if (!filteredRecipes.includes(recipe)) {
-        filteredRecipes.push(recipe)
-      };
-    });
-    }) 
-    return filteredRecipes
-    }
-  } 
+}
+  // filterRecipesByTag(selected, element) {
+  //   const filteredRecipes = [];
+  //   selected.forEach(tag => {
+  //   const allRecipes = this.recipes
+  //   .filter(recipe => recipe.tags.includes(tag))
+  //   .forEach(recipe => {
+  //     if (!filteredRecipes.includes(recipe)) {
+  //       filteredRecipes.push(recipe)
+  //     };
+  //   });
+  //   }) 
+  //   return filteredRecipes
+  //   }
+  // } 
 
 
 

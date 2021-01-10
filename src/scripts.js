@@ -17,7 +17,7 @@ import User from './user';
 import Recipe from './recipe';
 import RecipeRepo from './recipe-repo'
 import IngredientsRepo from './ingredient-repo'
-import ingredientsData from './data/ingredient-data';
+// import ingredientsData from './data/ingredient-data';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -140,37 +140,22 @@ function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
   let checkboxInfo = Array.from(tagCheckboxes)
   let selectedTags = checkboxInfo.filter(box => {
-    
     return box.checked;
-    
   })
-  // console.log(selectedTags)
   findTaggedRecipes(selectedTags);
 }
 
 function findTaggedRecipes(selected) {
   let filteredResults = [];
-  // event.preventDefault()
-  // const test = recipes2.filterRecipesByTag(selected)
-  // const test2 = filteredResults.push(test)
-
-  // const test = filteredResults.push(recipesByTag)
-  // console.log(test)
   selected.forEach(tag => {
-    console.log(selected)
-      console.log(recipes)
     let allRecipes = recipes.filter(recipe => {
-     
       return recipe.tags.includes(tag.id);
-      
     });
-   
     allRecipes.forEach(recipe => {
       if (!filteredResults.includes(recipe)) {
         filteredResults.push(recipe);
       }
     })
-  
   showAllRecipes();
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
@@ -328,11 +313,10 @@ function pressEnterSearch(event) { //rename
 function searchRecipes() { //create a method that filters through recipes in data model that can be called to display searched recipe on the dom
   showAllRecipes();
   let searchedRecipes = [];
-  const ingredients = new IngredientsRepo(ingredientsData)
-  console.log(searchedRecipes)
-  const ingredientId = ingredients.getRecipeIdByName(searchInput.value.toLowerCase())
+  const allIngredients = new IngredientsRepo(ingredientsData)
+  const ingredientId = allIngredients.getRecipeIdByName(searchInput.value.toLowerCase())
   const foundRecipes = recipes2.searchRecipes(ingredientId)
-  return searchedRecipes.push(foundRecipes)
+  searchedRecipes.push(foundRecipes)
 
   
 
