@@ -1,6 +1,3 @@
-// don't need this
-import usersTest from '../src/data/users-test-data';
-
 class User {
   constructor(user) {
     this.id = user.id;
