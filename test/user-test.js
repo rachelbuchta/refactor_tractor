@@ -4,7 +4,7 @@ import User from '../src/user';
 import Pantry from '../src/pantry';
 import Recipe from '../src/recipe';
 import userData from '../src/data/users-test-data';
-import testRecipe from '../src/data/recipe-test-data.js';
+import testRecipes from '../src/data/recipe-test-data.js';
 
 
 describe.only('User', function() {
@@ -19,10 +19,9 @@ describe.only('User', function() {
     firstUserInfo = userData[0];
     firstUser = new User(firstUserInfo);
     secondUserInfo = userData[1];
-    secondUser = new User(secondUserInfo);   
-
-    recipe1 = new Recipe(testRecipe[0]);
-    recipe2 = new Recipe(testRecipe[1]);
+    secondUser = new User(secondUserInfo);
+    recipe1 = new Recipe(testRecipes[0]);
+    recipe2 = new Recipe(testRecipes[1]);
   });
 
   it('should be an instance of User', function() {
@@ -78,27 +77,5 @@ describe.only('User', function() {
     expect(firstUser.recipesToCook[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
     expect(secondUser.recipesToCook[0]).to.be.an.instanceof(Recipe);
     expect(secondUser.recipesToCook[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops');
-  });
-
-  it('should be able to filter recipes by type', function() {
-    firstUser.saveRecipe(recipe1);    
-    secondUser.decideToCook(recipe2);
-
-    const favorites = firstUser.favoriteRecipes;
-    const toCook = secondUser.recipesToCook;
-
-    expect(firstUser.filterListByTag(favorites, 'starter')).to.deep.equal([recipe1]);
-    expect(firstUser.filterListByTag(favorites, 'brunch')).to.deep.equal([]);
-    expect(second.filterListByTag(toCook, 'main course')).to.deep.equal([recipe2]);
-    expect(firstUser.filterListByTag(toCook, 'breakfast')).to.deep.equal([]);
-
-  });
-
-  // filterListByName
-  // filterListByIngredient
-
-  it('should be able to search recipes by name', function() {
-    user.saveRecipe(recipe);
-    expect(user.searchForRecipe('Chicken Parm')).to.deep.equal([recipe]);
-  });
+  });  
 });
