@@ -1,4 +1,4 @@
-export default ingredientsTest = [
+const ingredientsTest = [
   {
     "name": "sharks",
     "id": 8585858585,
@@ -140,3 +140,5 @@ export default ingredientsTest = [
     "estimatedCostInCents": 334
   }
 ];
+
+export default ingredientsTest;
