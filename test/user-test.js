@@ -46,12 +46,14 @@ describe.only('User', function() {
   });  
 
   it('should initialize with a favoriteRecipes array', function() {    
-    expect(user.favoriteRecipes).to.be.an('Array');    
+    expect(firstUser.favoriteRecipes).to.be.an('Array');    
+    expect(secondUser.favoriteRecipes).to.be.an('Array');    
   });
 
   it('should initialize with a recipesToCook array', function() {
-    expect(user.recipesToCook).to.be.an('Array');
-  });  
+    expect(firstUser.favoriteRecipes).to.be.an('Array');    
+    expect(secondUser.favoriteRecipes).to.be.an('Array');    
+  });
 
   it('should be able to save a recipe to favoriteRecipes', function() {
     user.saveRecipe(recipe);
