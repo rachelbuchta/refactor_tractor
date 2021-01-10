@@ -4,14 +4,18 @@ import User from '../src/user';
 import userData from '../src/data/users-test-data';
 import testRecipe from '../src/data/recipe-test-data.js';
 
-describe('User', function() {
-  let user;
-  let userInfo;
+describe.only('User', function() {
+  let firstUser;
+  let firstUserInfo;
+  let secondUser;
+  let secondUserInfo;
   let recipe;  
 
   beforeEach(function() {
-    userInfo = userData[0];
-    user = new User(userInfo)
+    firstUserInfo = userData[0];
+    firstUser = new User(firstUserInfo);
+    secondUserInfo = userData[1];
+    secondUser = new User(secondUserInfo);
 
     recipe = testRecipe[0];
   });
