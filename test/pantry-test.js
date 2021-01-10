@@ -82,7 +82,7 @@ describe('Pantry', function() {
     expect(pantry.contents).to.deep.eq([
       {
         "ingredient": 20081,
-        "amount": 10;
+        "amount": 10
       },
       {
         "ingredient": 18372,
