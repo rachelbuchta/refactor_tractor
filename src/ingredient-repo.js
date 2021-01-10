@@ -1,17 +1,18 @@
+/* eslint-disable max-len */
 export default class IngredientsRepo {
-    constructor(ingredients) {
-        this.ingredients = ingredients;
-    };
+  constructor(ingredients) {
+    this.ingredients = ingredients;
+  }
 
- getRecipeIdByName(name) {
+  getRecipeIdByName(name) {
     const ingredientId = this.ingredients.find(ingredient => {
-        if(ingredient.name === name) {
-            return ingredient.id;
-        };
+      if (ingredient.name === name) {
+        return ingredient.id;
+      }
     });
     return ingredientId.id;
- };
-};
+  }
+}
 
 
 

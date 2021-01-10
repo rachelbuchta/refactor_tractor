@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-class Recipe {
+export default class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
     this.name = recipe.name;
@@ -7,7 +7,7 @@ class Recipe {
     this.tags = recipe.tags;
     this.ingredients = recipe.ingredients;
     this.instructions = recipe.instructions;
-  };
+  }
 
   calculateIngredientsCost(ingredientData) {
     const costInCents = this.ingredients.reduce((totalCost, recipeIngredient) => {
@@ -25,8 +25,6 @@ class Recipe {
 
   returnInstructions() {
     return this.instructions;
-  };
-};
+  }
+}
 
-
-export default Recipe;

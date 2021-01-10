@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 //wrong syntax
 import users from './data/users-data.js';
 import recipeData from  './data/recipe-data';
@@ -15,6 +16,8 @@ import './images/apple-logo-outline.png';
 import User from './user';
 import Recipe from './recipe';
 import RecipeRepo from './recipe-repo'
+import IngredientsRepo from './ingredient-repo'
+import ingredientsData from './data/ingredient-data';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -113,7 +116,7 @@ function addToDom(recipe) {
 }
 
 // FILTER BY RECIPE TAGS
-//this seems repetitive and should be in the data model
+
 function findTags() {
 let tags = recipes2.returnAllTags()
 listTags(tags);
@@ -145,8 +148,12 @@ function findCheckedBoxes() {
 function findTaggedRecipes(selected) {
   let filteredResults = [];
   selected.forEach(tag => {
+      
     let allRecipes = recipes.filter(recipe => {
+        console.log(tag.id)
+        console.log(recipe.tags.includes(tag))
       return recipe.tags.includes(tag.id);
+      
     });
     allRecipes.forEach(recipe => {
       if (!filteredResults.includes(recipe)) {
@@ -309,18 +316,25 @@ function pressEnterSearch(event) { //rename
 function searchRecipes() { //create a method that filters through recipes in data model that can be called to display searched recipe on the dom
   showAllRecipes();
   let searchedRecipes = [];
+  const ingredients = new IngredientsRepo(ingredientsData)
+  console.log(searchedRecipes)
+  const ingredientId = ingredients.getRecipeIdByName(searchInput.value.toLowerCase())
+  const foundRecipes = recipes2.searchRecipes(ingredientId)
+  return searchedRecipes.push(foundRecipes)
 
-  recipeData.forEach(recipe => {
-    recipe.ingredients.forEach(ingredient => {
-      if (!searchedRecipes.includes(ingredient.name) && ingredient.name === searchInput.value.toLowerCase()) {
-        searchedRecipes.push(recipe);
-      }
+  
 
-      if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
-        searchedRecipes.push(recipe);
-      }
-    })
-  });
+//   recipeData.forEach(recipe => {
+//     recipe.ingredients.forEach(ingredient => {
+//       if (!searchedRecipes.includes(ingredient.name) && ingredient.name === searchInput.value.toLowerCase()) {
+//         searchedRecipes.push(recipe);
+//       }
+
+//       if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+//         searchedRecipes.push(recipe);
+//       }
+//     })
+//   });
 
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
@@ -358,7 +372,7 @@ function showAllRecipes() { // domFile and datamodel thing - helper function to 
 
 // CREATE AND USE PANTRY 
 function findPantryInfo() { 
-  console.log(user.pantry)
+ 
   user.pantry.forEach(item => { // create pantry class
     let itemInfo = ingredientData.find(ingredient => {
       return ingredient.id === item.ingredient; // string and number cant be compared, will be undefined. Also this needs to go into the data model
@@ -377,7 +391,7 @@ function findPantryInfo() {
       pantryInfo.push({name: itemInfo.name, count: item.amount});
     }
   });
-  console.log(pantryInfo)
+
   displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name))); // this goes in the dom
 }
 
