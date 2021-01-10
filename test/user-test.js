@@ -25,16 +25,14 @@ describe.only('User', function() {
     expect(secondUser).to.be.an.instanceof(User);
   });
 
-  it('should initialize with an id', function() {
-    const user2Info = userData[1];
-    const user2 = new User(user2Info);
-
-    expect(user.id).to.eq(1);
-    expect(user2.id).to.equal(2);
+  it('should initialize with an id', function() {    
+    expect(firstUser.id).to.eq(1);
+    expect(secondUser.id).to.equal(2);
   });
 
   it('should initialize with a name', function() {
-    expect(user.name).to.eq('Saige O\'Kon');
+    expect(firstUser.name).to.eq('Saige O\'Kon');
+    expect(secondUser.name).to.eq('Ephraim Goyette');
   });
 
   it('should initialize with a pantry', function() {
