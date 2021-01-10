@@ -40,11 +40,4 @@ describe("RecipeRepo", () => {
 
     expect(allRecipes.searchRecipesByIngredient(ingredientId)).to.deep.eq(["Dirty Steve's Original Wing Sauce", "Elvis Pancakes"]);
   });
-
-  // it("should filter recipes by tags", () => {
-
-  //   const selected = ["starter", "sauce"]
-  
-  //   expect(allRecipes.filterRecipesByTag(selected, tag)).to.deep.eq([data[0], data[2]]);
-  // });
 });

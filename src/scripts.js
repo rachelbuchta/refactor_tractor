@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
-//wrong syntax
 import users from './data/users-data.js';
 import recipeData from  './data/recipe-data';
-import ingredientData from './data/ingredient-data';
+import ingredientsData from './data/ingredient-data';
 
 import './css/base.scss';
 import './css/styles.scss';
@@ -12,12 +11,11 @@ import './images/cookbook.png';
 import './images/seasoning.png';
 import './images/apple-logo-outline.png';
 
-
+import domUpdates from './domUpdates';
 import User from './user';
 import Recipe from './recipe';
 import RecipeRepo from './recipe-repo'
 import IngredientsRepo from './ingredient-repo'
-// import ingredientsData from './data/ingredient-data';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -25,22 +23,21 @@ let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
-let pantryInfo = [];
-let recipes = []
 let recipes2 = new RecipeRepo(recipeData);
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
-let tagList = document.querySelector(".tag-list");
-let user;
 
+let user;
+let pantryInfo = [];
+let recipes = []
 
 
 
 window.addEventListener("load", createCards);
-window.addEventListener("load", findTags);
+window.addEventListener("load", displayTagList);
 window.addEventListener("load", generateUser);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
@@ -55,18 +52,9 @@ searchForm.addEventListener("submit", pressEnterSearch);
 //possibly move to sep domFile
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
-
-  let firstName = user.name.split(" ")[0];
-  let welcomeMsg = `
-    <div class="welcome-msg">
-      <h1>Welcome ${firstName}!</h1>
-    </div>`;
-  document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
-    welcomeMsg);
+  domUpdates.welcomeUser(user)
   findPantryInfo();
 }
-
-
 
 // CREATE RECIPE CARDS
 function createCards() {
@@ -77,64 +65,27 @@ function createCards() {
     if (recipeInfo.name.length > 40) {
       shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
     }
-    addToDom(recipeInfo, shortRecipeName);
-    //change that shit^
+    domUpdates.createCard(recipeInfo);
   });
- 
-}
-
-function getTags(tags) {
-  let result = '';
-  tags.forEach(tag => {
-    let newTag = `<h4>${tag}</h4>`;
-    result += newTag;
-  });
-  return result;
-}
-
-function addToDom(recipe) {
-  let cardHtml = `
-    <div class="recipe-card" id=${recipe.id}>
-      <div class="title-container"
-        <h3 class="title" maxlength="40">${recipe.name}</h3>
-      </div>  
-      <div class="card-photo-container">
-        <img src=${recipe.image} class="card-photo-preview" alt="${recipe.name} recipe" title="${recipe.name} recipe">
-        <div class="text">
-          <div>Click for Instructions</div>
-        </div>
-      </div>
-      <div class="tags">
-        ${getTags(recipe.tags)}
-      </div>
-      <div class="apple-container">
-        <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
-      </div>  
-    </div>`
-  main.insertAdjacentHTML("beforeend", cardHtml);
  
 }
 
 // FILTER BY RECIPE TAGS
 
-function findTags() {
+function displayTagList() {
 let tags = recipes2.returnAllTags()
-listTags(tags);
+domUpdates.createListTags(tags);
 }
 // domFIle
-function listTags(allTags) {
-  allTags.forEach(tag => {
-    let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
-      <label for="${tag}">${capitalize(tag)}</label></li>`;
-    tagList.insertAdjacentHTML("beforeend", tagHtml);
-  });
-}
+// function listTags(allTags) {
+//   allTags.forEach(tag => {
+//     let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
+//       <label for="${tag}">${capitalize(tag)}</label></li>`;
+//     tagList.insertAdjacentHTML("beforeend", tagHtml);
+//   });
+// }
 // this is a no for me
-function capitalize(words) {
-  return words.split(" ").map(word => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  }).join(" ");
-}
+// function 
 // These next few functions can be combined/moved to proper data model and domFile
 function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
@@ -254,9 +205,7 @@ function addRecipeImage(recipe) {
 }
 
 function findRecipeIngredient(recipeIngredient) {
-  console.log(recipeIngredient)
-  // console.log(ingredient)
-  return ingredientData.find(ingredient => recipeIngredient.id === ingredient.id
+  return ingredientsData.find(ingredient => recipeIngredient.id === ingredient.id
   );
 }
 
@@ -264,7 +213,7 @@ function generateIngredients(recipe) {
   
   return recipe && recipe.ingredients.map(i => {
     const foundIngredient = findRecipeIngredient(i);
-    return `${capitalize(foundIngredient.name)} (${i.quantity.amount} ${i.quantity.unit})`
+    return `${domUpdates.capitalize(foundIngredient.name)} (${i.quantity.amount} ${i.quantity.unit})`
   }).join(", "); //the output is not what we want. Its giving us an array and we want a string (is this being displayed properly?)
 }
 
@@ -283,7 +232,7 @@ function generateInstructions(recipe) {
 function generateEstimateCost(recipe) {
   let currentRecipe = new Recipe (recipe);
   fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Estimated Cost</h4>")
-  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${currentRecipe.calculateIngredientsCost(ingredientData)}</h4>`)
+  fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${currentRecipe.calculateIngredientsCost(ingredientsData)}</h4>`)
 }
 
 function exitRecipe() {
@@ -313,24 +262,16 @@ function pressEnterSearch(event) { //rename
 function searchRecipes() { //create a method that filters through recipes in data model that can be called to display searched recipe on the dom
   showAllRecipes();
   let searchedRecipes = [];
-  const allIngredients = new IngredientsRepo(ingredientsData)
-  const ingredientId = allIngredients.getRecipeIdByName(searchInput.value.toLowerCase())
-  const foundRecipes = recipes2.searchRecipes(ingredientId)
-  searchedRecipes.push(foundRecipes)
-
-  
-
-//   recipeData.forEach(recipe => {
-//     recipe.ingredients.forEach(ingredient => {
-//       if (!searchedRecipes.includes(ingredient.name) && ingredient.name === searchInput.value.toLowerCase()) {
-//         searchedRecipes.push(recipe);
-//       }
-
-//       if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
-//         searchedRecipes.push(recipe);
-//       }
-//     })
-//   });
+  recipeData.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      if (!searchedRecipes.includes(ingredient.name) && ingredient.name === searchInput.value.toLowerCase()) {
+        searchedRecipes.push(recipe);
+      }
+      if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+        searchedRecipes.push(recipe);
+      }
+    })
+  });
 
   filterNonSearched(createRecipeObject(searchedRecipes));
 }
@@ -370,10 +311,10 @@ function showAllRecipes() { // domFile and datamodel thing - helper function to 
 function findPantryInfo() { 
  
   user.pantry.forEach(item => { // create pantry class
-    let itemInfo = ingredientData.find(ingredient => {
+    let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient; // string and number cant be compared, will be undefined. Also this needs to go into the data model
-                                                // basically we want to have a method that is counting the ingreients and giving it a name to eventually be displayed on the dom
-      
+    // basically we want to have a method that is counting the ingreients and giving it a name to eventually be displayed on the dom
+
     });
 
     let originalIngredient = pantryInfo.find(ingredient => {
