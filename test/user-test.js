@@ -8,7 +8,7 @@ import userData from '../src/data/users-test-data';
 import testRecipes from '../src/data/recipe-test-data.js';
 
 
-describe.only('User', function() {
+describe('User', function() {
   let firstUser;
   let firstUserInfo;
   let secondUser;
