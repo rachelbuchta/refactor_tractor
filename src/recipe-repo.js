@@ -27,6 +27,26 @@ export default class RecipeRepo {
     });
     return filteredRecipes;
   }
+
+  filterListByTag(list, tag) {
+    return list.filter(recipe => recipe.tags.includes(tag));
+  }
+
+  filterListByIngredient(list, ingredientId) {        
+    return list.reduce((filtered, recipe) => {
+      recipe.ingredients.forEach(ingredient => {
+        if (ingredient.id === ingredientId) {
+          filtered.push(recipe);
+        }
+      });
+
+      return filtered;
+    }, []);
+  }
+
+  filterListByName(list, name) {
+    return list.filter(recipe => recipe.name.includes(name));
+  }
 }
 
 
