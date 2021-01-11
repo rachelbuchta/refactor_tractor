@@ -34,7 +34,6 @@ let user;
 let pantryInfo = [];
 let recipes = []
 
-console.log(recipes)
 
 window.addEventListener("load", createCards);
 window.addEventListener("load", displayTagList);
@@ -229,6 +228,7 @@ function searchRecipes() {
         searchedRecipes.push(recipe);
       }
       if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+     
         searchedRecipes.push(recipe);
       }
     })

@@ -114,9 +114,9 @@ let domUpdates = {
 
   createAllRecipes(recipes) {
      recipes.forEach(recipe => {
-      // let domRecipe = 
+      let domRecipe = 
       document.getElementById(`${recipe.id}`);
-      // domRecipe.style.display = "";
+      domRecipe.style.display = "";
     });
   },
 
