@@ -62,7 +62,7 @@ describe.only('Pantry', function() {
   });
 
   it('should store a user pantry', function() {
-    expect(pantry.contents).to.eq(user.pantry);
+    expect(pantry.items).to.eq(user.pantry);
   });
 
   it('should determine if it is stocked for a meal', function() {
@@ -70,11 +70,22 @@ describe.only('Pantry', function() {
   });
 
   it('should return the amount missing of each ingredient', function() {
-    expect(pantry.canMake(recipe2)).to.deep.eq({
+    expect(pantry.canMake(recipe2)).to.deep.eq([{
       "name": "sharks",
-      "amount": 1.5,
-      "cost": .15
-    });
+      "id": 8585858585,
+      "quantity": {
+        "amount": 1.5,
+        "unit": "c"
+      }
+    },
+    {
+      "name": "lizards",
+      "id": 18372001001,
+      "quantity": {
+        "amount": 0.5,
+        "unit": "tsp"
+      }
+    }]);
   });
 
   it('should remove ingredients when a user cooks a meal', function() {
@@ -93,4 +104,5 @@ describe.only('Pantry', function() {
         "amount": 3
       }
     ]);
-  });
+  })
+})
