@@ -34,7 +34,7 @@ let user;
 let pantryInfo = [];
 let recipes = []
 
-
+console.log(recipes)
 
 window.addEventListener("load", createCards);
 window.addEventListener("load", displayTagList);
@@ -56,9 +56,12 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // what the page needs rather than
 
 function generateUser() {
+
   user = new User(users[Math.floor(Math.random() * users.length)]);
   domUpdates.welcomeUser(user)
   findPantryInfo();
+  let test = showAllRecipes(recipes)
+  console.log(test)
 }
 
 // CREATE RECIPE CARDS
@@ -160,6 +163,7 @@ function showSavedRecipes() {
     return !user.favoriteRecipes.includes(recipe.id);
   });
   domUpdates.displaySavedRecipes(unsavedRecipes)
+  console.log(recipes)
   showMyRecipesBanner();
 }
 
@@ -255,8 +259,8 @@ function toggleMenu() { // Might have to go to domUpdates?
   }
 }
 
-function showAllRecipes(recipes) { 
-  domUpdates.createAllRecipes(recipes)
+function showAllRecipes() { 
+  domUpdates.createAllRecipes(recipes);
   showWelcomeBanner();
 }
 

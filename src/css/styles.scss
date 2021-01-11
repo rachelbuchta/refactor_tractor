@@ -1,7 +1,17 @@
+$primary-color: #5B7894;
+$text-background: white;
+$font: "Quicksand",
+sans-serif;
+$border-font: #359567;
+$background: #C4EB67;
+
+
+
+
 body {
-  background-color: #5B7894;
+  background-color: $primary-color;
   display: grid;
-  font-family: "Quicksand", sans-serif;
+  font-family: $font;
   grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "header header"
@@ -15,7 +25,7 @@ body {
 
 h1 {
   align-self: center;
-  color: white;
+  color: $text-background;
   font-family: "Sulphur Point", sans-serif;
   font-size: 50px;
   margin: 0%;
@@ -29,7 +39,7 @@ h2 {
 }
 
 h3 {
-  color: #359567;
+  color: $border-font;
   cursor: pointer;
   height: 17%;
   margin: 5px 5px 10px 0px;
@@ -38,8 +48,8 @@ h3 {
 }
 
 h4 {
-  color: #359567;
-  background-color: #C4EB67;
+  color: $border-font;
+  background-color: $background;
   border-radius: 3px;
   font-size: smaller;
   margin: 10px 0px 0px 0px;
@@ -58,7 +68,7 @@ header {
 }
 
 span {
-  color: #C4EB67;
+  color: $background;
   font-weight: 400;
 }
 
@@ -70,11 +80,11 @@ span {
 
 #search {
   border-radius: 15px 15px 15px 15px;
-  border: 3px outset #C4EB67;
+  border: 3px outset $background;
   box-shadow: 0px 0px 7px 0px #475d74;
   display: flex;
   flex-direction: row;
-  font-family: "Quicksand", sans-serif;
+  font-family: $font;
   justify-content: center;
   margin: 1.2% 0.5% 1.2% 0%;
   width: 100%;
@@ -87,7 +97,7 @@ span {
   border: none;
   box-shadow: inset -3px -1px 20px 1px #5c7894;
   color: #5B7894;
-  font-family: "Quicksand", sans-serif;
+  font-family: $font;
   font-size: 42px;
   height: 100%;
   outline: none;
@@ -98,16 +108,16 @@ span {
 }
 
 #search-input:hover {
-  box-shadow: inset 0px 0px 0px 0px white;
+  box-shadow: inset 0px 0px 0px 0px $text-background;;
   transition: .8s ease;
 }
 
 #search-input:focus {
-  box-shadow: inset 0px 0px 0px 0px white;
+  box-shadow: inset 0px 0px 0px 0px $text-background;;
 }
 
 #search-input::placeholder {
-  color: #5B7894;
+  color: $primary-color;
   font-size: 20px;
   text-align: right;
   text-shadow: none;
@@ -123,14 +133,14 @@ span {
 }
 
 .search-btn {
-  border-left: 3px outset #C4EB67;
+  border-left: 3px outset $background;
   border-radius: 0px 15px 15px 0px;
   padding: 1%;
 }
 
 .nav-btn {
   align-items: center;
-  background: #5B7894 no-repeat;
+  background:$primary-color no-repeat;
   border: none;
   cursor: pointer;
   display: flex;
@@ -147,7 +157,7 @@ span {
 }
 
 .nav-btn:hover {
-  color: #C4EB67;
+  color: $background;
   font-size: 14px;
   text-shadow: 0px 2px 4px black;
   transition: .4s ease;
@@ -160,7 +170,7 @@ span {
 }
 
 .saved-ingredients-btn {
-  border-left: 3px solid #C4EB67;
+  border-left: 3px solid $background;
 }
 
 .ing-pan-btn {
@@ -186,7 +196,7 @@ span {
 
 .my-recipes-banner h1,
 .welcome-msg h1 {
-  color: white;
+  color: $text-background;;
   width: 100%;
 }
 
@@ -202,7 +212,7 @@ span {
 
 /* FILTER SIDEBAR */
 aside {
-  background-color: white;
+  background-color: $text-background;;
   display: flex;
   justify-content: center;
   height: auto;
@@ -210,7 +220,7 @@ aside {
 }
 
 .wrap {
-  background-color: white;
+  background-color: $text-background;;
   height: 100vh;
   padding: 10px;
   position: relative;
@@ -239,6 +249,7 @@ main {
 }
 
 .title-container {
+  display: grid;
   grid-area: title;
   text-align: center;
   align-items: center;
@@ -254,8 +265,8 @@ main {
   "title title"
   "food food"
   "tags apple";
-  background-color: white;
-  border: 2px solid #C4EB67;
+  background-color: $text-background;;
+  border: 2px solid $background;
   border-radius: 7px;
   cursor: pointer;
   height: 270px;
@@ -273,11 +284,12 @@ main {
   font-size: 20px;
   opacity: 100%;
   transition: .5s ease;
-  width: 100%;
+  width: 17.5%;
+  
 }
 
 .recipe-card:hover h3 {
-  text-shadow: 0px 0px 4px #C4EB67;
+  text-shadow: 0px 0px 4px $background;
   transition: .8s ease;
 }
 
@@ -291,9 +303,10 @@ main {
   width: 100%;
 }
 
-.apple-container{
+.apple-container {
+  display: grid;
   align-items: center;
-   justify-items: center;
+  justify-items: center;
   display: inline-grid;
   grid-area: apple;
  
@@ -317,17 +330,19 @@ main {
 }
 
 .card-photo-container {
+  display: grid;
   grid-area: food;
-  align-items: center;
-  display: flex;
-  height: 130px;
-  justify-content: center;
-  position: relative;
+  color: black;
+  // align-items: center;
+  // display: flex;
+  // height: 130px;
+  // justify-content: center;
+  // position: relative;
 }
 
 .text {
-  background: #359567;
-  color: white;
+  background: $border-font;
+  color: $text-background;;
   font-weight: 700;
   font-size: 0px;
   opacity: 0%;
@@ -343,12 +358,12 @@ main {
 .show-pantry-recipes-btn,
 .show-all-btn,
 .filter-btn {
-  background-color: #359567;
+  background-color: $border-font;
   border: 0;
   border-radius: 3px;
-  color: white;
+  color: $text-background;;
   cursor: pointer;
-  font-family: "Quicksand", sans-serif;
+  font-family: $font;
   font-size: 12pt;
   font-weight: bold;
   padding: 5px 10px 5px 10px;
@@ -386,7 +401,7 @@ main {
 }
 
 .drop-menu h2 {
-  color: #359567;
+  color: $border-font;
   margin: 0px;
 }
 
@@ -399,8 +414,8 @@ main {
 
 /* RECIPE INSTRUCTIONS */
 .recipe-instructions {
-  background: white;
-  border: 3px solid #C4EB67;
+  background: $text-background;
+  border: 3px solid $background;
   border-radius: 10px;
   box-shadow: 1px 1px 115px black;
   display: none;
@@ -416,10 +431,10 @@ main {
 }
 
 #exit-recipe-btn {
-  background: white;
-  border: 2px double #359567;
+  background: $text-background;
+  border: 2px double $border-font;
   border-radius: 5px;
-  color: #359567;
+  color: $border-font;
   cursor: pointer;
   font-size: 20px;
   font-weight: 700;
@@ -429,7 +444,7 @@ main {
 }
 
 #exit-recipe-btn:hover {
-  background: #C4EB67;
+  background: $background;
   transition: .3s ease;
 }
 
@@ -437,7 +452,7 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 7px 7px 0px 0px;
-  color: white;
+  color: $text-background;;
   font-size: 30px;
   margin: 0;
   padding: 5%;
@@ -446,8 +461,8 @@ main {
 }
 
 .recipe-instructions h4 {
-  background: white;
-  color: #359567;
+  background: $text-background;;
+  color: $border-font;
 }
 
 .recipe-instructions p {
@@ -460,7 +475,7 @@ main {
 
 #overlay {
   filter:alpha(opacity=50);
-  background-color: #5B7894;
+  background-color:$primary-color;
   height:100%;
   left:0;
   opacity:0.5;

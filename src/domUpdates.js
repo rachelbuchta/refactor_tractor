@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+
+
 let domUpdates = {
 
   welcomeUser(currentUser) {
@@ -111,9 +113,10 @@ let domUpdates = {
   },
 
   createAllRecipes(recipes) {
-    recipes.forEach(recipe => {
-      let domRecipe = document.getElementById(`${recipe.id}`);
-      domRecipe.style.display = "block";
+     recipes.forEach(recipe => {
+      // let domRecipe = 
+      document.getElementById(`${recipe.id}`);
+      // domRecipe.style.display = "";
     });
   },
 
