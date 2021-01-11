@@ -4,13 +4,13 @@ $font: "Quicksand",
 sans-serif;
 $border-font: #359567;
 $background: #C4EB67;
-$transition: .8s ease;
 
-// @mixin flexCenter() {
 
-// }
+@mixin transition($value) {
+    transition: $value;
+ }
 
-// @include flexCenter()
+
 
 
 body {
@@ -48,7 +48,7 @@ h3 {
   cursor: pointer;
   height: 17%;
   margin: 5px 5px 10px 0px;
-  transition:$transition;
+  @include transition(.8s ease)
   
 }
 
@@ -108,12 +108,12 @@ span {
   outline: none;
   padding: 0% 2% 0% 0%;
   text-align: right;
-  transition:$transition;
+  @include transition(.8s ease);
   width: 100%;
 
   &:hover {
     box-shadow: inset 0px 0px 0px 0px $text-background;
-    transition:$transition;
+    @include transition(.8s ease);
   }
 
   &:focus {
@@ -130,7 +130,7 @@ span {
 
   &:focus::placeholder {
     font-size: 0px;
-    transition:$transition;
+    @include transition(.8s ease);
   }
 }
 
@@ -158,14 +158,14 @@ span {
   outline: none;
   overflow: hidden;
   text-align: center;
-  transition: .4s ease;
+  @include transition(.4s ease);
   width: 15%;
 
   &:hover {
   color: $background;
   font-size: 14px;
   text-shadow: 0px 2px 4px black;
-  transition: .4s ease;
+  @include transition(.4s ease);
 }
 
   img {
@@ -283,19 +283,19 @@ main {
 
   &:hover .card-photo-preview {
     opacity: 50%;
-    transition:$transition;
+    @include transition(.8s ease);
   }
 
   &:hover .text {
   font-size: 20px;
   opacity: 100%;
-  transition: .5s ease;
+  @include transition(.5s ease);
   width: 100%;
 }
 
   &:hover h3 {
   text-shadow: 0px 0px 4px $background;
-  transition:$transition;
+  @include transition(.8s ease);
 }
 }
 
@@ -331,7 +331,7 @@ main {
   border-radius: 3%;
   cursor: pointer;
   height: 130px;
-  transition:$transition;
+  @include transition(.8s ease);
   width: 100%;
 }
 
@@ -353,7 +353,7 @@ main {
   position: absolute;
   text-align: center;
   width: 0%;
-  transition: .5s ease;
+  @include transition(.5s ease);
 }
 
 
@@ -456,11 +456,11 @@ main {
   font-weight: 700;
   margin: -4% -3% 2% -1%;
   position: fixed;
-  transition: .3s ease;
+  @include transition(.3s ease);
 
   &:hover {
     background: $background;
-    transition: .3s ease;
+    @include transition(.3s ease);
   }
 }
 
