@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import IngredientsRepo from "../src/ingredient-repo";
 import ingredientsTest from '../src/data/ingredient-test-data';
 
-describe.only('IngredientRepo', () => {
+describe('IngredientRepo', () => {
   let ingredients;
   let data;
 

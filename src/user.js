@@ -1,11 +1,14 @@
-class User {
-  constructor(user) {
-    this.id = user.id;
-    this.name = user.name;
-    this.pantry = user.pantry;
+import Pantry from './pantry';
+
+export default class User {
+  constructor(userData) {
+    this.id = userData.id;
+    this.name = userData.name;
+    this.pantry = new Pantry(userData.pantry);
     this.favoriteRecipes = [];
     this.recipesToCook = [];
   }
+  
   saveRecipe(recipe) {
     this.favoriteRecipes.push(recipe);
   }
@@ -25,17 +28,6 @@ class User {
   searchForRecipe(keyword) {
     return this.favoriteRecipes.filter(recipe => recipe.name.includes(keyword) || recipe.ingredients.includes(keyword));
   }
-  // replace name & ingredients to arguments of property?
+  
 }
-
-// create a method that gets a recipe and compares ingredients needed to make the recipe with what the user has in their pantry, is there enough?
-// return the amount/what type of ingredients are missing that are needed to make recipe
-//Class Pantry
-// create method that removes the ingredients used to make a recipe from pantry
-
-// module.exports = User;
-export default User;
-
-//need to change all of our module.exports
-
 
