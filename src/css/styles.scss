@@ -4,8 +4,13 @@ $font: "Quicksand",
 sans-serif;
 $border-font: #359567;
 $background: #C4EB67;
+$transition: .8s ease;
 
+@mixin flexCenter {
 
+}
+
+// @include flexCenter()
 
 
 body {
@@ -43,7 +48,7 @@ h3 {
   cursor: pointer;
   height: 17%;
   margin: 5px 5px 10px 0px;
-  transition: .8s ease;
+  transition:$transition;
   
 }
 
@@ -96,36 +101,37 @@ span {
   border-radius: 10px 0px 0px 10px;
   border: none;
   box-shadow: inset -3px -1px 20px 1px #5c7894;
-  color: #5B7894;
+  color: $primary-color;
   font-family: $font;
   font-size: 42px;
   height: 100%;
   outline: none;
   padding: 0% 2% 0% 0%;
   text-align: right;
-  transition: .8s ease;
+  transition:$transition;
   width: 100%;
-}
 
-#search-input:hover {
-  box-shadow: inset 0px 0px 0px 0px $text-background;;
-  transition: .8s ease;
-}
+  &:hover {
+    box-shadow: inset 0px 0px 0px 0px $text-background;
+    transition:$transition;
+  }
 
-#search-input:focus {
-  box-shadow: inset 0px 0px 0px 0px $text-background;;
-}
+  &:focus {
+    box-shadow: inset 0px 0px 0px 0px $text-background;
+    font-size: 0px;
+  }
 
-#search-input::placeholder {
-  color: $primary-color;
-  font-size: 20px;
-  text-align: right;
-  text-shadow: none;
-}
+  &::placeholder {
+    color: $primary-color;
+    font-size: 20px;
+    text-align: right;
+    text-shadow: none;
+  }
 
-#search-input:focus::placeholder {
-  font-size: 0px;
-  transition: .8s ease;
+  &:focus::placeholder {
+    font-size: 0px;
+    transition:$transition;
+  }
 }
 
 .search-label {
@@ -277,7 +283,7 @@ main {
 
 .recipe-card:hover .card-photo-preview {
   opacity: 50%;
-  transition: .8s ease;
+  transition:$transition;
 }
 
 .recipe-card:hover .text {
@@ -290,7 +296,7 @@ main {
 
 .recipe-card:hover h3 {
   text-shadow: 0px 0px 4px $background;
-  transition: .8s ease;
+  transition:$transition;
 }
 
 .tags {
@@ -325,7 +331,7 @@ main {
   border-radius: 7px;
   cursor: pointer;
   height: 130px;
-  transition: .8s ease;
+  transition:$transition;
   width: 100%;
 }
 
