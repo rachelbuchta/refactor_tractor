@@ -31,6 +31,18 @@ export default class RecipeRepo {
   filterListByTag(list, tag) {
     return list.filter(recipe => recipe.tags.includes(tag));
   }
+
+  filterListByIngredient(list, ingredientId) {        
+    return list.reduce((filtered, recipe) => {
+      recipe.ingredients.forEach(ingredient => {
+        if (ingredient.id === ingredientId) {
+          filtered.push(recipe);
+        }
+      });
+
+      return filtered;
+    }, []);
+  }
 }
 
 

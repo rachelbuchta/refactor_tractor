@@ -68,7 +68,7 @@ describe.only("RecipeRepo", () => {
     secondUser.saveRecipe(toCook, recipe2);    
   });
 
-  it.only('should be able to filter recipes by type', () => {    
+  it('should be able to filter recipes by type', () => {    
     expect(allRecipes.filterListByTag(favorites, 'starter')).to.deep.equal([recipe1]);
     expect(allRecipes.filterListByTag(favorites, 'brunch')).to.deep.equal([]);
     expect(allRecipes.filterListByTag(toCook, 'main course')).to.deep.equal([recipe2]);
@@ -78,11 +78,11 @@ describe.only("RecipeRepo", () => {
   });
 
     
-  it('should be able to filter recipes by ingredient', () => {
+  it.only('should be able to filter recipes by ingredient', () => {
     const domIngredient1 = 'egg';
     const domIngredient2 = 'apples';
     const domIngredient3 = 'dijon'; // this is short for dijon mustard, and should still work
-    const domIngredient4 = 'black pepper';
+    const domIngredient4 = 'black pepper';    
 
     const id1 = ingredients.getRecipeIdByName(domIngredient1);
     const id2 = ingredients.getRecipeIdByName(domIngredient2);
