@@ -37,7 +37,6 @@ describe('Recipe', function() {
   it('should initialize with an array of ingredients', function() {
     const ingredient = {
       "id": 20081,
-      "name": "all purpose flour",
       "quantity": {
         "amount": 1.5,
         "unit": "c"

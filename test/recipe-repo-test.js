@@ -12,6 +12,10 @@ import IngredientsRepo from "../src/ingredient-repo";
 
 describe("RecipeRepo", () => {
   let allRecipes;
+  let ingredients
+
+  beforeEach(function() {
+    
   let ingredients;
   let firstUser;
   let firstUserInfo;
@@ -23,6 +27,7 @@ describe("RecipeRepo", () => {
   let toCook;
 
   beforeEach(() => {
+
     allRecipes = new RecipeRepo(data);
     ingredients = new IngredientsRepo(ingredientData);
     firstUserInfo = userData[0];
@@ -42,6 +47,16 @@ describe("RecipeRepo", () => {
   });
 
   it("should return an array of all recipe tags with no duplicates in alphabetical order", () => {
+
+    expect(allRecipes.returnAllTags()).to.deep.eq(["antipasti", "antipasto", "appetizer", "dinner", "hor d'oeuvre", "lunch", "main course", "main dish", "sauce", "side dish", "snack", "starter"]);
+  });
+
+  it("should return ingredients id that matches entered name", () => {
+
+    expect(ingredients.getRecipeIdByName("butter")).to.eq(1001);
+  });
+
+  it("should return recipes that match entered ingredient name", () => {
     expect(allRecipes.returnAllTags()).to.deep.eq(["antipasti", "antipasto", "appetizer", "dinner", "hor d'oeuvre", "lunch", "main course", "main dish", "sauce", "side dish", "snack", "starter"]);
   });  
 
@@ -67,6 +82,7 @@ describe("RecipeRepo", () => {
     expect(allRecipes.filterListbyTag(testRecipes, 'side dish')[0].id).to.equal(741603);
   });
 
+    expect(allRecipes.searchRecipesByIngredient(ingredientId)).to.deep.eq(["Dirty Steve's Original Wing Sauce", "Elvis Pancakes"]);
   it('should be able to filter recipes by ingredient', () => {
     const domIngredient1 = 'egg';
     const domIngredient2 = 'apples';

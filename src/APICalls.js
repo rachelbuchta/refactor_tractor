@@ -10,3 +10,5 @@ export default function getData(dataset) {
     .catch(error => console.log('error', error));
   return data;
 }
+
+//sned it to scripts and use for each there
