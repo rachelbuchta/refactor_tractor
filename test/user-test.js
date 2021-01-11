@@ -61,18 +61,18 @@ describe.only('User', function() {
   });
 
   it('should be able to save a recipe to favoriteRecipes', function() {
-    firstUser.saveRecipe(recipe1);
-    secondUser.saveRecipe(recipe2);
+    firstUser.saveRecipe(firstUser.favoriteRecipes, recipe1);
+    secondUser.saveRecipe(secondUser.recipesToCook, recipe2);
     
-    expect(firstUser.recipesToCook[0]).to.be.an.instanceof(Recipe);
+    expect(firstUser.favoriteRecipes[0]).to.be.an.instanceof(Recipe);
     expect(firstUser.favoriteRecipes[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
     expect(secondUser.recipesToCook[0]).to.be.an.instanceof(Recipe);
-    expect(secondUser.favoriteRecipes[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops');
+    expect(secondUser.recipesToCook[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops');
   });
 
   it('should be able to decide to cook a recipe', function() {
-    firstUser.decideToCook(recipe1);
-    secondUser.decideToCook(recipe2);
+    firstUser.saveRecipe(firstUser.recipesToCook, recipe1);
+    secondUser.saveRecipe(secondUser.recipesToCook, recipe2);
 
     expect(firstUser.recipesToCook[0]).to.be.an.instanceof(Recipe);
     expect(firstUser.recipesToCook[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
@@ -81,7 +81,7 @@ describe.only('User', function() {
   });
 
   it('should be able to remove a recipe from the favorites', () => {
-    firstUser.saveRecipe(recipe1);
+    firstUser.saveRecipe(firstUser.favoriteRecipes, recipe1);
     expect(firstUser.favoriteRecipes).to.deep.equal([recipe1]);
 
     firstUser.removeRecipe(firstUser.favoriteRecipes, recipe1);
@@ -89,8 +89,8 @@ describe.only('User', function() {
   });
 
   it('should be able to remove a recipe from the recipes to cook', () => {
-    secondUser.decideToCook(recipe1);
-    secondUser.decideToCook(recipe2);
+    secondUser.saveRecipe(secondUser.recipesToCook, recipe1);
+    secondUser.saveRecipe(secondUser.recipesToCook, recipe2);
 
     expect(secondUser.recipesToCook).to.deep.equal([recipe1, recipe2]);
     secondUser.removeRecipe(secondUser.recipesToCook, recipe1);
