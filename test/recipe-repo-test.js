@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { expect } from "chai";
 
 import RecipeRepo from "../src/recipe-repo";
