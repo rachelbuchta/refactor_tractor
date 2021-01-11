@@ -49,8 +49,6 @@ export default class Pantry {
     // subtract each recipe ingredients amount from pantry ingredient amount
     recipe.ingredients.forEach(ingredient => {
       this.items.forEach((item, index) => {
-        
-        
         if (ingredient.id === item.ingredient) {
           console.log(ingredient.amount) 
           console.log(item.amount)
