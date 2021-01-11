@@ -1,15 +1,10 @@
 /* eslint-disable max-len */
-
 import { expect } from 'chai';
 
 import Pantry from '../src/pantry';
 import User from '../src/user';
-
 import data from '../src/data/users-test-data';
-
 import ingredientData from '../src/data/ingredient-test-data';
-
-
 
 describe.only('Pantry', function() {
   let user;
@@ -25,6 +20,7 @@ describe.only('Pantry', function() {
     pantry = new Pantry(user);
 
     recipe = {name: 'Flour Soda', type: ['italian', 'dinner'], ingredients: [{
+
       "name": "all purpose flour",
       "id": 20081,
       "quantity": {
@@ -98,5 +94,3 @@ describe.only('Pantry', function() {
       }
     ]);
   });
-
-})
