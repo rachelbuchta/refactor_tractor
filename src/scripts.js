@@ -49,6 +49,12 @@ showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
 
 // GENERATE A USER ON LOAD
+
+
+// possibly move to sep domFile
+// I feel this is pointing at a general run() or start() function to instantiate
+// what the page needs rather than
+
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   domUpdates.welcomeUser(user)
@@ -122,6 +128,11 @@ function addToMyRecipes() {
       event.target.src = "../images/apple-logo.png";
       user.saveRecipe(cardId);
     } else if (!user.favoriteRecipes.includes(cardId)) {
+
+
+      console.log('A wild error has appeared!');
+    // dd
+
     } else {
       event.target.src = "../images/apple-logo-outline.png";
       user.removeRecipe(cardId);
@@ -250,7 +261,8 @@ function showAllRecipes(recipes) {
 }
 
 // CREATE AND USE PANTRY 
-function findPantryInfo() { 
+
+function findPantryInfo() {   
   user.pantry.forEach(item => { // create pantry class
     let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient; 
