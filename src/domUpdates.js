@@ -6,9 +6,9 @@ let domUpdates = {
   welcomeUser(currentUser) {
     let firstName = currentUser.name.split(" ")[0];
     let welcomeMsg = `
-    <div class="welcome-msg">
+    <article class="welcome-msg">
       <h1>Welcome ${firstName}!</h1>
-    </div>`;
+    </article>`;
     document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
       welcomeMsg);
   },
@@ -26,23 +26,23 @@ let domUpdates = {
   createCard(recipe) {
     let main = document.querySelector("main");
     let cardHtml = `
-  <div class="recipe-card" id=${recipe.id}>
-    <div class="title-container"
+  <article class="recipe-card" id=${recipe.id}>
+    <section class="title-container"
       <h3 class="title" maxlength="40">${recipe.name}</h3>
-    </div>  
-    <div class="card-photo-container">
+    </section>  
+    <section class="card-photo-container">
       <img src=${recipe.image} class="card-photo-preview" alt="${recipe.name} recipe" title="${recipe.name} recipe">
       <div class="text">
-        <div>Click for Instructions</div>
+        <div aria-label="Click for instructions banner">Click for Instructions</div>
       </div>
-    </div>
-    <div class="tags">
+    </section>
+    <section aria-label="Type of recipe" class="tags">
       ${this.createCardTags(recipe.tags)}
-    </div>
-    <div class="apple-container">
-      <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
-    </div>  
-  </div>`
+    </section>
+    <section class="apple-container">
+      <img aria-label="Click to favorite recipe" src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+    </section>  
+  </article>`
     main.insertAdjacentHTML("beforeend", cardHtml);
   },
 
@@ -79,7 +79,7 @@ let domUpdates = {
   createInstructionsTitle(recipe, ingredients) {
     let fullRecipeInfo = document.querySelector(".recipe-instructions");
     let recipeTitle = `
-    <button id="exit-recipe-btn">X</button>
+    <button aria-label="Exit recipe" id="exit-recipe-btn">X</button>
     <h3 id="recipe-title">${recipe.name}</h3>
     <h4>Ingredients</h4>
     <p>${ingredients}</p>`
