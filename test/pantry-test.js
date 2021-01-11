@@ -95,5 +95,4 @@ describe('Pantry', function() {
       }
     ]);
   });
-
-})
+});

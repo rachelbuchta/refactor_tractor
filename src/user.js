@@ -14,7 +14,7 @@ export default class User {
   }  
 
   removeRecipe(list, recipe) {
-    let index = list.indexOf(recipe);
+    const index = list.indexOf(recipe);
     list.splice(index, 1);
   }
 
