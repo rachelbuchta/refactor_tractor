@@ -43,6 +43,10 @@ export default class RecipeRepo {
       return filtered;
     }, []);
   }
+
+  filterListByName(list, name) {
+    return list.filter(recipe => recipe.name.includes(name));
+  }
 }
 
 

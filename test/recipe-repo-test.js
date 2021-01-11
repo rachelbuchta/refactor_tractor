@@ -10,7 +10,7 @@ import data from "../src/data/recipe-test-data";
 import ingredientData from '../src/data/ingredient-test-data';
 import IngredientsRepo from "../src/ingredient-repo";
 
-describe.only("RecipeRepo", () => {
+describe("RecipeRepo", () => {
   let allRecipes;    
   let ingredients;
   let firstUser;
@@ -42,14 +42,8 @@ describe.only("RecipeRepo", () => {
   });
 
   it("should return an array of all recipe tags with no duplicates in alphabetical order", () => {
-
     expect(allRecipes.returnAllTags()).to.deep.eq(["antipasti", "antipasto", "appetizer", "dinner", "hor d'oeuvre", "lunch", "main course", "main dish", "sauce", "side dish", "snack", "starter"]);
-  });
-
-  it("should return ingredients id that matches entered name", () => {
-
-    expect(ingredients.getRecipeIdByName("butter")).to.eq(1001);
-  });
+  });  
 
   it("should return recipes that match entered ingredient name", () => {
     expect(allRecipes.returnAllTags()).to.deep.eq(["antipasti", "antipasto", "appetizer", "dinner", "hor d'oeuvre", "lunch", "main course", "main dish", "sauce", "side dish", "snack", "starter"]);
@@ -78,7 +72,7 @@ describe.only("RecipeRepo", () => {
   });
 
     
-  it.only('should be able to filter recipes by ingredient', () => {
+  it('should be able to filter recipes by ingredient', () => {
     const domIngredient1 = 'egg';
     const domIngredient2 = 'apples';
     const domIngredient3 = 'dijon'; // this is short for dijon mustard, and should still work
@@ -100,12 +94,12 @@ describe.only("RecipeRepo", () => {
     const domName2 = 'Elvis Pancakes';
     const domName3 = 'Maple Dijon Apple Cider Grilled Pork Chops';
     const domName4 = 'Dirty Steve\'s Original Wing Sauce';
-    const domName5 = 'a';    
+    const domName5 = 'a';
     
-    expect(allRecipes.filterRecipesByName(favorites, domName1)).to.deep.equal([recipe1]);
-    expect(allRecipes.filterRecipesByName(favorites, domName2)).to.deep.equal([]);
-    expect(allRecipes.filterRecipesByName(toCook, domName3)).to.deep.equal([recipe2]);
-    expect(allRecipes.filterRecipesByName(toCook, domName4)).to.deep.equal([]);
-    expect(allRecipes.filterRecipesByName(testRecipes, domName5)).to.deep.equal(testRecipes);
+    expect(allRecipes.filterListByName(favorites, domName1)).to.deep.equal([recipe1]);
+    expect(allRecipes.filterListByName(favorites, domName2)).to.deep.equal([]);
+    expect(allRecipes.filterListByName(toCook, domName3)).to.deep.equal([recipe2]);
+    expect(allRecipes.filterListByName(toCook, domName4)).to.deep.equal([]);
+    expect(allRecipes.filterListByName(testRecipes, domName5)).to.deep.equal(testRecipes);
   });
 });
