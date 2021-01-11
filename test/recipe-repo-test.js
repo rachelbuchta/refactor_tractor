@@ -11,11 +11,7 @@ import ingredientData from '../src/data/ingredient-test-data';
 import IngredientsRepo from "../src/ingredient-repo";
 
 describe("RecipeRepo", () => {
-  let allRecipes;
-  let ingredients
-
-  beforeEach(function() {
-    
+  let allRecipes;    
   let ingredients;
   let firstUser;
   let firstUserInfo;
@@ -82,7 +78,7 @@ describe("RecipeRepo", () => {
     expect(allRecipes.filterListbyTag(testRecipes, 'side dish')[0].id).to.equal(741603);
   });
 
-    expect(allRecipes.searchRecipesByIngredient(ingredientId)).to.deep.eq(["Dirty Steve's Original Wing Sauce", "Elvis Pancakes"]);
+    
   it('should be able to filter recipes by ingredient', () => {
     const domIngredient1 = 'egg';
     const domIngredient2 = 'apples';
