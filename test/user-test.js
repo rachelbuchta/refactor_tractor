@@ -78,5 +78,24 @@ describe.only('User', function() {
     expect(firstUser.recipesToCook[0].name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
     expect(secondUser.recipesToCook[0]).to.be.an.instanceof(Recipe);
     expect(secondUser.recipesToCook[0].name).to.equal('Maple Dijon Apple Cider Grilled Pork Chops');
-  });  
+  });
+
+  it('should be able to remove a recipe from the favorites', () => {
+    firstUser.saveRecipe(recipe1);
+    expect(firstUser.favoriteRecipes).to.deep.equal([recipe1]);
+
+    firstUser.removeRecipe(firstUser.favoriteRecipes, recipe1);
+    expect(firstUser.favoriteRecipes).to.deep.equal([]);
+  });
+
+  it('should be able to remove a recipe from the recipes to cook', () => {
+    secondUser.decideToCook(recipe1);
+    secondUser.decideToCook(recipe2);
+
+    expect(secondUser.recipesToCook).to.deep.equal([recipe1, recipe2]);
+    secondUser.removeRecipe(secondUser.recipesToCook, recipe1);
+    expect(secondUser.recipesToCook).to.deep.equal([recipe2]);
+    secondUser.removeRecipe(secondUser.recipesToCook, recipe2);
+    expect(secondUser.recipesToCook).to.deep.equal([]);
+  });
 });

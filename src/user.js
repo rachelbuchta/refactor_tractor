@@ -8,14 +8,14 @@ export default class User {
     this.favoriteRecipes = [];
     this.recipesToCook = [];
   }
-  
+
   saveRecipe(recipe) {
     this.favoriteRecipes.push(recipe);
   }
 
-  removeRecipe(recipe) {
-    let i = this.favoriteRecipes.indexOf(recipe);
-    this.favoriteRecipes.splice(i, 1);
+  removeRecipe(list, recipe) {
+    let index = list.indexOf(recipe);
+    list.splice(index, 1);
   }
 
   decideToCook(recipe) {
