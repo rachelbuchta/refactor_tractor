@@ -10,7 +10,7 @@ import data from "../src/data/recipe-test-data";
 import ingredientData from '../src/data/ingredient-test-data';
 import IngredientsRepo from "../src/ingredient-repo";
 
-describe("RecipeRepo", () => {
+describe.only("RecipeRepo", () => {
   let allRecipes;    
   let ingredients;
   let firstUser;
@@ -23,7 +23,6 @@ describe("RecipeRepo", () => {
   let toCook;
 
   beforeEach(() => {
-
     allRecipes = new RecipeRepo(data);
     ingredients = new IngredientsRepo(ingredientData);
     firstUserInfo = userData[0];
@@ -56,26 +55,26 @@ describe("RecipeRepo", () => {
     expect(allRecipes.returnAllTags()).to.deep.eq(["antipasti", "antipasto", "appetizer", "dinner", "hor d'oeuvre", "lunch", "main course", "main dish", "sauce", "side dish", "snack", "starter"]);
   });  
 
-  it("should return recipes id that matches entered name", () => {
+  it("should return recipes whose id matches the given name", () => {
     const ingredientId = ingredients.getRecipeIdByName("butter");
 
-    expect(allRecipes.searchRecipes(ingredientId)).to.deep.eq(["Dirty Steve's Original Wing Sauce", "Elvis Pancakes"]);    
+    expect(allRecipes.searchRecipesByIngredient(ingredientId)).to.deep.eq(["Dirty Steve's Original Wing Sauce", "Elvis Pancakes"]);    
   });
 
   beforeEach(() => {
-    firstUser.saveRecipe(recipe1);    
-    secondUser.decideToCook(recipe2);
     favorites = firstUser.favoriteRecipes;
     toCook = secondUser.recipesToCook;    
+    firstUser.saveRecipe(favorites, recipe1);    
+    secondUser.saveRecipe(toCook, recipe2);    
   });
 
-  it('should be able to filter recipes by type', () => {
+  it.only('should be able to filter recipes by type', () => {    
     expect(allRecipes.filterListByTag(favorites, 'starter')).to.deep.equal([recipe1]);
     expect(allRecipes.filterListByTag(favorites, 'brunch')).to.deep.equal([]);
     expect(allRecipes.filterListByTag(toCook, 'main course')).to.deep.equal([recipe2]);
     expect(allRecipes.filterListByTag(toCook, 'breakfast')).to.deep.equal([]);
-    expect(allRecipes.filterListbyTag(testRecipes, 'side dish')[0].name).to.equal('Elvis Pancakes');
-    expect(allRecipes.filterListbyTag(testRecipes, 'side dish')[0].id).to.equal(741603);
+    expect(allRecipes.filterListByTag(testRecipes, 'side dish')[0].name).to.equal('Elvis Pancakes');
+    expect(allRecipes.filterListByTag(testRecipes, 'side dish')[0].id).to.equal(741603);
   });
 
     

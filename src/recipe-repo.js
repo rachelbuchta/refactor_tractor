@@ -27,6 +27,10 @@ export default class RecipeRepo {
     });
     return filteredRecipes;
   }
+
+  filterListByTag(list, tag) {
+    return list.filter(recipe => recipe.tags.includes(tag));
+  }
 }
 
 
