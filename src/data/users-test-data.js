@@ -14,6 +14,10 @@ let usersTest = [
       {
         "ingredient": 11297,
         "amount": 3
+      },
+      {
+        "ingredient": 8585858585,
+        "amount": 1
       }
     ]
   },

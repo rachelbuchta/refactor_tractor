@@ -12,17 +12,17 @@ describe.only('Pantry', function() {
   let recipe;
   let recipe2;
   let pantry;
+  let pantryData;
 
 
   beforeEach(function() {
     userInfo = data[0];
+    pantryData = userInfo.pantry;
     user = new User(userInfo);
-    console.log(user)
-    pantry = new Pantry(user);
+    pantry = new Pantry(pantryData);
 
     recipe = {name: 'Flour Soda', type: ['italian', 'dinner'], ingredients: [{
 
-      "name": "all purpose flour",
       "id": 20081,
       "quantity": {
         "amount": 1.5,
@@ -30,16 +30,14 @@ describe.only('Pantry', function() {
       }
     },
     {
-      "name": "baking soda",
       "id": 18372,
       "quantity": {
-        "amount": 0.5,
+        "amount": 1,
         "unit": "tsp"
       }
     }]};
 
     recipe2 = {name: 'Cannot make this', type: ['italian', 'dinner'], ingredients: [{
-      "name": "sharks",
       "id": 8585858585,
       "quantity": {
         "amount": 1.5,
@@ -47,7 +45,6 @@ describe.only('Pantry', function() {
       }
     },
     {
-      "name": "lizards",
       "id": 18372001001,
       "quantity": {
         "amount": 0.5,
@@ -70,40 +67,43 @@ describe.only('Pantry', function() {
     expect(pantry.canMake(recipe)).to.eq(true);
   });
 
-  it('should return the amount missing of each ingredient', function() {
-    expect(pantry.canMake(recipe2)).to.deep.eq([{
-      "name": "sharks",
-      "id": 8585858585,
-      "quantity": {
-        "amount": 1.5,
-        "unit": "c"
-      }
-    },
-    {
-      "name": "lizards",
-      "id": 18372001001,
-      "quantity": {
-        "amount": 0.5,
-        "unit": "tsp"
-      }
-    }]);
+  it('should determine if it is stocked for a meal', function() {
+    expect(pantry.canMake(recipe)).to.eq(true);
   });
 
-  it('should remove ingredients when a user cooks a meal', function() {
-    pantry.removeMeal(recipe)
-    expect(pantry.contents).to.deep.eq([
+
+  it('should return the amount missing of each ingredient', function() {
+    expect(pantry.canMake(recipe2)).to.deep.eq([
+      {
+        "ingredient": 18372001001,
+        "amount": 0.5
+      },
+      {
+        "ingredient": 8585858585,
+        "amount": 0.5
+      }
+    ]);
+  });
+
+  it('should remove the amount of ingredients used when a user cooks a meal', function() {
+    pantry.takeStock(recipe);
+    pantry.removeIngredients(recipe);
+    expect(pantry.items).to.deep.eq([
       {
         "ingredient": 20081,
         "amount": 10
       },
       {
-        "ingredient": 18372,
-        "amount": 0.5
-      },
-      {
         "ingredient": 11297,
         "amount": 3
+      },
+      {
+        "ingredient": 8585858585,
+        "amount": 1
       }
     ]);
-  })
+  });
+
+  
+
 })

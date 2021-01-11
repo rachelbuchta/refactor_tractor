@@ -1,33 +1,66 @@
-// BELOW NEEDS TO BE CHANGED TO IMPORT USERS FROM A NETWORK REQUEST
-
 export default class Pantry {
-  constructor(user) {
-    this.items = user.pantry;
+  constructor(pantryData) {
+    this.items = pantryData;
     this.forRecipe = [];
     this.groceryList = [];
   }
 
-  canMake(recipe) {
-    recipe.ingredients.forEach(ingredient => {
-      console.log(this);
-      if (this.items.includes(ingredient)) {
-        return true;
-      }
-      })
-    
+  takeStock(recipe) {
+    this.checkPantry(recipe);
 
+    recipe.ingredients.forEach(ingredient => {
+    this.items.forEach(item => {
+      if (item.ingredient === ingredient.id && item.amount > ingredient.quantity.amount) {
+        this.forRecipe.push(item);
+      }
+      else if (item.ingredient === ingredient.id && item.amount < ingredient.quantity.amount) {
+        this.groceryList.push({
+          ingredient: item.ingredient,
+          amount: ingredient.quantity.amount - item.amount
+        });
+      }
+    })
+  })}
+
+  checkPantry(recipe) {
+    recipe.ingredients.forEach(ingredient => {
+      let newItems = this.items.find(item => item.ingredient === ingredient.id);
+
+      if (!newItems) {
+        this.groceryList.push({
+          ingredient: ingredient.id,
+          amount: ingredient.quantity.amount
+        })
+      }
+    })
+  }
+
+  canMake(recipe) {
+    this.takeStock(recipe);
     if (this.groceryList.length > 0) {
       return this.groceryList;
     } else {
       return true;
     }
-
-    // 
   }
 
-
-
-  removeMeal(recipe) {
-
+  removeIngredients(recipe) {
+    // iterate over forRecipe array
+    // subtract each recipe ingredients amount from pantry ingredient amount
+    recipe.ingredients.forEach(ingredient => {
+      this.items.forEach((item, index) => {
+        
+        
+        if (ingredient.id === item.ingredient) {
+          console.log(ingredient.amount) 
+          console.log(item.amount)
+          let newAmount = item.amount - ingredient.quantity.amount;
+          if (newAmount === 0) {
+            this.items.splice(index, 1);
+          }
+          return item.amount = newAmount;
+        }
+      })
+    })
   }
 }
