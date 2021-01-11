@@ -17,6 +17,7 @@ describe.only('Pantry', function() {
   beforeEach(function() {
     userInfo = data[0];
     user = new User(userInfo);
+    console.log(user)
     pantry = new Pantry(user);
 
     recipe = {name: 'Flour Soda', type: ['italian', 'dinner'], ingredients: [{

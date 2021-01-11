@@ -1,3 +1,4 @@
+// BELOW NEEDS TO BE CHANGED TO IMPORT USERS FROM A NETWORK REQUEST
 
 export default class Pantry {
   constructor(user) {
@@ -8,20 +9,25 @@ export default class Pantry {
 
   canMake(recipe) {
     recipe.ingredients.forEach(ingredient => {
-      this.items.forEach(item => {
-        if (ingredient.id === item.ingredient && ingredient.amount > item.quantity.amount) {
-          this.groceryList.push(`${item.name}: ${ingredient.amount - item.quantity.amount}`);
-        } else if (ingredient.id === item.ingredient && ingredient.amount < item.quantity.amount) {
-          this.forRecipe.push(item);
-        } else {
-          this.groceryList.push(`${item.name}: ${ingredient.amount}`);
-        }
+      console.log(this);
+      if (this.items.includes(ingredient)) {
+        return true;
+      }
       })
-    })
+    
+
     if (this.groceryList.length > 0) {
       return this.groceryList;
     } else {
       return true;
     }
-}
+
+    // 
+  }
+
+
+
+  removeMeal(recipe) {
+
+  }
 }
