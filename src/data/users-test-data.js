@@ -5,7 +5,7 @@ let usersTest = [
     "pantry": [
       {
         "ingredient": 20081,
-        "amount": 11.5;
+        "amount": 11.5
       },
       {
         "ingredient": 18372,
