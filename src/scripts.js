@@ -23,7 +23,6 @@ let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
-let recipes2 = new RecipeRepo(recipeData);
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
@@ -31,14 +30,14 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 
 let user;
+let recipe;
+let recipeRepo;
 let pantryInfo = [];
-let recipes = []
+let recipes = [];
+let recipes2
 
 
-
-window.addEventListener("load", createCards);
-window.addEventListener("load", displayTagList);
-window.addEventListener("load", generateUser);
+window.addEventListener("load", initiateData);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
@@ -55,14 +54,19 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // I feel this is pointing at a general run() or start() function to instantiate
 // what the page needs rather than
 
-function generateUser() {
+// should go in user
+function initiateData() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
+  recipes2 = new RecipeRepo(recipeData);
+  createCards();
+  displayTagList();
   domUpdates.welcomeUser(user)
   findPantryInfo();
 }
 
 // CREATE RECIPE CARDS
 function createCards() {
+  // most of this should happen in recipes, just import recipeInfo here?
   recipeData.forEach(recipe => {
     let recipeInfo = new Recipe(recipe);
     let shortRecipeName = recipeInfo.name;
@@ -263,21 +267,15 @@ function showAllRecipes(recipes) {
 // CREATE AND USE PANTRY 
 
 function findPantryInfo() {   
-  user.pantry.forEach(item => { // create pantry class
-    let itemInfo = ingredientsData.find(ingredient => {
-      return ingredient.id === item.ingredient; 
-    });
-    let originalIngredient = pantryInfo.find(ingredient => {
-      if (itemInfo) {
-        return ingredient.name === itemInfo.name;
-      }
-    });
-    if (itemInfo && originalIngredient) {
-      originalIngredient.count += item.amount;
-    } else if (itemInfo) {
-      pantryInfo.push({name: itemInfo.name, count: item.amount});
+  let ingredientRepo = new IngredientsRepo(ingredientsData);
+  let pantryInfo = user.pantry.items.reduce((acc, ingredient) => {
+    let outputObject = {
+      name: ingredientRepo.getRecipeNameById(ingredient.ingredient),
+      count: ingredient.amount
     }
-  });
+    acc.push(outputObject);
+    return acc;
+  }, []);
   domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name))); 
 }
 

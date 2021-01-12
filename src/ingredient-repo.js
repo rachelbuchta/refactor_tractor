@@ -13,6 +13,16 @@ export default class IngredientsRepo {
     
     return foundIngredient ? foundIngredient.id : 0;
   }
+
+  getRecipeNameById(id) {
+    const foundIngredient = this.ingredients.find(ingredient => {
+      if (ingredient.id === id) {
+        return ingredient.name;
+      }
+    });
+    
+    return foundIngredient ? foundIngredient.name : "";
+  }
 }
 
 
