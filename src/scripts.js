@@ -34,7 +34,7 @@ let recipe;
 let recipeRepo;
 let pantryInfo = [];
 let recipes = [];
-let recipes2
+// let recipes2
 
 
 window.addEventListener("load", initiateData);
@@ -57,7 +57,7 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // should go in user
 function initiateData() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
-  recipes2 = new RecipeRepo(recipeData);
+  recipeRepo = new RecipeRepo(recipeData);
   createCards();
   displayTagList();
   domUpdates.welcomeUser(user)
@@ -65,26 +65,25 @@ function initiateData() {
 }
 
 // CREATE RECIPE CARDS
-function createCards() {
-  // most of this should happen in recipes, just import recipeInfo here?
-  recipes2.recipes.forEach(recipe => {
-
-    let recipeInfo = new Recipe(recipe);
-    recipes.push(recipeInfo);
-
-    // let shortRecipeName = domUpdates.shortenRecipeName(recipeInfo);
-
-    
-
-
-
-    domUpdates.createCard(recipeInfo);
+function createCards() {  
+  recipeRepo.recipes.forEach(recipe => {    
+    domUpdates.createCard(recipe);
   });
 }
 
+// function helperFnForDataAndDomShit() {
+//   // do the manipulation < class method that does something
+//     // almost certainly User, which can look at Pantry
+//     // make obj lit to store changes?
+//   // posts
+//   // pulls it back
+//     // makes sure it was the same
+//   // call domDisplay method
+// }
+
 // FILTER BY RECIPE TAGS
 function displayTagList() {
-  let tags = recipes2.returnAllTags()
+  let tags = recipeRepo.returnAllTags()
   domUpdates.createListTags(tags);
 }
 

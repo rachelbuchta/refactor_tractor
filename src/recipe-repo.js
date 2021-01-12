@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
+import Recipe from './recipe';
+
 export default class RecipeRepo {
   constructor(recipes) {
-    this.recipes = recipes;
+    this.recipes = recipes.map(recipe => new Recipe(recipe));
   }
 
   returnAllTags() {
