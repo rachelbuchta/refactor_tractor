@@ -49,6 +49,10 @@ export default class RecipeRepo {
   filterListByName(list, name) {
     return list.filter(recipe => recipe.name.includes(name));
   }
-}
 
+
+  filterListById(id) {
+    return this.recipes.find(recipe => recipe.id === id);
+  }
+}
 

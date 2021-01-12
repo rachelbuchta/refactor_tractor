@@ -1,3 +1,5 @@
+import users from "./data/users-data";
+
 /* eslint-disable max-len */
 let domUpdates = {
 
@@ -21,7 +23,9 @@ let domUpdates = {
     return result;
   },
 
-  createCard(recipe) {
+
+
+  createCard(recipe, appleDisplayed) {
     let main = document.querySelector("main");
     let cardHtml = `
   <div class="recipe-card" id=${recipe.id}>
@@ -38,7 +42,7 @@ let domUpdates = {
       ${this.createCardTags(recipe.tags)}
     </div>
     <div class="apple-container">
-      <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+      <img src="../images/${appleDisplayed}.png" alt="unfilled apple icon" class="card-apple-icon">
     </div>  
   </div>`
     main.insertAdjacentHTML("beforeend", cardHtml);
@@ -67,20 +71,34 @@ let domUpdates = {
     }).join(" ");
   },
 
-  showSelectedRecipes(foundRecipes) {
-    let main = document.querySelector("main");
+  showSelectedRecipes(foundRecipes, appleDisplayed) {
+    appleDisplayed = false;
+    const main = document.querySelector("main");
     main.innerHTML = '';
-    foundRecipes.forEach(recipe => this.createCard(recipe));
-    // foundRecipes.forEach(recipe => {
-    //   let domRecipe = document.getElementById(`${recipe.id}`);
-    //   domRecipe.style.display = "none";
-    // });
+    foundRecipes.forEach(recipe => {
+      this.createCard(recipe)
+    });
   },
 
-  displaySavedRecipes(recipes) {
+  getCardId() {
+    return parseInt(event.target.closest(".recipe-card").id)
+  },
+
+  fillApple() {
+    event.target.src = "../images/apple-logo.png";
+  },
+
+  removeApple() {
+    event.target.src = "../images/apple-logo-outline.png";
+  },
+
+  displaySavedRecipes(recipes, user) {
+    console.log(recipes);
+    // should this main reset be a function?
+    let main = document.querySelector("main");
+    main.innerHTML = '';
     recipes.forEach(recipe => {
-      let domRecipe = document.getElementById(`${recipe.id}`); 
-      domRecipe.style.display = "none";
+      user.isFavorited(recipe) ? this.createCard(recipe, 'apple-logo') : this.createCard(recipe, 'apple-logo-outline');
     });
   },
 

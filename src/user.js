@@ -21,5 +21,9 @@ export default class User {
   returnFirstName() {
     return this.name.split(' ')[0];
   }
+
+  isFavorited(recipe) {
+    return this.favoriteRecipes.find(favRecipe => recipe.id === favRecipe.id);
+  }
 }
 

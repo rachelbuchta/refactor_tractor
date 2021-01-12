@@ -67,7 +67,7 @@ function initiateData() {
 // CREATE RECIPE CARDS
 function createCards() {  
   recipeRepo.recipes.forEach(recipe => {    
-    domUpdates.createCard(recipe);
+    domUpdates.createCard(recipe, 'apple-logo-outline');
   });
 }
 
@@ -99,64 +99,53 @@ function findCheckedBoxes() {
   findTaggedRecipes(selectedTagNames);
 }
 
-// recipe repo has a function that takes a list and tag and returns an array of objects.
-// can we use this instead of filteredResults?
-function findTaggedRecipes(selected) {
-  let filteredResults = [];
+const findTaggedRecipes = selected => {
+  const filteredResults = [];
   selected.forEach(tag => {
     const foundRecipe = recipeRepo.filterListByTag(recipeRepo.recipes, tag);
     foundRecipe.forEach(recipe => {
-      let tagMatch = filteredResults.find(result => recipe.id === result.id);
-      
+      const tagMatch = filteredResults.find(result => recipe.id === result.id);
       if (!tagMatch) {
         filteredResults.push(recipe)
       }
     })
   })   
-  showAllRecipes();
   if (filteredResults.length > 0) {
-    filterRecipes(filteredResults);
+    domUpdates.showSelectedRecipes(filteredResults);
   }
 }
 
-
-//allRecipes
-function filterRecipes(filtered) {
-  // let foundRecipes = recipes.filter(recipe => {
-  //   return !filtered.includes(recipe);
-  // });
-  // // 
-  domUpdates.showSelectedRecipes(filtered);
-}
 
 // FAVORITE RECIPE FUNCTIONALITY
 
 // Need to sort through these to properly place in domFile or data model
 
+
+// takes a recipe and saves it to my recipes
+// adding styling to fill in the
+
 function addToMyRecipes() {
-  // this needs to be split up into multiple functions so notSRP
   if (event.target.className === "card-apple-icon") {
-    let cardId = parseInt(event.target.closest(".recipe-card").id)
-    // this codeblock straight up sucks, makes no sense
-    if (!user.favoriteRecipes.includes(cardId)) {
-      event.target.src = "../images/apple-logo.png";
-      user.saveRecipe(cardId);
-    } else if (!user.favoriteRecipes.includes(cardId)) {
+    const cardId = domUpdates.getCardId();
+    const recipe = recipeRepo.filterListById(cardId);
 
-
-      console.log('A wild error has appeared!');
-    // dd
-
-    } else {
-      event.target.src = "../images/apple-logo-outline.png";
-      user.removeRecipe(cardId);
-    }
+    if (!user.favoriteRecipes.includes(recipe)) {
+      domUpdates.fillApple();
+      user.saveRecipe(user.favoriteRecipes, recipe);
+    } else if (user.favoriteRecipes.includes(recipe)) {
+      alert('You have removed a recipe from My Recipes!');
+      domUpdates.removeApple();
+      user.removeRecipe(user.favoriteRecipes, recipe);
+      domUpdates.displaySavedRecipes(user.favoriteRecipes, user);
+    } 
   } else if (event.target.id === "exit-recipe-btn") {
     domUpdates.exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
+    // probably move this to domUpdates
     openRecipeInfo(event);
   }
 }
+
 // not a clue what is happening here
 function isDescendant(parent, child) {
   let node = child;
@@ -170,10 +159,7 @@ function isDescendant(parent, child) {
 }
 
 function showSavedRecipes() {
-  let unsavedRecipes = recipes.filter(recipe => {
-    return !user.favoriteRecipes.includes(recipe.id);
-  });
-  domUpdates.displaySavedRecipes(unsavedRecipes)
+  domUpdates.displaySavedRecipes(user.favoriteRecipes, user);
   showMyRecipesBanner();
 }
 
