@@ -6,18 +6,39 @@ $border-font: #359567;
 $background: #C4EB67;
 
 
+
 @mixin transition($value) {
     transition: $value;
  }
 
+ @mixin gridDisplay($columns, $rows) {
+   display: grid;
+   grid-template-columns: $columns;
+   grid-template-rows: $rows;
+ }
 
+ @mixin flexDisplay($direction, $justify) {
+   display: flex;
+   flex-direction: $direction;
+   justify-content: $justify;
+   //width
+   //align-items
+  //  padding: ;
+  //  width: ;
+ }
 
+ @mixin borderStyling($border, $radius, $shadow) {
+   border: $border;
+   border-radius: $radius;
+   box-shadow: $shadow;
+ }
 
 body {
   background-color: $primary-color;
-  display: grid;
+  @include gridDisplay(1fr 5fr, none);
+  // display: grid;
   font-family: $font;
-  grid-template-columns: 1fr 5fr;
+  // grid-template-columns: 1fr 5fr;
   grid-template-areas:
     "header header"
     "image image"
@@ -65,11 +86,12 @@ h4 {
 
 /* HEADER */
 header {
-  display: flex;
-  flex-direction: row;
+  // display: flex;
+  // flex-direction: row;
+  @include flexDisplay(row, none);
   grid-area: header;
-  padding: 0% 0%;
-  width: 100%;
+  // padding: 0% 0%;
+  // width: 100%;
 }
 
 span {
@@ -78,18 +100,20 @@ span {
 }
 
 .header-apple-icon {
-  height: 40px;
-  margin-left: 5px;
-  width: 35px;
+  // height: .7em;
+  margin-left: 1.1%;
+  width: .7em;
 }
 
 #search {
-  border-radius: 15px 15px 15px 15px;
-  border: 3px outset $background;
-  box-shadow: 0px 0px 7px 0px #475d74;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  @include borderStyling(.2em outset $background, 15px 15px 15px 15px, 0px 0px 7px 0px #475d74);
+  // border-radius: 15px 15px 15px 15px;
+  // border: 3px outset $background;
+  // box-shadow: 0px 0px 7px 0px #475d74;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: center;
+  @include flexDisplay(row, center);
   font-family: $font;
   margin: 1.2% 0.5% 1.2% 0%;
   width: 100%;
@@ -98,9 +122,10 @@ span {
 #search-input {
   background-color: #b6dcca;
   background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(225,225,225)));
-  border-radius: 10px 0px 0px 10px;
-  border: none;
-  box-shadow: inset -3px -1px 20px 1px #5c7894;
+  @include borderStyling(none, 10px 0px 0px 10px, inset -3px -1px 20px 1px #5c7894);
+  // border-radius: 10px 0px 0px 10px;
+  // border: none;
+  // box-shadow: inset -3px -1px 20px 1px #5c7894;
   color: $primary-color;
   font-family: $font;
   font-size: 42px;
@@ -145,16 +170,17 @@ span {
 }
 
 .nav-btn {
+  @include flexDisplay(column, center);
   align-items: center;
   background:$primary-color no-repeat;
   border: none;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   font-size: 0px;
   font-weight: 700;
-  justify-content: center;
-  margin: 0%;
+  // justify-content: center;
+  // margin: 0%;
   outline: none;
   overflow: hidden;
   text-align: center;
@@ -220,9 +246,10 @@ span {
 
 /* FILTER SIDEBAR */
 aside {
-  background-color: $text-background;;
-  display: flex;
-  justify-content: center;
+  background-color: $text-background;
+  @include flexDisplay(row, center);
+  // display: flex;
+  // justify-content: center;
   height: auto;
   text-align: center;
 }
@@ -248,38 +275,46 @@ li {
 
 /* RECIPE CARD SECTION */
 main {
+  @include flexDisplay(row, center);
   grid-area: main;
-  display: flex;
-  justify-content: center;
-  align-content: flex-start;
-  flex-direction: row;
+  // display: flex;
+  // justify-content: center;
+  // align-content: flex-start;
+  // flex-direction: row;
   flex-wrap: wrap;
 }
 
 .title-container {
-  display: grid;
+  // display: grid;
+  align-self: center;
   grid-area: title;
   text-align: center;
+  margin-bottom: 13%;
 }
 
 .recipe-card {
-  display: grid;
-  grid-gap: 1%;
-  justify-content: space-evenly;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  @include gridDisplay(2fr 1fr, 1fr 1fr 1fr);
+  // display: grid;
+  // grid-gap: 1%;
+  // justify-content: space-evenly;
+  // grid-template-columns: 2fr 1fr;
+  // grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas: 
   "title title"
   "food food"
   "tags apple";
-  background-color: $text-background;;
-  border: 2px solid $background;
-  border-radius: 7px;
+  background-color: $text-background;
+  @include borderStyling(2px solid $background, 7px, none);
+  // border: 2px solid $background;
+  // border-radius: 7px;
   cursor: pointer;
-  height: 270px;
-  margin: 20px;
-  padding: 15px;
-  width: 250px;
+  height: 18em;
+  margin: 2%;
+  // margin: 20px;
+  // padding: 15px;
+  padding: 1.5%;
+  // width: 250px;
+  width: 15em;
 
   &:hover .card-photo-preview {
     opacity: 50%;
@@ -300,12 +335,13 @@ main {
 }
 
 .tags {
-  display: grid;
+  @include gridDisplay(1fr 1fr, 1fr 1fr);
+  // display: grid;
   grid-area: tags;
   align-items: center;
   justify-content: space-between;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  // grid-template-columns: 1fr 1fr;
+  // grid-template-rows: 1fr 1fr;
   width: 100%;
   overflow: auto;
 }
@@ -360,14 +396,16 @@ main {
 /* BUTTONS */
 .filter-btn {
   background-color: $border-font;
-  border: 0;
-  border-radius: 3%;
+  @include borderStyling(0, 3%, none);
+  // border: 0;
+  // border-radius: 3%;
   color: $text-background;
   cursor: pointer;
   font-family: $font;
   font-size: 12pt;
   font-weight: bold;
-  padding: 2px 4px 2px 4px;
+  // padding: 2px 4px 2px 4px;
+  padding: 1% 2% 1% 2%;
 
     &:hover {
     background-color: #84C8A4;
@@ -384,7 +422,7 @@ main {
     @extend .filter-btn;
     height: 2.5em;
     margin-top: 1%;
-    width: 15%;
+    // width: 15%;
   }
 
 /* PANTRY LIST */
@@ -392,7 +430,7 @@ main {
   align-items: center;
   background-color: #DAE4EE;
   display: none;
-  height: 60%;
+  height: 65%;
   margin-left: 81%;
   margin-top: 7%;
   overflow: scroll;
@@ -418,9 +456,10 @@ main {
 /* RECIPE INSTRUCTIONS */
 .recipe-instructions {
   background: $text-background;
-  border: 3px solid $background;
-  border-radius: 1%;
-  box-shadow: 1px 1px 115px black;
+  @include borderStyling(3px solid $background, 1%, 1px 1px 115px black);
+  // border: 3px solid $background;
+  // border-radius: 1%;
+  // box-shadow: 1px 1px 115px black;
   display: none;
   height: 70%;
   margin: 0;
@@ -448,8 +487,9 @@ main {
 
 #exit-recipe-btn {
   background: $text-background;
-  border: 2px double $border-font;
-  border-radius: 2%;
+  @include borderStyling(2px double $border-font, 2%, none);
+  // border: 2px double $border-font;
+  // border-radius: 2%;
   color: $border-font;
   cursor: pointer;
   font-size: 20px;
