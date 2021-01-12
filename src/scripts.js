@@ -40,7 +40,7 @@ let recipes = [];
 window.addEventListener("load", initiateData);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
-main.addEventListener("click", addToMyRecipes);
+main.addEventListener("click", allClicksInMain);
 pantryBtn.addEventListener("click", toggleMenu);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
@@ -123,27 +123,41 @@ const findTaggedRecipes = selected => {
 
 // takes a recipe and saves it to my recipes
 // adding styling to fill in the
-
-function addToMyRecipes() {
+// dealWithClick
+function allClicksInMain() {
   if (event.target.className === "card-apple-icon") {
-    const cardId = domUpdates.getCardId();
-    const recipe = recipeRepo.filterListById(cardId);
-
-    if (!user.favoriteRecipes.includes(recipe)) {
-      domUpdates.fillApple();
-      user.saveRecipe(user.favoriteRecipes, recipe);
-    } else if (user.favoriteRecipes.includes(recipe)) {
-      alert('You have removed a recipe from My Recipes!');
-      domUpdates.removeApple();
-      user.removeRecipe(user.favoriteRecipes, recipe);
-      domUpdates.displaySavedRecipes(user.favoriteRecipes, user);
-    } 
+    addToMyRecipes();
   } else if (event.target.id === "exit-recipe-btn") {
     domUpdates.exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     // probably move this to domUpdates
     openRecipeInfo(event);
   }
+}
+
+const addToSavedDom = recipe => {
+  domUpdates.fillApple();
+  user.saveRecipe(user.favoriteRecipes, recipe);
+  console.log(user.favoriteRecipes);
+}
+
+const removeFromSavedDom = recipe => {
+  console.log(user.favoriteRecipes);
+  alert('You have removed a recipe from My Recipes!');
+  domUpdates.removeApple();
+  user.removeRecipe(user.favoriteRecipes, recipe);
+  domUpdates.displaySavedRecipes(user.favoriteRecipes, user);
+}
+
+const addToMyRecipes = () => {
+  const cardId = domUpdates.getCardId();
+  const recipe = recipeRepo.filterListById(cardId);
+
+  if (!user.favoriteRecipes.includes(recipe)) {
+    addToSavedDom(recipe);
+  } else if (user.favoriteRecipes.includes(recipe)) {
+    removeFromSavedDom(recipe);
+  } 
 }
 
 // not a clue what is happening here
