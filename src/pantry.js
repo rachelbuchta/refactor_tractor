@@ -7,7 +7,6 @@ export default class Pantry {
 
   takeStock(recipe) {
     this.checkPantry(recipe);
-
     recipe.ingredients.forEach(ingredient => {
     this.items.forEach(item => {
       if (item.ingredient === ingredient.id && item.amount > ingredient.quantity.amount) {
@@ -45,8 +44,6 @@ export default class Pantry {
   }
 
   removeIngredients(recipe) {
-    // iterate over forRecipe array
-    // subtract each recipe ingredients amount from pantry ingredient amount
     recipe.ingredients.forEach(ingredient => {
       this.items.forEach((item, index) => {
         if (ingredient.id === item.ingredient) {

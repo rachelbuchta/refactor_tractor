@@ -22,7 +22,6 @@ describe.only('Pantry', function() {
     pantry = new Pantry(pantryData);
 
     recipe = {name: 'Flour Soda', type: ['italian', 'dinner'], ingredients: [{
-
       "id": 20081,
       "quantity": {
         "amount": 1.5,
@@ -51,8 +50,6 @@ describe.only('Pantry', function() {
         "unit": "tsp"
       }
     }]};
-
-
   });
 
   it('should be a function', function() {
@@ -70,7 +67,6 @@ describe.only('Pantry', function() {
   it('should determine if it is stocked for a meal', function() {
     expect(pantry.canMake(recipe)).to.eq(true);
   });
-
 
   it('should return the amount missing of each ingredient', function() {
     expect(pantry.canMake(recipe2)).to.deep.eq([
@@ -103,7 +99,4 @@ describe.only('Pantry', function() {
       }
     ]);
   });
-
-  
-
 })
