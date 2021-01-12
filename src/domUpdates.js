@@ -26,7 +26,7 @@ let domUpdates = {
     let cardHtml = `
   <div class="recipe-card" id=${recipe.id}>
     <div class="title-container"
-      <h3 class="title" maxlength="40">${recipe.name}</h3>
+      <h3 class="title" maxlength="40">${this.shortenRecipeName(recipe)}</h3>
     </div>  
     <div class="card-photo-container">
       <img src=${recipe.image} class="card-photo-preview" alt="${recipe.name} recipe" title="${recipe.name} recipe">
@@ -42,6 +42,14 @@ let domUpdates = {
     </div>  
   </div>`
     main.insertAdjacentHTML("beforeend", cardHtml);
+  },
+
+  shortenRecipeName(recipe) {
+    let shortRecipeName = recipe.name;
+    if (shortRecipeName.length > 40) {
+      shortRecipeName = shortRecipeName.substring(0, 40) + "...";
+    }
+    return shortRecipeName;
   },
 
   createListTags(tags) {

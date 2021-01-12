@@ -67,13 +67,17 @@ function initiateData() {
 // CREATE RECIPE CARDS
 function createCards() {
   // most of this should happen in recipes, just import recipeInfo here?
-  recipeData.forEach(recipe => {
+  recipes2.recipes.forEach(recipe => {
+
     let recipeInfo = new Recipe(recipe);
-    let shortRecipeName = recipeInfo.name;
     recipes.push(recipeInfo);
-    if (recipeInfo.name.length > 40) {
-      shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
-    }
+
+    // let shortRecipeName = domUpdates.shortenRecipeName(recipeInfo);
+
+    
+
+
+
     domUpdates.createCard(recipeInfo);
   });
 }
