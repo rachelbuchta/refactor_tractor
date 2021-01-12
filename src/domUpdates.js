@@ -67,11 +67,14 @@ let domUpdates = {
     }).join(" ");
   },
 
-  hideUnselectedRecipes(foundRecipes) {
-    foundRecipes.forEach(recipe => {
-      let domRecipe = document.getElementById(`${recipe.id}`);
-      domRecipe.style.display = "none";
-    });
+  showSelectedRecipes(foundRecipes) {
+    let main = document.querySelector("main");
+    main.innerHTML = '';
+    foundRecipes.forEach(recipe => this.createCard(recipe));
+    // foundRecipes.forEach(recipe => {
+    //   let domRecipe = document.getElementById(`${recipe.id}`);
+    //   domRecipe.style.display = "none";
+    // });
   },
 
   displaySavedRecipes(recipes) {

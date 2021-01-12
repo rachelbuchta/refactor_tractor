@@ -87,39 +87,46 @@ function displayTagList() {
   domUpdates.createListTags(tags);
 }
 
+// come back to this, maybe should be in dom updates?
 function findCheckedBoxes() {
-  let tagCheckboxes = document.querySelectorAll(".checked-tag");
-  let checkboxInfo = Array.from(tagCheckboxes)
-  let selectedTags = checkboxInfo.filter(box => {
+  const tagCheckboxes = document.querySelectorAll(".checked-tag");
+  const checkboxInfo = Array.from(tagCheckboxes)
+  const selectedTags = checkboxInfo.filter(box => {
     return box.checked;
   })
-  findTaggedRecipes(selectedTags);
+  const selectedTagNames = selectedTags.map(tag => tag.id);
+
+  findTaggedRecipes(selectedTagNames);
 }
 
+// recipe repo has a function that takes a list and tag and returns an array of objects.
+// can we use this instead of filteredResults?
 function findTaggedRecipes(selected) {
   let filteredResults = [];
   selected.forEach(tag => {
-    let allRecipes = recipes.filter(recipe => {
-      return recipe.tags.includes(tag.id);
-    });
-    allRecipes.forEach(recipe => {
-      if (!filteredResults.includes(recipe)) {
-        filteredResults.push(recipe);
+    const foundRecipe = recipeRepo.filterListByTag(recipeRepo.recipes, tag);
+    foundRecipe.forEach(recipe => {
+      let tagMatch = filteredResults.find(result => recipe.id === result.id);
+      
+      if (!tagMatch) {
+        filteredResults.push(recipe)
       }
     })
-    showAllRecipes();
-    if (filteredResults.length > 0) {
-      filterRecipes(filteredResults);
-    }
-  })
+  })   
+  showAllRecipes();
+  if (filteredResults.length > 0) {
+    filterRecipes(filteredResults);
+  }
 }
+
 
 //allRecipes
 function filterRecipes(filtered) {
-  let foundRecipes = recipes.filter(recipe => {
-    return !filtered.includes(recipe);
-  });
-  domUpdates.hideUnselectedRecipes(foundRecipes)
+  // let foundRecipes = recipes.filter(recipe => {
+  //   return !filtered.includes(recipe);
+  // });
+  // // 
+  domUpdates.showSelectedRecipes(filtered);
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
@@ -262,7 +269,7 @@ function toggleMenu() { // Might have to go to domUpdates?
   }
 }
 
-function showAllRecipes(recipes) { 
+function showAllRecipes() { 
   domUpdates.createAllRecipes(recipes)
   showWelcomeBanner();
 }
