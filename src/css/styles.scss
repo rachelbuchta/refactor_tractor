@@ -450,18 +450,19 @@ main {
 }
 
 @media only screen and (max-width: 800px) {
-// body {
-//   @include gridDisplay(1fr 2fr, none);
-//   font-family: $font;
-//   grid-template-areas:
-//     "header header"
-//     "image image"
-//     "aside main";
-//   height: 100vh;
-//   margin: 0;
-//   padding: 0;
-//   -webkit-font-smoothing: auto;
-// }
+body {
+  @include gridDisplay(1fr, none);
+  font-family: $font;
+  grid-template-areas:
+    "header"
+    "image"
+    "aside"
+    "main";
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: auto;
+}
 
 header {
   @include gridDisplay(2fr 1fr 1fr,none);
@@ -494,4 +495,20 @@ h1 {
 .banner-image {
   height: 7em;
 }
+}
+
+@media only screen and (max-width: 550px) {
+  header {
+    @include gridDisplay(1fr 1fr, none);
+    grid-template-areas: 
+    "fresh fresh" 
+    "button button2"
+    "search search";
+    justify-content: center;
+  }
+  h1 {
+    width: 100%;
+    font-size: 2.5em;
+    justify-items: center;
+  }
 }
