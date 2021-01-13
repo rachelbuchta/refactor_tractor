@@ -36,16 +36,9 @@ let pantryInfo = [];
 let recipes = [];
 let ingredientsRepo;  
 
-// let recipes2
-
 // GENERATE A USER ON LOAD
 
 
-// possibly move to sep domFile
-// I feel this is pointing at a general run() or start() function to instantiate
-// what the page needs rather than
-
-// should go in user
 function initiateData() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   recipeRepo = new RecipeRepo(recipeData);
@@ -63,23 +56,12 @@ function createCards() {
   });
 }
 
-// function helperFnForDataAndDomShit() {
-//   // do the manipulation < class method that does something
-//     // almost certainly User, which can look at Pantry
-//     // make obj lit to store changes?
-//   // posts
-//   // pulls it back
-//     // makes sure it was the same
-//   // call domDisplay method
-// }
-
 // FILTER BY RECIPE TAGS
 function displayTagList() {
   let tags = recipeRepo.returnAllTags()
   domUpdates.createListTags(tags);
 }
 
-// come back to this, maybe should be in dom updates?
 function findCheckedBoxes() {
   const tagCheckboxes = document.querySelectorAll(".checked-tag");
   const checkboxInfo = Array.from(tagCheckboxes)
@@ -91,7 +73,6 @@ function findCheckedBoxes() {
 }
 
 const findTaggedRecipes = selected => {
-  console.log(recipeRepo)
   const filteredResults = [];
   selected.forEach(tag => {
     const foundRecipe = recipeRepo.filterListByTag(recipeRepo.recipes, tag);
@@ -115,8 +96,6 @@ function allClicksInMain(event) {
   } else if (event.target.id === "exit-recipe-btn") {
     domUpdates.exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
-    // probably move this to domUpdates
-   
     openRecipeInfo(event);
   }
 }
@@ -124,11 +103,9 @@ function allClicksInMain(event) {
 const addToSavedDom = recipe => {
   domUpdates.fillApple();
   user.saveRecipe(user.favoriteRecipes, recipe);
-  console.log(user.favoriteRecipes);
 }
 
 const removeFromSavedDom = recipe => {
-  console.log(user.favoriteRecipes);
   alert('You have removed a recipe from My Recipes!');
   domUpdates.removeApple();
   user.removeRecipe(user.favoriteRecipes, recipe);
@@ -146,7 +123,6 @@ const addToMyRecipes = () => {
   } 
 }
 
-// not a clue what is happening here
 function isDescendant(parent, child) {
   let node = child;
   while (node !== null) {
@@ -171,13 +147,12 @@ const openRecipeInfo = event => {
   const recipeId = parseInt(event.path.find(e => e.id).id);    
   const recipe = recipeRepo.filterListById(recipeId);  
   expandRecipeCard(recipe);  
-  // fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></section>");
 }
 
 const generateIngredients = recipe => { 
   return recipe.ingredients.map(ingredient => {
     const name = ingredientsRepo.getRecipeNameById(ingredient.id);
-    return `${domUpdates.capitalize(name)} (${ingredient.quantity.amount} ${ingredient.quantity.unit})`;
+    return `${domUpdates.capitalize(name)} (${domUpdates.formatNumber(ingredient.quantity.amount)} ${ingredient.quantity.unit})`;
   }).join(', ');
 }
 
@@ -192,7 +167,6 @@ const expandRecipeCard = recipe => {
 }
 
 // TOGGLE DISPLAYS // 
-//combine these//
 function showMyRecipesBanner() {
   document.querySelector(".welcome-msg").style.display = "none";
   document.querySelector(".my-recipes-banner").style.display = "block";
@@ -239,15 +213,7 @@ function pressEnterSearch(event) {
   searchRecipes();
 }
 
-// function filterNonSearched(filtered) { 
-//   let found = recipes.filter(recipe => {
-//     let ids = filtered.map(f => f.id);
-//     return !ids.includes(recipe.id)
-//   })
-//   domUpdates.hideUnselectedRecipes(found);
-// }
-
-function toggleMenu() { // Might have to go to domUpdates?
+function toggleMenu() {  
   var menuDropdown = document.querySelector(".drop-menu");
   menuOpen = !menuOpen;
   if (menuOpen) {

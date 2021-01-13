@@ -100,16 +100,6 @@ let domUpdates = {
     event.target.src = "../images/apple-logo-outline.png";
   },
 
-  // showSelectedRecipes(recipes, user) {
-  //   // console.log(recipes);
-  //   // should this main reset be a function?
-  //   let main = document.querySelector("main");
-  //   main.innerHTML = '';
-  //   recipes.forEach(recipe => {
-  //     user.isFavorited(recipe) ? this.createCard(recipe, 'apple-logo') : this.createCard(recipe, 'apple-logo-outline');
-  //   });
-  // },
-
   //Recipe Instructions//
   createInstructionsTitle(recipe, ingredients) {
     let fullRecipeInfo = document.querySelector(".recipe-instructions");
@@ -172,6 +162,21 @@ let domUpdates = {
     <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
       document.querySelector(".pantry-list").insertAdjacentHTML("beforeend", ingredientHtml);
     });
+  }, 
+
+  formatNumber(number) {
+    const stringedNum = number.toString();
+    let index;
+    let afterPeriod;
+
+    if (stringedNum.includes('.')) {
+      index = stringedNum.indexOf('.');
+      afterPeriod = stringedNum.slice(index + 1);
+    }
+    if (afterPeriod && afterPeriod.length > 2) {
+      afterPeriod = afterPeriod.toFixed(2);
+    }
+    return parseFloat(stringedNum.slice(0, index + 1).concat(afterPeriod)) || number;
   }
 }
 
