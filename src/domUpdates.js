@@ -91,8 +91,8 @@ let domUpdates = {
     event.target.src = "../images/apple-logo-outline.png";
   },
 
-  displaySavedRecipes(recipes, user) {
-    console.log(recipes);
+  displaySelectedRecipes(recipes, user) {
+    // console.log(recipes);
     // should this main reset be a function?
     let main = document.querySelector("main");
     main.innerHTML = '';
@@ -136,6 +136,22 @@ let domUpdates = {
     fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
     fullRecipeInfo.style.display = "none";
     document.getElementById("overlay").remove();
+  },
+
+  //Search bar input dom updates
+  displaySearchError() {
+    let searchInput = document.querySelector("#search-input");
+    // set error messageas text
+    const message = document.createElement('p');
+    // make field
+    message.innerText = 'WAT DA FUK YOU DOIN?!?!';
+    const result = searchInput.appendChild(message);
+    return result;
+  },
+
+  clearField() {
+    let searchInput = document.querySelector("#search-input");
+    searchInput.value = '';
   },
 
   //Pantry//

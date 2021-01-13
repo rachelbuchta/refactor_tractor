@@ -156,9 +156,6 @@ const addToMyRecipes = () => {
 
 // not a clue what is happening here
 function isDescendant(parent, child) {
-
-
-
   let node = child;
   while (node !== null) {
     if (node === parent) {
@@ -214,39 +211,33 @@ function showWelcomeBanner() {
 }
 
 // SEARCH RECIPES
+const searchRecipes = () => {
+  let input = searchInput.value;  
+  let recipes;
+
+  input = domUpdates.capitalize(input);
+  input = input.trim();
+  
+  typeof input !== 'string' ? (
+    domUpdates.displaySearchError(),
+    domUpdates.clearField()
+  ) : recipes = recipeRepo.filterListByName(recipeRepo.recipes, input);  
+
+  domUpdates.displaySelectedRecipes(recipes, user);
+}
+
 function pressEnterSearch(event) { 
   event.preventDefault();
   searchRecipes();
 }
 
-function searchRecipes() { 
-  showAllRecipes();
-  let searchedRecipes = [];
-  recipeData.forEach(recipe => {
-    recipe.ingredients.forEach(ingredient => {
-      if (!searchedRecipes.includes(ingredient.name) && ingredient.name === searchInput.value.toLowerCase()) {
-        searchedRecipes.push(recipe);
-      }
-      if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
-        searchedRecipes.push(recipe);
-      }
-    })
-  });
-  filterNonSearched(createRecipeObject(searchedRecipes));
-}
-
-function filterNonSearched(filtered) { 
-  let found = recipes.filter(recipe => {
-    let ids = filtered.map(f => f.id);
-    return !ids.includes(recipe.id)
-  })
-  domUpdates.hideUnselectedRecipes(found);
-}
-
-function createRecipeObject(recipes) { 
-  recipes = recipes.map(recipe => new Recipe(recipe));
-  return recipes
-}
+// function filterNonSearched(filtered) { 
+//   let found = recipes.filter(recipe => {
+//     let ids = filtered.map(f => f.id);
+//     return !ids.includes(recipe.id)
+//   })
+//   domUpdates.hideUnselectedRecipes(found);
+// }
 
 function toggleMenu() { // Might have to go to domUpdates?
   var menuDropdown = document.querySelector(".drop-menu");
