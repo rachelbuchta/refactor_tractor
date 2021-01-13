@@ -5,7 +5,6 @@ let recipeTest = [
     "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
     "ingredients": [
       {
-        // "name": "all purpose flour",
         "id": 20081,
         "quantity": {
           "amount": 1.5,
@@ -13,7 +12,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "baking soda",
         "id": 18372,
         "quantity": {
           "amount": 0.5,
@@ -21,7 +19,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "egg",
         "id": 1123,
         "quantity": {
           "amount": 1,
@@ -70,7 +67,6 @@ let recipeTest = [
     "image": "https://spoonacular.com/recipeImages/678353-556x370.jpg",
     "ingredients": [
       {
-        // "name": "apple cider",
         "id": 1009016,
         "quantity": {
           "amount": 1.5,
@@ -78,7 +74,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "apples",
         "id": 9003,
         "quantity": {
           "amount": 2,
@@ -86,7 +81,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "cornstarch",
         "id": 20027,
         "quantity": {
           "amount": 1,
@@ -94,7 +88,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "dijon mustard",
         "id": 1002046,
         "quantity": {
           "amount": 1,
@@ -102,7 +95,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "garlic",
         "id": 11215,
         "quantity": {
           "amount": 1,
@@ -110,7 +102,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "grainy mustard",
         "id": 1012046,
         "quantity": {
           "amount": 1,
@@ -118,7 +109,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "maple syrup",
         "id": 19911,
         "quantity": {
           "amount": 0.25,
@@ -126,7 +116,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "Miso Soybean Paste",
         "id": 16112,
         "quantity": {
           "amount": 1,
@@ -134,7 +123,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "pork chops",
         "id": 10010062,
         "quantity": {
           "amount": 24,
@@ -142,7 +130,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "salt and pepper",
         "id": 1102047,
         "quantity": {
           "amount": 4,
@@ -150,7 +137,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "soy sauce",
         "id": 16124,
         "quantity": {
           "amount": 1,
@@ -158,7 +144,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "sriracha",
         "id": 1016168,
         "quantity": {
           "amount": 1,
@@ -185,7 +170,6 @@ let recipeTest = [
     "image": "https://spoonacular.com/recipeImages/412309-556x370.jpeg",
     "ingredients": [
       {
-        // "name": "black pepper",
         "id": 1002030,
         "quantity": {
           "amount": 4,
@@ -193,7 +177,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "brown sugar",
         "id": 19334,
         "quantity": {
           "amount": 8,
@@ -201,7 +184,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "butter",
         "id": 1001,
         "quantity": {
           "amount": 2,
@@ -209,7 +191,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "canola oil",
         "id": 4582,
         "quantity": {
           "amount": 4,
@@ -217,7 +198,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "cayenne pepper",
         "id": 2031,
         "quantity": {
           "amount": 4,
@@ -225,7 +205,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "chicken wings",
         "id": 5100,
         "quantity": {
           "amount": 1,
@@ -233,7 +212,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "chili powder",
         "id": 2009,
         "quantity": {
           "amount": 4,
@@ -241,7 +219,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "garlic powder",
         "id": 1022020,
         "quantity": {
           "amount": 4,
@@ -249,7 +226,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "hot sauce",
         "id": 6168,
         "quantity": {
           "amount": 8,
@@ -257,7 +233,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "mango",
         "id": 9176,
         "quantity": {
           "amount": 0.5,
@@ -265,7 +240,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "onion powder",
         "id": 2026,
         "quantity": {
           "amount": 4,
@@ -273,7 +247,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "seasoning salt",
         "id": 1042047,
         "quantity": {
           "amount": 1.5,
@@ -281,7 +254,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "seasoning salt",
         "id": 1042047,
         "quantity": {
           "amount": 4,
@@ -305,7 +277,6 @@ let recipeTest = [
     "image": "https://spoonacular.com/recipeImages/741603-556x370.jpeg",
     "ingredients": [
       {
-        // "name": "all purpose flour",
         "id": 20081,
         "quantity": {
           "amount": 1,
@@ -313,7 +284,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "baking powder",
         "id": 18371,
         "quantity": {
           "amount": 2,
@@ -321,7 +291,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "bananas",
         "id": 9040,
         "quantity": {
           "amount": 12,
@@ -329,7 +298,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "buckwheat flour",
         "id": 20011,
         "quantity": {
           "amount": 1,
@@ -337,7 +305,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "butter",
         "id": 1001,
         "quantity": {
           "amount": 2,
@@ -345,7 +312,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "butter",
         "id": 1001,
         "quantity": {
           "amount": 6,
@@ -353,7 +319,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "buttermilk",
         "id": 1230,
         "quantity": {
           "amount": 2,
@@ -361,7 +326,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "eggs",
         "id": 1123,
         "quantity": {
           "amount": 2,
@@ -369,7 +333,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "honey",
         "id": 19296,
         "quantity": {
           "amount": 12,
@@ -377,7 +340,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "peanut butter",
         "id": 16098,
         "quantity": {
           "amount": 12,
@@ -385,7 +347,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "salt",
         "id": 2047,
         "quantity": {
           "amount": 1,
@@ -393,7 +354,6 @@ let recipeTest = [
         }
       },
       {
-        // "name": "sugar",
         "id": 19335,
         "quantity": {
           "amount": 2,
