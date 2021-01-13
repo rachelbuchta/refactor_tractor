@@ -158,9 +158,22 @@ let domUpdates = {
     return result;
   },
 
+  clearAllFields() {
+    this.clearField();
+    this.clearCheckedBoxes();
+  },
+
   clearField() {
     let searchInput = document.querySelector("#search-input");
     searchInput.value = '';
+  },
+
+  clearCheckedBoxes() {
+    let checkedBoxes = document.querySelectorAll(".checked-tag");
+    let arrayCheckedBoxes = Array.from(checkedBoxes)
+    arrayCheckedBoxes.forEach(box => {
+      box.checked = false;
+    })
   },
 
   createAllRecipes(recipes) {

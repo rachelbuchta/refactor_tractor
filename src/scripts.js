@@ -214,6 +214,7 @@ const findRecipeMatches = input => {
 function pressEnterSearch(event) { 
   event.preventDefault();
   searchRecipes();
+  domUpdates.clearAllFields();
 }
 
 function toggleMenu() {  
