@@ -49,6 +49,21 @@ let domUpdates = {
     section.innerHTML = cardHtml;
     main.appendChild(section);
   },
+
+  clearMainCardSection() {
+    const main = document.querySelector("main");
+    const modal =`
+    <div class="recipe-instructions">
+    </div>
+    <div class="my-recipes-banner">
+      <h1>My Recipes</h1>
+      <button class="show-all-btn">Show All Recipes</button>
+    </div>`
+    
+    main.innerHTML = '';
+    main.innerHTML += modal;
+    return main;
+  },
   
   shortenRecipeName(recipe) {
     let shortRecipeName = recipe.name;
@@ -74,17 +89,8 @@ let domUpdates = {
   },
 
   showSelectedRecipes(foundRecipes, user) {
-    const main = document.querySelector("main");
-    const modal =`
-    <div class="recipe-instructions">
-    </div>
-    <div class="my-recipes-banner">
-      <h1>My Recipes</h1>
-      <button class="show-all-btn">Show All Recipes</button>
-    </div>`
-    
-    main.innerHTML = '';
-    main.innerHTML += modal;
+    this.clearMainCardSection()
+    console.log(this.clearMainCardSection())
     foundRecipes.forEach(recipe => {
       user.isFavorited(recipe) ? this.createCard(recipe, "apple-logo") : this.createCard(recipe, "apple-logo-outline");
     });

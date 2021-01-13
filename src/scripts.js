@@ -49,10 +49,13 @@ function initiateData() {
 }
 
 // CREATE RECIPE CARDS
-function createCards() {  
-  recipeRepo.recipes.forEach(recipe => {    
-    domUpdates.createCard(recipe, 'apple-logo-outline');
-  });
+function createCards() { 
+  domUpdates.clearMainCardSection();
+  domUpdates.showSelectedRecipes(recipeRepo.recipes, user);
+
+  // recipeRepo.recipes.forEach(recipe => {    
+  //     user.isFavorited(recipe) ? createCard(recipe, "apple-logo") : createCard(recipe, "apple-logo-outline");
+
 }
 
 // FILTER BY RECIPE TAGS
@@ -107,7 +110,8 @@ const removeFromSavedDom = recipe => {
   alert('You have removed a recipe from My Recipes!');
   domUpdates.removeApple();
   user.removeRecipe(user.favoriteRecipes, recipe);
-  domUpdates.displaySavedRecipes(user.favoriteRecipes, user);
+  createCards();
+  showWelcomeBanner();
 }
 
 const addToMyRecipes = () => {
@@ -133,8 +137,9 @@ function isDescendant(parent, child) {
 }
 
 function showSavedRecipes() {
+  console.log(savedRecipesBtn)
   user.favoriteRecipes.length > 0 ? (
-    domUpdates.displaySavedRecipes(user.favoriteRecipes, user), 
+    domUpdates.showSelectedRecipes(user.favoriteRecipes, user), 
     showMyRecipesBanner()
    ) : createCards();
 }
