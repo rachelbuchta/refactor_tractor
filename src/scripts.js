@@ -34,6 +34,8 @@ let recipe;
 let recipeRepo;
 let pantryInfo = [];
 let recipes = [];
+let ingredientsRepo;  
+
 // let recipes2
 
 // GENERATE A USER ON LOAD
@@ -47,6 +49,7 @@ let recipes = [];
 function initiateData() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   recipeRepo = new RecipeRepo(recipeData);
+  ingredientsRepo = new IngredientsRepo(ingredientsData);
   createCards();
   displayTagList();
   domUpdates.welcomeUser(user)
@@ -172,8 +175,6 @@ const openRecipeInfo = event => {
 }
 
 const generateIngredients = recipe => { 
-  const ingredientsRepo = new IngredientsRepo(ingredientsData);  
-
   return recipe.ingredients.map(ingredient => {
     const name = ingredientsRepo.getRecipeNameById(ingredient.id);
     return `${domUpdates.capitalize(name)} (${ingredient.quantity.amount} ${ingredient.quantity.unit})`;
@@ -202,17 +203,38 @@ function showWelcomeBanner() {
 // SEARCH RECIPES
 const searchRecipes = () => {
   let input = searchInput.value;  
-  let recipes;
 
-  input = domUpdates.capitalize(input);
   input = input.trim();
+  input = domUpdates.capitalize(input);
   
   typeof input !== 'string' ? (
     domUpdates.displaySearchError(),
     domUpdates.clearField()
-  ) : recipes = recipeRepo.filterListByName(recipeRepo.recipes, input);  
+  ) : domUpdates.displaySelectedRecipes(findRecipeMatches(input), user);
+}
 
-  domUpdates.displaySelectedRecipes(recipes, user);
+const findRecipeMatches = input => {
+  let nameMatches;
+  let idMatches;
+  let ingredientId;
+  let recipeMatches;
+
+  ingredientId = ingredientsRepo.getRecipeIdByName(input);
+  console.log(ingredientId);
+  nameMatches = recipeRepo.filterListByName(recipeRepo.recipes, input);
+  idMatches = recipeRepo.filterListByIngredient(recipeRepo.recipes, ingredientId);
+  console.log(idMatches);
+  recipeMatches = [...nameMatches];
+  console.log(recipeMatches);
+  idMatches.forEach(match => {
+    const isRecipeFound = recipeMatches.find(recipe => recipe.id === match.id);
+    if (!isRecipeFound) {
+      console.log(match);
+      recipeMatches = [...recipeMatches, match];
+    }
+  })
+  console.log(recipeMatches);
+  return recipeMatches;
 }
 
 function pressEnterSearch(event) { 
@@ -286,7 +308,6 @@ function findRecipesWithCheckedIngredients(selected) {
     }
   })
 }
-
 
 window.addEventListener("load", initiateData);
 allRecipesBtn.addEventListener("click", showAllRecipes);

@@ -5,8 +5,9 @@ export default class IngredientsRepo {
   }
 
   getRecipeIdByName(name) {
+    console.log(name);
     const foundIngredient = this.ingredients.find(ingredient => {
-      if (ingredient.name.includes(name)) {
+      if (ingredient.name.includes(name.toLowerCase())) {
         return ingredient.id;
       }
     });
