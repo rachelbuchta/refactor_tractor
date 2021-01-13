@@ -4,7 +4,7 @@ export default class User {
   constructor(userData) {
     this.id = userData.id;
     this.name = userData.name;
-    this.pantry = userData.pantry;
+    this.pantry = new Pantry(userData.pantry);
     this.favoriteRecipes = [];
     this.recipesToCook = [];
   }
@@ -20,6 +20,10 @@ export default class User {
 
   returnFirstName() {
     return this.name.split(' ')[0];
+  }
+
+  isFavorited(recipe) {
+    return this.favoriteRecipes.find(favRecipe => recipe.id === favRecipe.id);
   }
 }
 

@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
+import Recipe from './recipe';
+
 export default class RecipeRepo {
   constructor(recipes) {
-    this.recipes = recipes;
+    this.recipes = recipes.map(recipe => new Recipe(recipe));
   }
 
   returnAllTags() {
@@ -47,6 +49,10 @@ export default class RecipeRepo {
   filterListByName(list, name) {
     return list.filter(recipe => recipe.name.includes(name));
   }
-}
 
+
+  filterListById(id) {
+    return this.recipes.find(recipe => recipe.id === id);
+  }
+}
 
