@@ -73,7 +73,16 @@ let domUpdates = {
 
   showSelectedRecipes(foundRecipes, user) {
     const main = document.querySelector("main");
+    const modal =`
+    <div class="recipe-instructions">
+    </div>
+    <div class="my-recipes-banner">
+      <h1>My Recipes</h1>
+      <button class="show-all-btn">Show All Recipes</button>
+    </div>`
+    
     main.innerHTML = '';
+    main.innerHTML += modal;
     foundRecipes.forEach(recipe => {
       user.isFavorited(recipe) ? this.createCard(recipe, "apple-logo") : this.createCard(recipe, "apple-logo-outline");
     });
@@ -91,29 +100,30 @@ let domUpdates = {
     event.target.src = "../images/apple-logo-outline.png";
   },
 
-  displaySelectedRecipes(recipes, user) {
-    // console.log(recipes);
-    // should this main reset be a function?
-    let main = document.querySelector("main");
-    main.innerHTML = '';
-    recipes.forEach(recipe => {
-      user.isFavorited(recipe) ? this.createCard(recipe, 'apple-logo') : this.createCard(recipe, 'apple-logo-outline');
-    });
-  },
+  // showSelectedRecipes(recipes, user) {
+  //   // console.log(recipes);
+  //   // should this main reset be a function?
+  //   let main = document.querySelector("main");
+  //   main.innerHTML = '';
+  //   recipes.forEach(recipe => {
+  //     user.isFavorited(recipe) ? this.createCard(recipe, 'apple-logo') : this.createCard(recipe, 'apple-logo-outline');
+  //   });
+  // },
 
   //Recipe Instructions//
   createInstructionsTitle(recipe, ingredients) {
     let fullRecipeInfo = document.querySelector(".recipe-instructions");
+
     let recipeTitle = `
-    <button id="exit-recipe-btn">X</button>
-    <h3 id="recipe-title">${recipe.name}</h3>
-    <h4>Ingredients</h4>
-    <p>${ingredients}</p>`
+      <button id="exit-recipe-btn">X</button>
+      <h3 id="recipe-title">${recipe.name}</h3>
+      <h4>Ingredients</h4>
+      <p>${ingredients}</p>`
     fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
   },
 
   createInstructionsImage(recipe) {
-    document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
+    document.querySelector("#recipe-title").style.backgroundImage = `url(${recipe.image})`;
   },
 
   createInstructionsList(instructions) {
@@ -127,7 +137,8 @@ let domUpdates = {
   createEstimatedPrice(recipe, ingredients) {
     let fullRecipeInfo = document.querySelector(".recipe-instructions");
     fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Estimated Cost</h4>")
-    fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${recipe.calculateIngredientsCost(ingredients)}</h4>`)
+    fullRecipeInfo.insertAdjacentHTML("beforeend", `<h4>${recipe.calculateIngredientsCost(ingredients)}</h4>`);
+
   },
 
   exitRecipe() {

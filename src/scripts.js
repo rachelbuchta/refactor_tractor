@@ -171,7 +171,7 @@ const openRecipeInfo = event => {
   const recipeId = parseInt(event.path.find(e => e.id).id);    
   const recipe = recipeRepo.filterListById(recipeId);  
   expandRecipeCard(recipe);  
-  fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
+  // fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></section>");
 }
 
 const generateIngredients = recipe => { 
@@ -182,10 +182,12 @@ const generateIngredients = recipe => {
 }
 
 const expandRecipeCard = recipe => {  
+  let fullRecipeInfo = document.querySelector(".recipe-instructions");
   domUpdates.createInstructionsTitle(recipe, generateIngredients(recipe));
   domUpdates.createInstructionsImage(recipe);
   domUpdates.createInstructionsList(recipe.instructions);
-  domUpdates.createEstimatedPrice(recipe, ingredientsData)
+  domUpdates.createEstimatedPrice(recipe, ingredientsData);
+  fullRecipeInfo.style.display = "inline"; 
 }
 
 // TOGGLE DISPLAYS // 
@@ -206,11 +208,10 @@ const searchRecipes = () => {
 
   input = input.trim();
   input = domUpdates.capitalize(input);
-  
   typeof input !== 'string' ? (
     domUpdates.displaySearchError(),
     domUpdates.clearField()
-  ) : domUpdates.displaySelectedRecipes(findRecipeMatches(input), user);
+  ) : domUpdates.showSelectedRecipes(findRecipeMatches(input), user);
 }
 
 const findRecipeMatches = input => {
@@ -220,20 +221,15 @@ const findRecipeMatches = input => {
   let recipeMatches;
 
   ingredientId = ingredientsRepo.getRecipeIdByName(input);
-  console.log(ingredientId);
   nameMatches = recipeRepo.filterListByName(recipeRepo.recipes, input);
   idMatches = recipeRepo.filterListByIngredient(recipeRepo.recipes, ingredientId);
-  console.log(idMatches);
   recipeMatches = [...nameMatches];
-  console.log(recipeMatches);
   idMatches.forEach(match => {
     const isRecipeFound = recipeMatches.find(recipe => recipe.id === match.id);
     if (!isRecipeFound) {
-      console.log(match);
       recipeMatches = [...recipeMatches, match];
     }
   })
-  console.log(recipeMatches);
   return recipeMatches;
 }
 
