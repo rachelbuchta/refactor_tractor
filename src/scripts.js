@@ -183,6 +183,7 @@ const generateIngredients = recipe => {
 
 const expandRecipeCard = recipe => {  
   let fullRecipeInfo = document.querySelector(".recipe-instructions");
+  fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></section>");
   domUpdates.createInstructionsTitle(recipe, generateIngredients(recipe));
   domUpdates.createInstructionsImage(recipe);
   domUpdates.createInstructionsList(recipe.instructions);
