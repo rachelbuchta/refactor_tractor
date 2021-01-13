@@ -7,20 +7,20 @@ export default class Pantry {
 
   takeStock(recipe) {
     this.checkPantry(recipe);
-
     recipe.ingredients.forEach(ingredient => {
-    this.items.forEach(item => {
-      if (item.ingredient === ingredient.id && item.amount > ingredient.quantity.amount) {
-        this.forRecipe.push(item);
-      }
-      else if (item.ingredient === ingredient.id && item.amount < ingredient.quantity.amount) {
-        this.groceryList.push({
-          ingredient: item.ingredient,
-          amount: ingredient.quantity.amount - item.amount
-        });
-      }
+      this.items.forEach(item => {
+        if (item.ingredient === ingredient.id && item.amount > ingredient.quantity.amount) {
+          this.forRecipe.push(item);
+        }
+        else if (item.ingredient === ingredient.id && item.amount < ingredient.quantity.amount) {
+          this.groceryList.push({
+            ingredient: item.ingredient,
+            amount: ingredient.quantity.amount - item.amount
+          });
+        }
+      })
     })
-  })}
+  }
 
   checkPantry(recipe) {
     recipe.ingredients.forEach(ingredient => {
@@ -56,5 +56,13 @@ export default class Pantry {
         }
       })
     })
+  }
+
+  createPostBody(user, ingredient) {
+    return {
+      "userID": user.id,
+      "ingredientID": ingredient.id,
+      "ingredientModification": -ingredient.quantity.amount
+    }
   }
 }

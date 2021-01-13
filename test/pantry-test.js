@@ -13,6 +13,7 @@ describe.only('Pantry', function() {
   let recipe2;
   let pantry;
   let pantryData;
+  let ingredient;
 
 
   beforeEach(function() {
@@ -21,8 +22,15 @@ describe.only('Pantry', function() {
     user = new User(userInfo);
     pantry = new Pantry(pantryData);
 
-    recipe = {name: 'Flour Soda', type: ['italian', 'dinner'], ingredients: [{
+    ingredient = {
+      "id": 20081,
+      "quantity": {
+        "amount": 1.5,
+        "unit": "c"
+      }
+    };
 
+    recipe = {name: 'Flour Soda', type: ['italian', 'dinner'], ingredients: [{
       "id": 20081,
       "quantity": {
         "amount": 1.5,
@@ -51,8 +59,6 @@ describe.only('Pantry', function() {
         "unit": "tsp"
       }
     }]};
-
-
   });
 
   it('should be a function', function() {
@@ -60,7 +66,7 @@ describe.only('Pantry', function() {
   });
 
   it('should store a user pantry', function() {
-    expect(pantry.items).to.eq(user.pantry);
+    expect(pantry.items).to.eq(user.pantry.items);
   });
 
   it('should determine if it is stocked for a meal', function() {
@@ -70,7 +76,6 @@ describe.only('Pantry', function() {
   it('should determine if it is stocked for a meal', function() {
     expect(pantry.canMake(recipe)).to.eq(true);
   });
-
 
   it('should return the amount missing of each ingredient', function() {
     expect(pantry.canMake(recipe2)).to.deep.eq([
@@ -102,6 +107,16 @@ describe.only('Pantry', function() {
         "amount": 1
       }
     ]);
+  });
+
+  it('should return the body for POSTing', function() {
+    expect(pantry.createPostBody(user, ingredient)).to.deep.eq(
+      {
+        "userID": user.id,
+        "ingredientID": 20081,
+        "ingredientModification": -1.5
+      }
+    );
   });
 
   
