@@ -13,6 +13,7 @@ describe.only('Pantry', function() {
   let recipe2;
   let pantry;
   let pantryData;
+  let ingredient;
 
 
   beforeEach(function() {
@@ -20,6 +21,14 @@ describe.only('Pantry', function() {
     pantryData = userInfo.pantry;
     user = new User(userInfo);
     pantry = new Pantry(pantryData);
+
+    ingredient = {
+      "id": 20081,
+      "quantity": {
+        "amount": 1.5,
+        "unit": "c"
+      }
+    };
 
     recipe = {name: 'Flour Soda', type: ['italian', 'dinner'], ingredients: [{
       "id": 20081,
@@ -99,4 +108,17 @@ describe.only('Pantry', function() {
       }
     ]);
   });
+
+  it('should return the body for POSTing', function() {
+    expect(pantry.createPostBody(ingredient)).to.deep.eq([
+      {
+        "userID": user.id,
+        "ingredientID": 20081,
+        "ingredientModification": -1.5
+      }
+    ]);
+  });
+
+  
+
 })
