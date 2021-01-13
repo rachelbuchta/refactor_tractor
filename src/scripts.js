@@ -177,7 +177,7 @@ function showSavedRecipes() {
 }
 
 // CREATE RECIPE INSTRUCTIONS
-function openRecipeInfo(event) { 
+const openRecipeInfo = event => { 
   fullRecipeInfo.style.display = "inline"; 
   const recipeId = parseInt(event.path.find(e => e.id).id);    
   const recipe = recipeRepo.filterListById(recipeId);  
@@ -185,16 +185,13 @@ function openRecipeInfo(event) {
   fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
 }
 
-function findRecipeIngredient(recipeIngredient) {
-  return ingredientsData.find(ingredient => recipeIngredient.id === ingredient.id
-  );
-}
+const generateIngredients = recipe => { 
+  const ingredientsRepo = new IngredientsRepo(ingredientsData);  
 
-function generateIngredients(recipe) {
-  return recipe && recipe.ingredients.map(i => {
-    const foundIngredient = findRecipeIngredient(i);
-    return `${domUpdates.capitalize(foundIngredient.name)} (${i.quantity.amount} ${i.quantity.unit})`
-  }).join(", "); 
+  return recipe.ingredients.map(ingredient => {
+    const name = ingredientsRepo.getRecipeNameById(ingredient.id);
+    return `${domUpdates.capitalize(name)} (${ingredient.quantity.amount} ${ingredient.quantity.unit})`;
+  }).join(', ');
 }
 
 const expandRecipeCard = recipe => {  
@@ -203,11 +200,6 @@ const expandRecipeCard = recipe => {
   domUpdates.createInstructionsList(recipe.instructions);
   domUpdates.createEstimatedPrice(recipe, ingredientsData)
 }
-
-// function generateEstimateCost(recipe) {
-//   let currentRecipe = new Recipe (recipe);
-  
-// }
 
 // TOGGLE DISPLAYS // 
 //combine these//
