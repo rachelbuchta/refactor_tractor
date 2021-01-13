@@ -16,7 +16,7 @@ import User from './user';
 import Recipe from './recipe';
 import RecipeRepo from './recipe-repo'
 import IngredientsRepo from './ingredient-repo'
-import APICalls from './APICalls.js';
+import apiCalls from './APICalls.js';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -274,8 +274,8 @@ function findRecipesWithCheckedIngredients(selected) {
 const serverRoundTrip = (event) => {
   const recipe = event.target.closest("id");
   recipe.forEach(ingredient => {
-    APICalls.sendData(ingredient)
-      .then(APICalls.getData())
+    apiCalls.sendData(ingredient)
+      .then(apiCalls.getData())
       .then(
         recipeRepo = new RecipeRepo(recipeData),
         ingredientsRepo = new IngredientsRepo(ingredientsData),
