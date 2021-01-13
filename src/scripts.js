@@ -36,7 +36,7 @@ let pantryInfo = [];
 let recipes = [];
 let ingredientsRepo;  
 
-function initiateData() {
+const initiateData = () => {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   recipeRepo = new RecipeRepo(recipeData);
   ingredientsRepo = new IngredientsRepo(ingredientsData);
@@ -44,8 +44,7 @@ function initiateData() {
   displayTagList();
   domUpdates.welcomeUser(user)
   findPantryInfo();
-  let test = showAllRecipes(recipes)
-  console.log(test)
+  showAllRecipes(recipes)
 }
 
 // CREATE RECIPE CARDS
