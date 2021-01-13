@@ -43,9 +43,10 @@ let domUpdates = {
       <img src="../images/${appleDisplayed}.png" alt="unfilled apple icon" class="card-apple-icon">
     </div>  
   </div>`
-      let section = document.createElement("section");
-      section.innerHTML = cardHtml;
-      main.appendChild(section)
+    let section = document.createElement("section");
+    section.innerHTML = cardHtml;
+    console.log(section)
+    main.appendChild(section)
   },
 
   shortenRecipeName(recipe) {
@@ -71,11 +72,11 @@ let domUpdates = {
     }).join(" ");
   },
 
-  showSelectedRecipes(foundRecipes) {
+  showSelectedRecipes(foundRecipes, user) {
     const main = document.querySelector("main");
     main.innerHTML = '';
     foundRecipes.forEach(recipe => {
-      this.createCard(recipe)
+      user.isFavorited(recipe) ? this.createCard(recipe, "apple-logo") : this.createCard(recipe, "apple-logo-outline");
     });
   },
 

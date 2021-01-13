@@ -95,11 +95,11 @@ function findCheckedBoxes() {
     return box.checked;
   })
   const selectedTagNames = selectedTags.map(tag => tag.id);
-
   findTaggedRecipes(selectedTagNames);
 }
 
 const findTaggedRecipes = selected => {
+  console.log(recipeRepo)
   const filteredResults = [];
   selected.forEach(tag => {
     const foundRecipe = recipeRepo.filterListByTag(recipeRepo.recipes, tag);
@@ -111,9 +111,10 @@ const findTaggedRecipes = selected => {
     })
   })   
   if (filteredResults.length > 0) {
-    domUpdates.showSelectedRecipes(filteredResults);
+    domUpdates.showSelectedRecipes(filteredResults, user);
   }
 }
+
 
 // FAVORITE RECIPE FUNCTIONALITY
 function allClicksInMain() {
@@ -158,24 +159,21 @@ function isDescendant(parent, child) {
 
 
 
-  // let node = child;
-  // while (node !== null) {
-  //   if (node === parent) {
-  //     return true;
-  //   }
-  //   node = node.parentNode;
-  // }
-  // return false;
+  let node = child;
+  while (node !== null) {
+    if (node === parent) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
 }
 
 function showSavedRecipes() {
-  if (user.favoriteRecipes.length > 0) {
-    domUpdates.displaySavedRecipes(user.favoriteRecipes, user);
-    showMyRecipesBanner();
-  } else {
-    createCards()
-  }
-  
+  user.favoriteRecipes.length > 0 ? (
+    domUpdates.displaySavedRecipes(user.favoriteRecipes, user), 
+    showMyRecipesBanner()
+   ) : createCards();
 }
 
 // CREATE RECIPE INSTRUCTIONS
