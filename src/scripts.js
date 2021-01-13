@@ -36,7 +36,7 @@ let pantryInfo = [];
 let recipes = [];
 let ingredientsRepo;  
 
-function initiateData() {
+const initiateData = () => {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   recipeRepo = new RecipeRepo(recipeData);
   ingredientsRepo = new IngredientsRepo(ingredientsData);
@@ -44,15 +44,17 @@ function initiateData() {
   displayTagList();
   domUpdates.welcomeUser(user)
   findPantryInfo();
-  let test = showAllRecipes(recipes)
-  console.log(test)
+  showAllRecipes(recipes)
 }
 
 // CREATE RECIPE CARDS
-function createCards() {  
-  recipeRepo.recipes.forEach(recipe => {    
-    domUpdates.createCard(recipe, 'apple-logo-outline');
-  });
+function createCards() { 
+  domUpdates.clearMainCardSection();
+  domUpdates.showSelectedRecipes(recipeRepo.recipes, user);
+
+  // recipeRepo.recipes.forEach(recipe => {    
+  //     user.isFavorited(recipe) ? createCard(recipe, "apple-logo") : createCard(recipe, "apple-logo-outline");
+
 }
 
 // FILTER BY RECIPE TAGS
@@ -107,7 +109,8 @@ const removeFromSavedDom = recipe => {
   alert('You have removed a recipe from My Recipes!');
   domUpdates.removeApple();
   user.removeRecipe(user.favoriteRecipes, recipe);
-  domUpdates.displaySavedRecipes(user.favoriteRecipes, user);
+  createCards();
+  showWelcomeBanner();
 }
 
 const addToMyRecipes = () => {
@@ -133,8 +136,9 @@ function isDescendant(parent, child) {
 }
 
 function showSavedRecipes() {
+  console.log(savedRecipesBtn)
   user.favoriteRecipes.length > 0 ? (
-    domUpdates.displaySavedRecipes(user.favoriteRecipes, user), 
+    domUpdates.showSelectedRecipes(user.favoriteRecipes, user), 
     showMyRecipesBanner()
    ) : createCards();
 }
@@ -209,6 +213,7 @@ const findRecipeMatches = input => {
 function pressEnterSearch(event) { 
   event.preventDefault();
   searchRecipes();
+  domUpdates.clearAllFields();
 }
 
 function toggleMenu() {  

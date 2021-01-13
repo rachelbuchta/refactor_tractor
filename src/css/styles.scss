@@ -90,27 +90,27 @@ span {
   @include transition(.8s ease);
   width: 100%;
 
-  &:hover {
-    box-shadow: inset 0px 0px 0px 0px $text-background;
-    @include transition(.8s ease);
-  }
+  // &:hover {
+  //   box-shadow: inset 0px 0px 0px 0px $text-background;
+  //   @include transition(.8s ease);
+  // }
 
-  &:focus {
-    box-shadow: inset 0px 0px 0px 0px $text-background;
-    font-size: 0px;
-  }
+  // &:focus {
+  //   box-shadow: inset 0px 0px 0px 0px $text-background;
+  //   font-size: 0px;
+  // }
 
-  &::placeholder {
-    color: $primary-color;
-    font-size: 20px;
-    text-align: right;
-    text-shadow: none;
-  }
+  // &::placeholder {
+  //   color: $primary-color;
+  //   font-size: 20px;
+  //   text-align: right;
+  //   text-shadow: none;
+  // }
 
-  &:focus::placeholder {
-    font-size: 0px;
-    @include transition(.8s ease);
-  }
+  // &:focus::placeholder {
+  //   font-size: 0px;
+  //   @include transition(.8s ease);
+  // }
 }
 
 .search-label {
@@ -229,6 +229,8 @@ main {
   @include flexDisplay(row, center);
   grid-area: main;
   flex-wrap: wrap;
+  margin: 1em;
+  
 }
 
 .title-container {
@@ -251,6 +253,7 @@ main {
   margin: 2%;
   padding: 1.5%;
   width: 15em;
+  margin: 1em;
 
   &:hover .card-photo-preview {
     opacity: 50%;
