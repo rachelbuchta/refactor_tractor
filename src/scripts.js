@@ -234,10 +234,10 @@ function showAllRecipes() {
 // CREATE AND USE PANTRY 
 
 function findPantryInfo() {   
-  let ingredientRepo = new IngredientsRepo(ingredientsData);
+  // let ingredientRepo = new IngredientsRepo(ingredientsData);
   let pantryInfo = user.pantry.items.reduce((acc, ingredient) => {
     let outputObject = {
-      name: ingredientRepo.getRecipeNameById(ingredient.ingredient),
+      name: ingredientsRepo.getRecipeNameById(ingredient.ingredient),
       count: ingredient.amount
     }
     acc.push(outputObject);
@@ -247,11 +247,6 @@ function findPantryInfo() {
 }
 
 function findCheckedPantryBoxes() {
-  let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
-  let pantryCheckboxInfo = Array.from(pantryCheckboxes)
-  let selectedIngredients = pantryCheckboxInfo.filter(box => {
-    return box.checked;
-  })
   showAllRecipes();
   if (selectedIngredients.length > 0) {
     findRecipesWithCheckedIngredients(selectedIngredients);
