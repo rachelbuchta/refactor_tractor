@@ -35,7 +35,6 @@ let pantryInfo = [];
 let recipes = []
 
 
-
 window.addEventListener("load", createCards);
 window.addEventListener("load", displayTagList);
 window.addEventListener("load", generateUser);
@@ -56,9 +55,12 @@ searchForm.addEventListener("submit", pressEnterSearch);
 // what the page needs rather than
 
 function generateUser() {
+
   user = new User(users[Math.floor(Math.random() * users.length)]);
   domUpdates.welcomeUser(user)
   findPantryInfo();
+  let test = showAllRecipes(recipes)
+  console.log(test)
 }
 
 // CREATE RECIPE CARDS
@@ -160,6 +162,7 @@ function showSavedRecipes() {
     return !user.favoriteRecipes.includes(recipe.id);
   });
   domUpdates.displaySavedRecipes(unsavedRecipes)
+  console.log(recipes)
   showMyRecipesBanner();
 }
 
@@ -225,6 +228,7 @@ function searchRecipes() {
         searchedRecipes.push(recipe);
       }
       if (!searchedRecipes.includes(ingredient.name) && recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+     
         searchedRecipes.push(recipe);
       }
     })
@@ -255,8 +259,8 @@ function toggleMenu() { // Might have to go to domUpdates?
   }
 }
 
-function showAllRecipes(recipes) { 
-  domUpdates.createAllRecipes(recipes)
+function showAllRecipes() { 
+  domUpdates.createAllRecipes(recipes);
   showWelcomeBanner();
 }
 

@@ -1,8 +1,10 @@
+@import "variables";
+@import "media-queries";
+
 body {
-  background-color: #5B7894;
-  display: grid;
-  font-family: "Quicksand", sans-serif;
-  grid-template-columns: 1fr 5fr;
+  background-color: $primary-color;
+  @include gridDisplay(1fr 5fr, none);
+  font-family: $font;
   grid-template-areas:
     "header header"
     "image image"
@@ -15,12 +17,13 @@ body {
 
 h1 {
   align-self: center;
-  color: white;
+  color: $text-background;
   font-family: "Sulphur Point", sans-serif;
   font-size: 50px;
   margin: 0%;
   padding: 0.5% 0.7% 0%;
   width: 70%;
+  grid-area: fresh;
 }
 
 h2 {
@@ -29,17 +32,16 @@ h2 {
 }
 
 h3 {
-  color: #359567;
+  color: $border-font;
   cursor: pointer;
   height: 17%;
   margin: 5px 5px 10px 0px;
-  transition: .8s ease;
-  
+  @include transition(.8s ease)
 }
 
 h4 {
-  color: #359567;
-  background-color: #C4EB67;
+  color: $border-font;
+  background-color: $background;
   border-radius: 3px;
   font-size: smaller;
   margin: 10px 0px 0px 0px;
@@ -50,72 +52,65 @@ h4 {
 
 /* HEADER */
 header {
-  display: flex;
-  flex-direction: row;
+  @include flexDisplay(row, none);
   grid-area: header;
-  padding: 0% 0%;
-  width: 100%;
 }
 
 span {
-  color: #C4EB67;
+  color: $background;
   font-weight: 400;
 }
 
 .header-apple-icon {
-  height: 40px;
-  margin-left: 5px;
-  width: 35px;
+  margin-left: 1.1%;
+  width: .7em;
 }
 
 #search {
-  border-radius: 15px 15px 15px 15px;
-  border: 3px outset #C4EB67;
-  box-shadow: 0px 0px 7px 0px #475d74;
-  display: flex;
-  flex-direction: row;
-  font-family: "Quicksand", sans-serif;
-  justify-content: center;
+  @include borderStyling(.2em outset $background, 15px 15px 15px 15px, 0px 0px 7px 0px #475d74);
+  @include flexDisplay(row, center);
+  font-family: $font;
   margin: 1.2% 0.5% 1.2% 0%;
   width: 100%;
+  grid-area: search;
 }
+
 
 #search-input {
   background-color: #b6dcca;
   background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(225,225,225)));
-  border-radius: 10px 0px 0px 10px;
-  border: none;
-  box-shadow: inset -3px -1px 20px 1px #5c7894;
-  color: #5B7894;
-  font-family: "Quicksand", sans-serif;
+  @include borderStyling(none, 10px 0px 0px 10px, inset -3px -1px 20px 1px #5c7894);
+  color: $primary-color;
+  font-family: $font;
   font-size: 42px;
   height: 100%;
   outline: none;
   padding: 0% 2% 0% 0%;
   text-align: right;
-  transition: .8s ease;
+  @include transition(.8s ease);
   width: 100%;
-}
 
-#search-input:hover {
-  box-shadow: inset 0px 0px 0px 0px white;
-  transition: .8s ease;
-}
+  &:hover {
+    box-shadow: inset 0px 0px 0px 0px $text-background;
+    @include transition(.8s ease);
+  }
 
-#search-input:focus {
-  box-shadow: inset 0px 0px 0px 0px white;
-}
+  &:focus {
+    box-shadow: inset 0px 0px 0px 0px $text-background;
+    font-size: 0px;
+  }
 
-#search-input::placeholder {
-  color: #5B7894;
-  font-size: 20px;
-  text-align: right;
-  text-shadow: none;
-}
+  &::placeholder {
+    color: $primary-color;
+    font-size: 20px;
+    text-align: right;
+    text-shadow: none;
+  }
 
-#search-input:focus::placeholder {
-  font-size: 0px;
-  transition: .8s ease;
+  &:focus::placeholder {
+    font-size: 0px;
+    @include transition(.8s ease);
+  }
 }
 
 .search-label {
@@ -123,94 +118,96 @@ span {
 }
 
 .search-btn {
-  border-left: 3px outset #C4EB67;
+  border-left: 3px outset $background;
   border-radius: 0px 15px 15px 0px;
   padding: 1%;
 }
 
 .nav-btn {
+  @include flexDisplay(column, center);
   align-items: center;
-  background: #5B7894 no-repeat;
+  background:$primary-color no-repeat;
   border: none;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
   font-size: 0px;
   font-weight: 700;
-  justify-content: center;
-  margin: 0%;
   outline: none;
   overflow: hidden;
   text-align: center;
-  transition: .4s ease;
+  @include transition(.4s ease);
   width: 15%;
-}
 
-.nav-btn:hover {
-  color: #C4EB67;
+  &:hover {
+  color: $background;
   font-size: 14px;
   text-shadow: 0px 2px 4px black;
-  transition: .4s ease;
+  @include transition(.4s ease);
 }
 
-.nav-btn img {
+  img {
   max-height: 40px;
   max-width: 40px;
   padding: 2px 0px;
 }
+}
+
+.saved-recipes-btn {
+  grid-area: button;
+}
 
 .saved-ingredients-btn {
-  border-left: 3px solid #C4EB67;
+  border-left: 3px solid $background;
+  grid-area: button2;
 }
 
 .ing-pan-btn {
   margin: 1% 0%;
   padding: 1px 6px 5px 0px;
+  // @extend .nav-btn;
 }
-
 
 /* BANNER IMAGE*/
 .banner-image {
   background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),url("../images/green-apples.jpg");
   grid-area: image;
-  height: 150px;
+  height: 9em;
   overflow: hidden;
   width: 100%;
 }
 
-.my-recipes-banner,
+.my-recipes-banner {
+  text-align: center;
+  width: 95%;
+  display: none;
+  margin-top: 1%;
+
+    h1 {
+      color: $text-background;
+      width: 100%;
+    }
+}
+
 .welcome-msg {
   text-align: center;
   width: 95%;
-}
+  margin-top: 3%;
 
-.my-recipes-banner h1,
-.welcome-msg h1 {
-  color: white;
-  width: 100%;
+    h1 {
+      color: $text-background;
+      width: 100%;
+    }
 }
-
-.my-recipes-banner {
-  display: none;
-  margin-top: 25px;
-}
-
-.welcome-msg {
-  margin-top: 50px;
-}
-
 
 /* FILTER SIDEBAR */
 aside {
-  background-color: white;
-  display: flex;
-  justify-content: center;
+  background-color: $text-background;
+  @include flexDisplay(row, center);
   height: auto;
   text-align: center;
 }
 
 .wrap {
-  background-color: white;
+  background-color: $text-background;
   height: 100vh;
   padding: 10px;
   position: relative;
@@ -227,92 +224,82 @@ li {
   margin: 2px;
 }
 
-
 /* RECIPE CARD SECTION */
 main {
+  @include flexDisplay(row, center);
   grid-area: main;
-  display: flex;
-  justify-content: center;
-  align-content: flex-start;
-  flex-direction: row;
   flex-wrap: wrap;
 }
 
 .title-container {
+  align-self: center;
   grid-area: title;
   text-align: center;
-  align-items: center;
+  margin-bottom: 13%;
 }
 
 .recipe-card {
-  display: grid;
-  grid-gap: 1%;
-  justify-content: space-evenly;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  @include gridDisplay(2fr 1fr, 1fr 1fr 1fr);
   grid-template-areas: 
   "title title"
   "food food"
   "tags apple";
-  background-color: white;
-  border: 2px solid #C4EB67;
-  border-radius: 7px;
+  background-color: $text-background;
+  @include borderStyling(2px solid $background, 7px, none);
   cursor: pointer;
-  height: 270px;
-  margin: 20px;
-  padding: 15px;
-  width: 250px;
-}
+  height: 18em;
+  margin: 2%;
+  padding: 1.5%;
+  width: 15em;
 
-.recipe-card:hover .card-photo-preview {
-  opacity: 50%;
-  transition: .8s ease;
-}
+  &:hover .card-photo-preview {
+    opacity: 50%;
+    @include transition(.8s ease);
+  }
 
-.recipe-card:hover .text {
+  &:hover .text {
   font-size: 20px;
   opacity: 100%;
-  transition: .5s ease;
+  @include transition(.5s ease);
   width: 100%;
 }
 
-.recipe-card:hover h3 {
-  text-shadow: 0px 0px 4px #C4EB67;
-  transition: .8s ease;
+  &:hover h3 {
+  text-shadow: 0px 0px 4px $background;
+  @include transition(.8s ease);
+}
 }
 
 .tags {
-  display: grid;
+  @include gridDisplay(1fr 1fr, 1fr 1fr);
   grid-area: tags;
   align-items: center;
   justify-content: space-between;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
   width: 100%;
+  overflow: auto;
 }
 
-.apple-container{
+.apple-container {
   align-items: center;
-   justify-items: center;
+  justify-items: flex-end;
   display: inline-grid;
   grid-area: apple;
- 
 }
 
 .card-apple-icon {
   cursor: pointer;
-  height: 50px;
-  width: 45px;
+  height: 3em;
+  width: 3em;
 }
 
 .card-photo-preview {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 7px;
+  border-radius: 3%;
   cursor: pointer;
   height: 130px;
-  transition: .8s ease;
+  @include transition(.8s ease);
   width: 100%;
 }
 
@@ -320,14 +307,13 @@ main {
   grid-area: food;
   align-items: center;
   display: flex;
-  height: 130px;
-  justify-content: center;
+  height: 80%;
   position: relative;
 }
 
 .text {
-  background: #359567;
-  color: white;
+  background: $border-font;
+  color: $text-background;;
   font-weight: 700;
   font-size: 0px;
   opacity: 0%;
@@ -335,74 +321,68 @@ main {
   position: absolute;
   text-align: center;
   width: 0%;
-  transition: .5s ease;
+  @include transition(.5s ease);
 }
 
 
 /* BUTTONS */
-.show-pantry-recipes-btn,
-.show-all-btn,
 .filter-btn {
-  background-color: #359567;
-  border: 0;
-  border-radius: 3px;
-  color: white;
+  background-color: $border-font;
+  @include borderStyling(0, 3%, none);
+  color: $text-background;
   cursor: pointer;
-  font-family: "Quicksand", sans-serif;
+  font-family: $font;
   font-size: 12pt;
   font-weight: bold;
-  padding: 5px 10px 5px 10px;
+  padding: 1% 2% 1% 2%;
+
+    &:hover {
+    background-color: #84C8A4;
+    }
 }
 
-.show-pantry-recipes-btn {
-  margin-top: 10px;
-}
+  .show-pantry-recipes-btn {
+    @extend .filter-btn;
+    margin-top: 5%;
+  }
 
-.show-all-btn {
-  height: 40px;
-  margin-top: 20px;
-  width: 200px;
-}
-
-.filter-btn:hover {
-  background-color: #84C8A4;
-}
-
+  .show-all-btn {
+    @extend .filter-btn;
+    height: 2.5em;
+    margin-top: 1%;
+  }
 
 /* PANTRY LIST */
 .drop-menu {
   align-items: center;
   background-color: #DAE4EE;
   display: none;
-  height: 600px;
+  height: 65%;
   margin-left: 81%;
-  margin-top: 92px;
+  margin-top: 7%;
   overflow: scroll;
-  padding: 12px;
+  padding: 1%;
   position: absolute;
   text-align: center;
-  width: 250px;
+  width: 18%;
   z-index: 3;
-}
 
-.drop-menu h2 {
-  color: #359567;
-  margin: 0px;
+  h2 {
+    color: $border-font;
+    margin: 0%;
+  }
 }
 
 .pantry-list {
   color: #000000;
-  padding-left: 15px;
+  padding-left: 10%;
   text-align: left;
 }
 
-
 /* RECIPE INSTRUCTIONS */
 .recipe-instructions {
-  background: white;
-  border: 3px solid #C4EB67;
-  border-radius: 10px;
-  box-shadow: 1px 1px 115px black;
+  background: $text-background;
+  @include borderStyling(3px solid $background, 1%, 1px 1px 115px black);
   display: none;
   height: 70%;
   margin: 0;
@@ -413,54 +393,53 @@ main {
   top: 15%;
   width: 70%;
   z-index: 1000;
+
+  h4 {
+    background: $text-background;
+    color: $border-font;
+  }
+
+  p {
+    margin-left: 2%;
+  }
+
+  ol {
+    margin-right: 2%;
+  }
 }
 
 #exit-recipe-btn {
-  background: white;
-  border: 2px double #359567;
-  border-radius: 5px;
-  color: #359567;
+  background: $text-background;
+  @include borderStyling(2px double $border-font, 2%, none);
+  color: $border-font;
   cursor: pointer;
   font-size: 20px;
   font-weight: 700;
   margin: -4% -3% 2% -1%;
   position: fixed;
-  transition: .3s ease;
-}
+  @include transition(.3s ease);
 
-#exit-recipe-btn:hover {
-  background: #C4EB67;
-  transition: .3s ease;
+  &:hover {
+    background: $background;
+    @include transition(.3s ease);
+  }
 }
 
 #recipe-title {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 7px 7px 0px 0px;
-  color: white;
-  font-size: 30px;
+  color: $text-background;
+  font-size: 2em;
   margin: 0;
   padding: 5%;
   text-align: center;
   text-shadow: 0px 0px 6px black;
 }
 
-.recipe-instructions h4 {
-  background: white;
-  color: #359567;
-}
-
-.recipe-instructions p {
-  margin-left: 2%;
-}
-
-.recipe-instructions ol {
-  margin-right: 2%;
-}
-
 #overlay {
   filter:alpha(opacity=50);
-  background-color: #5B7894;
+  background-color:$primary-color;
   height:100%;
   left:0;
   opacity:0.5;
@@ -468,4 +447,109 @@ main {
   top:0;
   width:100%;
   z-index:100;
+}
+
+@media only screen and (max-width: 900px) {
+body {
+  @include gridDisplay(1fr 1fr, none);
+  font-family: $font;
+  grid-template-areas:
+    "header header"
+    "aside image"
+    "aside image"
+    "main main";
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: auto;
+}
+
+header {
+  @include gridDisplay(4fr 1fr 1fr,none);
+  grid-template-areas: 
+  "fresh button button2"
+  "search search search";
+  grid-area: header;
+  padding: 1%;
+}
+
+aside {
+  width: 40%;
+}
+
+.wrap {
+  height: 4em;
+  overflow: scroll;
+}
+
+.ing-pan-btn {
+  display: flex;
+  justify-self: end;
+  align-content: flex-end;
+  width:50%;
+}
+
+.drop-menu {
+  margin-left: 25%;
+  width: 50%;
+  height: 50%;
+  margin-top: 25%;
+  }
+
+h1 {
+  justify-self: center;
+  width: 90%;
+}
+
+#search {
+  width: 85%;
+  justify-self: center;
+}
+
+.banner-image {
+  height: 7em;
+}
+
+}
+
+@media only screen and (max-width: 550px) {
+  header {
+    @include gridDisplay(1fr 1fr 1fr, none);
+    grid-template-areas: 
+    "fresh fresh fresh" 
+    "none button button2"
+    "search search search";
+    justify-self: center;
+    align-self: center;
+  }
+
+  h1 {
+    width: 50%;
+    font-size: 2.8em;
+  }
+
+  .my-pantry-btn {
+    margin-right: 96%;
+  }
+
+  .saved-recipes-btn {
+    margin-right: 57%;
+  }
+
+  .saved-ingredients-btn {
+    border-left: none;
+  }
+
+  .nav-btn {
+    align-items: none;
+  }
+
+  .recipe-card {
+    width: 20em;
+  }
+
+  #recipe-title {
+    font-size: 1.5em;
+  }
+ 
 }
