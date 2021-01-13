@@ -23,8 +23,6 @@ let domUpdates = {
     return result;
   },
 
-
-
   createCard(recipe, appleDisplayed) {
     let main = document.querySelector("main");
     let cardHtml = `
@@ -45,7 +43,9 @@ let domUpdates = {
       <img src="../images/${appleDisplayed}.png" alt="unfilled apple icon" class="card-apple-icon">
     </div>  
   </div>`
-    main.insertAdjacentHTML("beforeend", cardHtml);
+      let section = document.createElement("section");
+      section.innerHTML = cardHtml;
+      main.appendChild(section)
   },
 
   shortenRecipeName(recipe) {
@@ -136,13 +136,6 @@ let domUpdates = {
     fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
     fullRecipeInfo.style.display = "none";
     document.getElementById("overlay").remove();
-  },
-
-  createAllRecipes(recipes) {
-    recipes.forEach(recipe => {
-      let domRecipe = document.getElementById(`${recipe.id}`);
-      domRecipe.style.display = "block";
-    });
   },
 
   //Pantry//

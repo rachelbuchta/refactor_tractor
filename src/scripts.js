@@ -115,15 +115,7 @@ const findTaggedRecipes = selected => {
   }
 }
 
-
 // FAVORITE RECIPE FUNCTIONALITY
-
-// Need to sort through these to properly place in domFile or data model
-
-
-// takes a recipe and saves it to my recipes
-// adding styling to fill in the
-// dealWithClick
 function allClicksInMain() {
   if (event.target.className === "card-apple-icon") {
     addToMyRecipes();
@@ -131,6 +123,7 @@ function allClicksInMain() {
     domUpdates.exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     // probably move this to domUpdates
+   
     openRecipeInfo(event);
   }
 }
@@ -162,19 +155,27 @@ const addToMyRecipes = () => {
 
 // not a clue what is happening here
 function isDescendant(parent, child) {
-  let node = child;
-  while (node !== null) {
-    if (node === parent) {
-      return true;
-    }
-    node = node.parentNode;
-  }
-  return false;
+
+
+
+  // let node = child;
+  // while (node !== null) {
+  //   if (node === parent) {
+  //     return true;
+  //   }
+  //   node = node.parentNode;
+  // }
+  // return false;
 }
 
 function showSavedRecipes() {
-  domUpdates.displaySavedRecipes(user.favoriteRecipes, user);
-  showMyRecipesBanner();
+  if (user.favoriteRecipes.length > 0) {
+    domUpdates.displaySavedRecipes(user.favoriteRecipes, user);
+    showMyRecipesBanner();
+  } else {
+    createCards()
+  }
+  
 }
 
 // CREATE RECIPE INSTRUCTIONS
@@ -269,8 +270,8 @@ function toggleMenu() { // Might have to go to domUpdates?
   }
 }
 
-function showAllRecipes() { 
-  domUpdates.createAllRecipes(recipes)
+function showAllRecipes() {
+  createCards();
   showWelcomeBanner();
 }
 
