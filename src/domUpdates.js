@@ -1,14 +1,16 @@
 import users from "./data/users-data";
 
 /* eslint-disable max-len */
+
+
 let domUpdates = {
 
   welcomeUser(currentUser) {
     let firstName = currentUser.name.split(" ")[0];
     let welcomeMsg = `
-    <div class="welcome-msg">
+    <article class="welcome-msg">
       <h1>Welcome ${firstName}!</h1>
-    </div>`;
+    </article>`;
     document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
       welcomeMsg);
   },
@@ -26,28 +28,28 @@ let domUpdates = {
   createCard(recipe, appleDisplayed) {
     let main = document.querySelector("main");
     let cardHtml = `
-  <div class="recipe-card" id=${recipe.id}>
-    <div class="title-container"
+  <article class="recipe-card" id=${recipe.id}>
+    <section class="title-container"
       <h3 class="title" maxlength="40">${this.shortenRecipeName(recipe)}</h3>
-    </div>  
-    <div class="card-photo-container">
+    </section>  
+    <section class="card-photo-container">
       <img src=${recipe.image} class="card-photo-preview" alt="${recipe.name} recipe" title="${recipe.name} recipe">
       <div class="text">
-        <div>Click for Instructions</div>
+        <div aria-label="Click for instructions banner">Click for Instructions</div>
       </div>
-    </div>
-    <div class="tags">
+    </section>
+    <section aria-label="Type of recipe" class="tags">
       ${this.createCardTags(recipe.tags)}
-    </div>
-    <div class="apple-container">
-      <img src="../images/${appleDisplayed}.png" alt="unfilled apple icon" class="card-apple-icon">
-    </div>  
-  </div>`
+    </section>
+    <section class="apple-container">
+      <img aria-label="Click to favorite recipe" src="../images/${appleDisplayed}.png" alt="unfilled apple icon" class="card-apple-icon">
+    </section>  
+  </article>`
     let section = document.createElement("section");
     section.innerHTML = cardHtml;
     main.appendChild(section);
   },
-
+  
   shortenRecipeName(recipe) {
     let shortRecipeName = recipe.name;
     if (shortRecipeName.length > 40) {
@@ -105,10 +107,10 @@ let domUpdates = {
     let fullRecipeInfo = document.querySelector(".recipe-instructions");
 
     let recipeTitle = `
-      <button id="exit-recipe-btn">X</button>
-      <h3 id="recipe-title">${recipe.name}</h3>
-      <h4>Ingredients</h4>
-      <p>${ingredients}</p>`
+    <button aria-label="Exit recipe" id="exit-recipe-btn">X</button>
+    <h3 id="recipe-title">${recipe.name}</h3>
+    <h4>Ingredients</h4>
+    <p>${ingredients}</p>`
     fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
   },
 
@@ -153,6 +155,14 @@ let domUpdates = {
   clearField() {
     let searchInput = document.querySelector("#search-input");
     searchInput.value = '';
+  },
+
+  createAllRecipes(recipes) {
+     recipes.forEach(recipe => {
+      let domRecipe = 
+      document.getElementById(`${recipe.id}`);
+      domRecipe.style.display = "";
+    });
   },
 
   //Pantry//

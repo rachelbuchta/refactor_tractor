@@ -36,9 +36,6 @@ let pantryInfo = [];
 let recipes = [];
 let ingredientsRepo;  
 
-// GENERATE A USER ON LOAD
-
-
 function initiateData() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   recipeRepo = new RecipeRepo(recipeData);
@@ -47,6 +44,8 @@ function initiateData() {
   displayTagList();
   domUpdates.welcomeUser(user)
   findPantryInfo();
+  let test = showAllRecipes(recipes)
+  console.log(test)
 }
 
 // CREATE RECIPE CARDS
@@ -87,7 +86,6 @@ const findTaggedRecipes = selected => {
     domUpdates.showSelectedRecipes(filteredResults, user);
   }
 }
-
 
 // FAVORITE RECIPE FUNCTIONALITY
 function allClicksInMain(event) {
