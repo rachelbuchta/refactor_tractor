@@ -71,8 +71,7 @@ let domUpdates = {
     }).join(" ");
   },
 
-  showSelectedRecipes(foundRecipes, appleDisplayed) {
-    appleDisplayed = false;
+  showSelectedRecipes(foundRecipes) {
     const main = document.querySelector("main");
     main.innerHTML = '';
     foundRecipes.forEach(recipe => {
