@@ -117,7 +117,7 @@ const findTaggedRecipes = selected => {
 
 
 // FAVORITE RECIPE FUNCTIONALITY
-function allClicksInMain() {
+function allClicksInMain(event) {
   if (event.target.className === "card-apple-icon") {
     addToMyRecipes();
   } else if (event.target.id === "exit-recipe-btn") {
@@ -179,12 +179,9 @@ function showSavedRecipes() {
 // CREATE RECIPE INSTRUCTIONS
 function openRecipeInfo(event) { 
   fullRecipeInfo.style.display = "inline"; 
-  let recipeId = event.path.find(e => e.id).id;
-  let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
-  domUpdates.createInstructionsTitle(recipe, generateIngredients(recipe));
-  domUpdates.createInstructionsImage(recipe);
-  generateInstructions(recipe);
-  generateEstimateCost(recipe);
+  const recipeId = parseInt(event.path.find(e => e.id).id);    
+  const recipe = recipeRepo.filterListById(recipeId);  
+  expandRecipeCard(recipe);  
   fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
 }
 
@@ -200,16 +197,17 @@ function generateIngredients(recipe) {
   }).join(", "); 
 }
 
-function generateInstructions(recipe) {
-  const currentRecipe = new Recipe(recipe);
-  const instructions = currentRecipe.returnInstructions().map(step => step.instruction);
-  domUpdates.createInstructionsList(instructions)
+const expandRecipeCard = recipe => {  
+  domUpdates.createInstructionsTitle(recipe, generateIngredients(recipe));
+  domUpdates.createInstructionsImage(recipe);
+  domUpdates.createInstructionsList(recipe.instructions);
+  domUpdates.createEstimatedPrice(recipe, ingredientsData)
 }
 
-function generateEstimateCost(recipe) {
-  let currentRecipe = new Recipe (recipe);
-  domUpdates.createEstimatedPrice(currentRecipe, ingredientsData)
-}
+// function generateEstimateCost(recipe) {
+//   let currentRecipe = new Recipe (recipe);
+  
+// }
 
 // TOGGLE DISPLAYS // 
 //combine these//

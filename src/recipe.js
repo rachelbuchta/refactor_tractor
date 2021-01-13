@@ -23,8 +23,8 @@ export default class Recipe {
     return cost.toLocaleString("en-US", {style: "currency", currency: "USD"});
   }
 
-  returnInstructions() {
-    return this.instructions;
+  returnInstructions(recipe) {
+    return recipe.instructions.map(step => step.instruction);    
   }
 }
 

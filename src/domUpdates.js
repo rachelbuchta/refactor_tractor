@@ -45,8 +45,7 @@ let domUpdates = {
   </div>`
     let section = document.createElement("section");
     section.innerHTML = cardHtml;
-    console.log(section)
-    main.appendChild(section)
+    main.appendChild(section);
   },
 
   shortenRecipeName(recipe) {
@@ -120,7 +119,7 @@ let domUpdates = {
   createInstructionsList(instructions) {
     let fullRecipeInfo = document.querySelector(".recipe-instructions");
     let instructionsList = "";
-    instructions.forEach(step => instructionsList += `<li>${step}</li>`);
+    instructions.forEach(step => instructionsList += `<li>${step.instruction}</li>`);
     fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
     fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
   },
