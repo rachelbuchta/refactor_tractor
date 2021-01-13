@@ -66,7 +66,7 @@ describe.only('Pantry', function() {
   });
 
   it('should store a user pantry', function() {
-    expect(pantry.items).to.eq(user.pantry);
+    expect(pantry.items).to.eq(user.pantry.items);
   });
 
   it('should determine if it is stocked for a meal', function() {
@@ -110,13 +110,13 @@ describe.only('Pantry', function() {
   });
 
   it('should return the body for POSTing', function() {
-    expect(pantry.createPostBody(ingredient)).to.deep.eq([
+    expect(pantry.createPostBody(user, ingredient)).to.deep.eq(
       {
         "userID": user.id,
         "ingredientID": 20081,
         "ingredientModification": -1.5
       }
-    ]);
+    );
   });
 
   
