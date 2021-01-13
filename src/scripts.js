@@ -36,17 +36,6 @@ let pantryInfo = [];
 let recipes = [];
 // let recipes2
 
-
-window.addEventListener("load", initiateData);
-allRecipesBtn.addEventListener("click", showAllRecipes);
-filterBtn.addEventListener("click", findCheckedBoxes);
-main.addEventListener("click", allClicksInMain);
-pantryBtn.addEventListener("click", toggleMenu);
-savedRecipesBtn.addEventListener("click", showSavedRecipes);
-searchBtn.addEventListener("click", searchRecipes);
-showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
-searchForm.addEventListener("submit", pressEnterSearch);
-
 // GENERATE A USER ON LOAD
 
 
@@ -297,3 +286,14 @@ function findRecipesWithCheckedIngredients(selected) {
     }
   })
 }
+
+
+window.addEventListener("load", initiateData);
+allRecipesBtn.addEventListener("click", showAllRecipes);
+filterBtn.addEventListener("click", findCheckedBoxes);
+main.addEventListener("click", allClicksInMain);
+pantryBtn.addEventListener("click", toggleMenu);
+savedRecipesBtn.addEventListener("click", showSavedRecipes);
+searchBtn.addEventListener("click", searchRecipes);
+showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
+searchForm.addEventListener("submit", pressEnterSearch);
