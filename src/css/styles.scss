@@ -23,6 +23,7 @@ h1 {
   margin: 0%;
   padding: 0.5% 0.7% 0%;
   width: 70%;
+  grid-area: fresh;
 }
 
 h2 {
@@ -71,7 +72,9 @@ span {
   font-family: $font;
   margin: 1.2% 0.5% 1.2% 0%;
   width: 100%;
+  grid-area: search;
 }
+
 
 #search-input {
   background-color: #b6dcca;
@@ -146,16 +149,21 @@ span {
   max-width: 40px;
   padding: 2px 0px;
 }
+}
 
+.saved-recipes-btn {
+  grid-area: button;
 }
 
 .saved-ingredients-btn {
   border-left: 3px solid $background;
+  grid-area: button2;
 }
 
 .ing-pan-btn {
   margin: 1% 0%;
   padding: 1px 6px 5px 0px;
+  // @extend .nav-btn;
 }
 
 /* BANNER IMAGE*/
@@ -439,4 +447,51 @@ main {
   top:0;
   width:100%;
   z-index:100;
+}
+
+@media only screen and (max-width: 800px) {
+// body {
+//   @include gridDisplay(1fr 2fr, none);
+//   font-family: $font;
+//   grid-template-areas:
+//     "header header"
+//     "image image"
+//     "aside main";
+//   height: 100vh;
+//   margin: 0;
+//   padding: 0;
+//   -webkit-font-smoothing: auto;
+// }
+
+header {
+  @include gridDisplay(2fr 1fr 1fr,none);
+  grid-template-areas: 
+  "fresh button button2"
+  "search search search";
+  // "button button2";
+  grid-area: header;
+  padding: 1%;
+  // justify-content: space-evenly;
+}
+
+.ing-pan-btn {
+  display: flex;
+  justify-self: end;
+  align-content: flex-end;
+  width:50%;
+}
+
+h1 {
+  justify-self: center;
+  width: 90%;
+}
+
+#search {
+  width: 85%;
+  justify-self: center;
+}
+
+.banner-image {
+  height: 7em;
+}
 }
