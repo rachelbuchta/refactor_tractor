@@ -35,20 +35,14 @@ Our main objectives were:
  Unfinished ideas are located in the project board [here](https://github.com/rachelbuchta/refactor_tractor/projects/1)
 
  
- ## Features
- 
-![Window sizing](NEED IMAGE)
-
-![User Change](NEED IMAGE)
-
  ### User Functionality
 
  * Users are able to favorite and unfavorite recipes
- [Favorites](image)
+ ![Favorites](https://i.imgur.com/jJmM8PS.gif)
  * Users can utilize the search bar to return matching recipes
- [Search Bar](image)
+ ![Search Bar](https://i.imgur.com/SLjsMXc.gif)
  * Users can filter using the sidebar filter list
- [Filter](image)
+ ![Filter](https://i.imgur.com/ZBujOws.gif)
 
 ### Setup & Installation
  
