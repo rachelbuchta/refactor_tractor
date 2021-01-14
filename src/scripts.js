@@ -97,6 +97,8 @@ function allClicksInMain(event) {
     domUpdates.exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
+  } else if (event.target.className === "cook-me-button") {
+    apiCalls.
   }
 }
 
@@ -154,7 +156,7 @@ const openRecipeInfo = event => {
 const generateIngredients = recipe => { 
   return recipe.ingredients.map(ingredient => {
     const name = ingredientsRepo.getRecipeNameById(ingredient.id);
-    return `${domUpdates.capitalize(name)} (${domUpdates.formatNumber(ingredient.quantity.amount)} ${ingredient.quantity.unit})`;
+    return `${domUpdates.capitalize(name)} (${ingredient.quantity.amount} ${ingredient.quantity.unit})`;
   }).join(', ');
 }
 
@@ -165,6 +167,7 @@ const expandRecipeCard = recipe => {
   domUpdates.createInstructionsImage(recipe);
   domUpdates.createInstructionsList(recipe.instructions);
   domUpdates.createEstimatedPrice(recipe, ingredientsData);
+  domUpdates.createCanCookButton();
   fullRecipeInfo.style.display = "inline"; 
 }
 

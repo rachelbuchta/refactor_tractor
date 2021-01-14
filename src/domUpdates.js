@@ -193,19 +193,11 @@ let domUpdates = {
     });
   }, 
 
-  formatNumber(number) {
-    const stringedNum = number.toString();
-    let index;
-    let afterPeriod;
-
-    if (stringedNum.includes('.')) {
-      index = stringedNum.indexOf('.');
-      afterPeriod = stringedNum.slice(index + 1);
-    }
-    if (afterPeriod && afterPeriod.length > 2) {
-      afterPeriod = afterPeriod.toFixed(2);
-    }
-    return parseFloat(stringedNum.slice(0, index + 1).concat(afterPeriod)) || number;
+  createCanCookButton() {
+    let fullRecipeInfo = document.querySelector(".recipe-instructions");
+    let cookMeButton = `
+    <button class="cook-me-button">Cook Me!</button>`
+    fullRecipeInfo.insertAdjacentHTML("beforeend", cookMeButton);
   }
 }
 
