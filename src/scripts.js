@@ -11,6 +11,7 @@ import './images/cookbook.png';
 import './images/seasoning.png';
 import './images/apple-logo-outline.png';
 
+import apiCalls from './APICalls';
 import domUpdates from './domUpdates';
 import User from './user';
 import Recipe from './recipe';
@@ -98,7 +99,7 @@ function allClicksInMain(event) {
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
   } else if (event.target.className === "cook-me-button") {
-    apiCalls.
+    serverRoundTrip(event);
   }
 }
 
@@ -277,6 +278,31 @@ function findRecipesWithCheckedIngredients(selected) {
     }
   })
 }
+
+function serverRoundTrip(event) {
+  const recipeId = event.target.closest('div').id;
+  const recipe = recipeRepo.filterListById(parseInt(recipeId));
+  recipe.ingredients.forEach(ingredient => {
+    if (user.pantry.items.find(item => item.ingredient === ingredient.id) !== undefined) {
+      console.log(ingredient);
+      Promise.all([apiCalls.sendData(ingredient)])
+      .then(
+        Promise.all([apiCalls.getData('users'), apiCalls.getData('recipes'), apiCalls.getData('ingredients')])
+        // .then(response => response.json())
+        .then(data => {
+          recipeRepo = new RecipeRepo(data[1]);
+          ingredientsRepo = new IngredientsRepo(data[2]);
+          createCards();
+          displayTagList();
+          domUpdates.welcomeUser(user);
+          findPantryInfo();
+          showAllRecipes(recipes);
+        })
+      )
+    }
+  })
+}
+
 
 window.addEventListener("load", initiateData);
 allRecipesBtn.addEventListener("click", showAllRecipes);

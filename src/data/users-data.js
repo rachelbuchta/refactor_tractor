@@ -1,8 +1,8 @@
-import getData from '../APICalls';
+import apiCalls from '../APICalls';
 
 const apiCall = 'users';
 let users;
 
-users = getData(apiCall);
+users = apiCalls.getData(apiCall);
 
 export default users;

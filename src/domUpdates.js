@@ -90,7 +90,6 @@ let domUpdates = {
 
   showSelectedRecipes(foundRecipes, user) {
     this.clearMainCardSection()
-    console.log(this.clearMainCardSection())
     foundRecipes.forEach(recipe => {
       user.isFavorited(recipe) ? this.createCard(recipe, "apple-logo") : this.createCard(recipe, "apple-logo-outline");
     });
@@ -111,8 +110,10 @@ let domUpdates = {
   //Recipe Instructions//
   createInstructionsTitle(recipe, ingredients) {
     let fullRecipeInfo = document.querySelector(".recipe-instructions");
+    fullRecipeInfo.id = `${recipe.id}`
 
     let recipeTitle = `
+    <div id=${recipe.id}></div>
     <button aria-label="Exit recipe" id="exit-recipe-btn">X</button>
     <h3 id="recipe-title">${recipe.name}</h3>
     <h4>Ingredients</h4>

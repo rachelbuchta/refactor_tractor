@@ -1,9 +1,9 @@
-import getData from '../APICalls';
+import apiCalls from '../APICalls';
 
 const apiCall = 'recipes';
 
 let recipeData;
 
-recipeData = getData(apiCall);
+recipeData = apiCalls.getData(apiCall);
 
 export default recipeData;

@@ -13,14 +13,17 @@ const apiCalls = {
   },
 
   sendData(dataToSend) {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
     const requestOptions = {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: dataToSend
+      headers: myHeaders,
+      body: `${dataToSend}`
     };
 
     fetch("http://localhost:3001/api/v1/users", requestOptions)
-      .then(response => response.text())
+      .then(response => response)
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
   }
