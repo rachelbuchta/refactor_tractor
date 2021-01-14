@@ -50,11 +50,10 @@ describe('Recipe', function() {
     expect(recipe.calculateIngredientsCost(ingredientData)).to.eq('$9.76');
   });
 
-  it('should return the instructions for recipe', function() {
-
-    const instructions = recipe.instructions
-
-    expect(recipe.returnInstructions()).to.eq(instructions);
+  it('should return the instructions for recipe', function() {    
+    const instructions = recipe.instructions.map(instruction => instruction.instruction);    
+    
+    expect(recipe.returnInstructions(recipe)).to.deep.eq(instructions);
   });
 
 });
