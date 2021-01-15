@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import users from './data/users-data.js';
-import recipeData from  './data/recipe-data';
+// import users from './data/users-data.js';
+// import recipeData from  './data/recipe-data';
 import ingredientsData from './data/ingredient-data';
 
 import './css/base.scss';
@@ -13,7 +13,6 @@ import './images/apple-logo-outline.png';
 
 import domUpdates from './domUpdates';
 import User from './user';
-// import Recipe from './recipe';
 import RecipeRepo from './recipe-repo'
 import IngredientsRepo from './ingredient-repo'
 import apiCalls from './APICalls.js';
@@ -31,9 +30,7 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 
 let user;
-// let recipe;
 let recipeRepo;
-// let pantryInfo = [];
 let recipes = [];
 let ingredientsRepo;  
 
@@ -57,17 +54,6 @@ const initiateData = () => {
       findPantryInfo();
       showAllRecipes(recipes);
     });
-
-    // usersPromise.then(data => {
-    //   user = new User(data[Math.floor(Math.random() * data.length)]);
-    //   recipeRepo = new RecipeRepo(recipeData);
-    //   ingredientsRepo = new IngredientsRepo(ingredientsData);
-    //   createCards();
-    //   displayTagList();
-    //   domUpdates.welcomeUser(user)
-    //   findPantryInfo();
-    //   showAllRecipes(recipes)      
-    // });  
 }
 
 // CREATE RECIPE CARDS
