@@ -38,9 +38,10 @@ let recipes = [];
 let ingredientsRepo;  
 
 const initiateData = () => {
-  fetch('http://localhost:3001/api/v1/users')
-    .then(response => response.json())
-    .then(data => {
+  const promise1 = fetch('http://localhost:3001/api/v1/users')
+    .then(response => response.json());
+
+    promise1.then(data => {
       user = new User(data[Math.floor(Math.random() * data.length)]);
       recipeRepo = new RecipeRepo(recipeData);
       ingredientsRepo = new IngredientsRepo(ingredientsData);
