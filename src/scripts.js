@@ -135,8 +135,7 @@ function isDescendant(parent, child) {
   return false;
 }
 
-function showSavedRecipes() {
-  console.log(savedRecipesBtn)
+function showSavedRecipes() {  
   user.favoriteRecipes.length > 0 ? (
     domUpdates.showSelectedRecipes(user.favoriteRecipes, user), 
     showMyRecipesBanner()
