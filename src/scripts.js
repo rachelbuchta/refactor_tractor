@@ -38,19 +38,36 @@ let recipes = [];
 let ingredientsRepo;  
 
 const initiateData = () => {
-  const promise1 = fetch('http://localhost:3001/api/v1/users')
+  const usersPromise = fetch('http://localhost:3001/api/v1/users')
+    .then(response => response.json());
+  const ingredientsPromise = fetch('http://localhost:3001/api/v1/ingredients')
+    .then(response => response.json());
+  const recipesPromise = fetch('http://localhost:3001/api/v1/recipes')
     .then(response => response.json());
 
-    promise1.then(data => {
-      user = new User(data[Math.floor(Math.random() * data.length)]);
-      recipeRepo = new RecipeRepo(recipeData);
-      ingredientsRepo = new IngredientsRepo(ingredientsData);
+  const promises = [usersPromise, ingredientsPromise, recipesPromise];
+  Promise.all(promises)
+    .then(data => {      
+      user = new User(data[0][Math.floor(Math.random() * data[0].length)]);
+      ingredientsRepo = new IngredientsRepo(data[1]);
+      recipeRepo = new RecipeRepo(data[2]);
       createCards();
       displayTagList();
-      domUpdates.welcomeUser(user)
+      domUpdates.welcomeUser(user);
       findPantryInfo();
-      showAllRecipes(recipes)      
-    });  
+      showAllRecipes(recipes);
+    });
+
+    // usersPromise.then(data => {
+    //   user = new User(data[Math.floor(Math.random() * data.length)]);
+    //   recipeRepo = new RecipeRepo(recipeData);
+    //   ingredientsRepo = new IngredientsRepo(ingredientsData);
+    //   createCards();
+    //   displayTagList();
+    //   domUpdates.welcomeUser(user)
+    //   findPantryInfo();
+    //   showAllRecipes(recipes)      
+    // });  
 }
 
 // CREATE RECIPE CARDS
