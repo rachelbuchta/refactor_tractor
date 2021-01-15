@@ -13,9 +13,10 @@ import './images/apple-logo-outline.png';
 
 import domUpdates from './domUpdates';
 import User from './user';
-import Recipe from './recipe';
+// import Recipe from './recipe';
 import RecipeRepo from './recipe-repo'
 import IngredientsRepo from './ingredient-repo'
+import apiCalls from './APICalls.js';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -30,31 +31,31 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 
 let user;
-let recipe;
+// let recipe;
 let recipeRepo;
-let pantryInfo = [];
+// let pantryInfo = [];
 let recipes = [];
 let ingredientsRepo;  
 
 const initiateData = () => {
-  user = new User(users[Math.floor(Math.random() * users.length)]);
-  recipeRepo = new RecipeRepo(recipeData);
-  ingredientsRepo = new IngredientsRepo(ingredientsData);
-  createCards();
-  displayTagList();
-  domUpdates.welcomeUser(user)
-  findPantryInfo();
-  showAllRecipes(recipes)
+  fetch('http://localhost:3001/api/v1/users')
+    .then(response => response.json())
+    .then(data => {
+      user = new User(data[Math.floor(Math.random() * data.length)]);
+      recipeRepo = new RecipeRepo(recipeData);
+      ingredientsRepo = new IngredientsRepo(ingredientsData);
+      createCards();
+      displayTagList();
+      domUpdates.welcomeUser(user)
+      findPantryInfo();
+      showAllRecipes(recipes)      
+    });  
 }
 
 // CREATE RECIPE CARDS
 function createCards() { 
   domUpdates.clearMainCardSection();
   domUpdates.showSelectedRecipes(recipeRepo.recipes, user);
-
-  // recipeRepo.recipes.forEach(recipe => {    
-  //     user.isFavorited(recipe) ? createCard(recipe, "apple-logo") : createCard(recipe, "apple-logo-outline");
-
 }
 
 // FILTER BY RECIPE TAGS
