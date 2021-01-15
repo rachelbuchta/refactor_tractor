@@ -1451,8 +1451,7 @@ function isDescendant(parent, child) {
   return false;
 }
 
-function showSavedRecipes() {
-  console.log(savedRecipesBtn)
+function showSavedRecipes() {  
   user.favoriteRecipes.length > 0 ? (
     _domUpdates__WEBPACK_IMPORTED_MODULE_10__["default"].showSelectedRecipes(user.favoriteRecipes, user), 
     showMyRecipesBanner()
