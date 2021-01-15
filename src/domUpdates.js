@@ -90,7 +90,6 @@ let domUpdates = {
 
   showSelectedRecipes(foundRecipes, user) {
     this.clearMainCardSection()
-    console.log(this.clearMainCardSection())
     foundRecipes.forEach(recipe => {
       user.isFavorited(recipe) ? this.createCard(recipe, "apple-logo") : this.createCard(recipe, "apple-logo-outline");
     });
