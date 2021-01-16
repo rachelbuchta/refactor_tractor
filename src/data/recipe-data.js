@@ -4,6 +4,6 @@ const apiCall = 'recipes';
 
 let recipeData;
 
-recipeData = getData(apiCall);
+recipeData = getData(apiCall);  
 
 export default recipeData;
