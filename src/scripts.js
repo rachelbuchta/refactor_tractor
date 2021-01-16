@@ -1,6 +1,4 @@
 /* eslint-disable max-len */
-import users from './data/users-data.js';
-import recipeData from  './data/recipe-data';
 import ingredientsData from './data/ingredient-data';
 
 import './css/base.scss';
@@ -13,7 +11,6 @@ import './images/apple-logo-outline.png';
 
 import domUpdates from './domUpdates';
 import User from './user';
-import Recipe from './recipe';
 import RecipeRepo from './recipe-repo'
 import IngredientsRepo from './ingredient-repo'
 
@@ -30,31 +27,36 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 
 let user;
-let recipe;
 let recipeRepo;
-let pantryInfo = [];
 let recipes = [];
 let ingredientsRepo;  
 
 const initiateData = () => {
-  user = new User(users[Math.floor(Math.random() * users.length)]);
-  recipeRepo = new RecipeRepo(recipeData);
-  ingredientsRepo = new IngredientsRepo(ingredientsData);
-  createCards();
-  displayTagList();
-  domUpdates.welcomeUser(user)
-  findPantryInfo();
-  showAllRecipes(recipes)
+  const usersPromise = fetch('http://localhost:3001/api/v1/users')
+    .then(response => response.json());
+  const ingredientsPromise = fetch('http://localhost:3001/api/v1/ingredients')
+    .then(response => response.json());
+  const recipesPromise = fetch('http://localhost:3001/api/v1/recipes')
+    .then(response => response.json());
+
+  const promises = [usersPromise, ingredientsPromise, recipesPromise];
+  Promise.all(promises)
+    .then(data => {      
+      user = new User(data[0][Math.floor(Math.random() * data[0].length)]);
+      ingredientsRepo = new IngredientsRepo(data[1]);
+      recipeRepo = new RecipeRepo(data[2]);
+      createCards();
+      displayTagList();
+      domUpdates.welcomeUser(user);
+      findPantryInfo();
+      showAllRecipes(recipes);
+    });
 }
 
 // CREATE RECIPE CARDS
 function createCards() { 
   domUpdates.clearMainCardSection();
   domUpdates.showSelectedRecipes(recipeRepo.recipes, user);
-
-  // recipeRepo.recipes.forEach(recipe => {    
-  //     user.isFavorited(recipe) ? createCard(recipe, "apple-logo") : createCard(recipe, "apple-logo-outline");
-
 }
 
 // FILTER BY RECIPE TAGS
@@ -135,8 +137,7 @@ function isDescendant(parent, child) {
   return false;
 }
 
-function showSavedRecipes() {
-  console.log(savedRecipesBtn)
+function showSavedRecipes() {  
   user.favoriteRecipes.length > 0 ? (
     domUpdates.showSelectedRecipes(user.favoriteRecipes, user), 
     showMyRecipesBanner()
