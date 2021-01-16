@@ -1,6 +1,4 @@
 /* eslint-disable max-len */
-// import users from './data/users-data.js';
-// import recipeData from  './data/recipe-data';
 import ingredientsData from './data/ingredient-data';
 
 import './css/base.scss';
@@ -15,7 +13,6 @@ import domUpdates from './domUpdates';
 import User from './user';
 import RecipeRepo from './recipe-repo'
 import IngredientsRepo from './ingredient-repo'
-import apiCalls from './APICalls.js';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
