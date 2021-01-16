@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-// import users from './data/users-data.js';
-// import recipeData from  './data/recipe-data';
+import users from './data/users-data.js';
+import recipeData from  './data/recipe-data';
 import ingredientsData from './data/ingredient-data';
 
 import './css/base.scss';
@@ -15,7 +15,6 @@ import domUpdates from './domUpdates';
 import User from './user';
 import RecipeRepo from './recipe-repo'
 import IngredientsRepo from './ingredient-repo'
-import apiCalls from './APICalls.js';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -35,14 +34,7 @@ let recipes = [];
 let ingredientsRepo;  
 
 const initiateData = () => {
-  const usersPromise = fetch('http://localhost:3001/api/v1/users')
-    .then(response => response.json());
-  const ingredientsPromise = fetch('http://localhost:3001/api/v1/ingredients')
-    .then(response => response.json());
-  const recipesPromise = fetch('http://localhost:3001/api/v1/recipes')
-    .then(response => response.json());
-
-  const promises = [usersPromise, ingredientsPromise, recipesPromise];
+  const promises = [users, ingredientsData, recipeData];
   Promise.all(promises)
     .then(data => {      
       user = new User(data[0][Math.floor(Math.random() * data[0].length)]);
